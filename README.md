@@ -1,5 +1,19 @@
 # WirVsVirus
 
+## Setup
+- `npm i`
+- `npm install -g @nrwl/cli`
+- two consoles
+  1. `nx serve helper-app` (frontend)
+  2. `nx serve api` (backend)
+- go to http://localhost:4200/
+
+
+
+
+
+# Original Auto-Generated Readme by NX:
+
 This project was generated using [Nx](https://nx.dev).
 
 <p align="center"><img src="https://raw.githubusercontent.com/nrwl/nx/master/nx-logo.png" width="450"></p>

@@ -1,15 +1,22 @@
-import { Controller, Get } from '@nestjs/common';
+import { Controller, Get, Post, Body } from '@nestjs/common';
 
-import { Message } from '@wir-vs-virus/api-interfaces';
+import { Helper } from '@wir-vs-virus/api-interfaces';
 
-import { AppService } from './app.service';
+import { DatabaseService } from './database.service';
 
 @Controller()
 export class AppController {
-  constructor(private readonly appService: AppService) {}
+  constructor(private readonly databaseService: DatabaseService) {}
 
-  @Get('hello')
-  getData(): Message {
-    return this.appService.getData();
+  @Get('helpers')
+  getAllHelper(): Promise<[Helper]> {
+    return this.databaseService.getHelpers();
+  }
+
+  @Post('helper')
+  async create(@Body() helper: Helper) {
+    // does not work yet
+    console.log(helper)
+    return await this.databaseService.saveHelper(helper);
   }
 }

@@ -1,7 +1,7 @@
 import { Test, TestingModule } from '@nestjs/testing';
 
 import { AppController } from './app.controller';
-import { AppService } from './app.service';
+import { DatabaseService } from './database.service';
 
 describe('AppController', () => {
   let app: TestingModule;
@@ -9,14 +9,18 @@ describe('AppController', () => {
   beforeAll(async () => {
     app = await Test.createTestingModule({
       controllers: [AppController],
-      providers: [AppService]
+      providers: [DatabaseService]
     }).compile();
   });
 
   describe('getData', () => {
     it('should return "Welcome to api!"', () => {
       const appController = app.get<AppController>(AppController);
-      expect(appController.getData()).toEqual({ message: 'Welcome to api!' });
+      expect(appController.getAllHelper()).toEqual([{
+          name: 'Peter Pan',
+          email: 'peter.pan@example.com',
+          plz: 70569
+      }]);
     });
   });
 });
