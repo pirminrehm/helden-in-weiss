@@ -21,6 +21,7 @@ export class AppComponent {
     ).subscribe(
       (val) => {
           console.log("POST call successful value returned in body", val);
+          location.reload();
       },
       response => {
           console.log("POST call in error", response);
