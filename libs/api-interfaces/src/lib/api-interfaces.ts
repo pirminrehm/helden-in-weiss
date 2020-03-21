@@ -1,4 +1,5 @@
 export interface Volunteer {
+  title: String,
   name: String,
   firstname: String,
   email: String,
@@ -7,11 +8,16 @@ export interface Volunteer {
   age: Number,
   phone: String,
   description: String,
+  qualification: String,
+  active?: Boolean,
+  registeredAt?: Date
 }
+
 export interface Institution {
   name: String,
   zipcode: Number,
   city: String,
+  title: String,
   description: String,
   contact: {
     name: String,
