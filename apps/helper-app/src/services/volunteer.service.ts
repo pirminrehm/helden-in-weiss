@@ -2,15 +2,25 @@ import { Injectable } from '@angular/core';
 import { Volunteer } from '@wir-vs-virus/api-interfaces';
 import { Observable, of } from 'rxjs';
 import { delay } from 'rxjs/operators';
+import { HttpClient } from '@angular/common/http';
 
 @Injectable({
   providedIn: 'root'
 })
 export class VolunteerService {
-  constructor() {}
+  constructor(private http: HttpClient) {}
+
+  private useMockData = false;
 
   // todo Volunteer rückgabe wert
   public getAll(): Observable<Volunteer[]> {
+    if (this.useMockData) {
+      return this.getMockData();
+    }
+    return this.http.get<[Volunteer]>('/api/volunteer');
+  }
+
+  private getMockData() {
     return of([
       {
         name: 'Lang',

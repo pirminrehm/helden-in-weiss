@@ -3,6 +3,7 @@ import { Observable } from 'rxjs';
 import { Volunteer } from '@wir-vs-virus/api-interfaces';
 import { HttpClient } from '@angular/common/http';
 import { VolunteerService } from '../../services/volunteer.service';
+import { tap } from 'rxjs/operators';
 
 @Component({
   selector: 'wir-vs-virus-volunteer-list',
@@ -11,6 +12,7 @@ import { VolunteerService } from '../../services/volunteer.service';
 })
 export class VolunteerListComponent implements OnInit {
   volunteers$: Observable<Volunteer[]>;
+  loading = true;
 
   constructor(
     private http: HttpClient,
@@ -44,7 +46,10 @@ export class VolunteerListComponent implements OnInit {
   }
 
   getVolunteers() {
-    // this.volunteers$ = this.http.get<[Volunteer]>('/api/volunteer');
-    this.volunteers$ = this.volunteerService.getAll();
+    this.volunteers$ = this.volunteerService.getAll().pipe(
+      tap(() => {
+        this.loading = false;
+      })
+    );
   }
 }

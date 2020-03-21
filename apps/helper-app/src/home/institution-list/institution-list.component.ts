@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Observable, of } from 'rxjs';
-import { delay } from 'rxjs/operators';
+import { delay, tap } from 'rxjs/operators';
 
 @Component({
   selector: 'wir-vs-virus-institution-list',
@@ -9,6 +9,7 @@ import { delay } from 'rxjs/operators';
 })
 export class InstitutionListComponent implements OnInit {
   institutions$: Observable<any>;
+  loading = true;
 
   constructor() {}
 
@@ -27,6 +28,11 @@ export class InstitutionListComponent implements OnInit {
         created: '2020-03-21T15:36:50.756Z',
         qualification: 'Institution'
       }
-    ]).pipe(delay(1000));
+    ]).pipe(
+      delay(1000),
+      tap(() => {
+        this.loading = false;
+      })
+    );
   }
 }
