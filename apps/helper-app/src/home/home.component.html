@@ -19,10 +19,16 @@
       </div>
     </div>
     <div class="search-help-toggle">
-      <a>
+      <a
+        [class.active]="router.url.match('volunteers')"
+        routerLink="volunteers"
+      >
         Einrichtungen, die Hilfe suchen
       </a>
-      <a class="active">
+      <a
+        [class.active]="router.url.match('institutions')"
+        routerLink="institutions"
+      >
         Engagierte, die helfen wollen
       </a>
     </div>
@@ -51,25 +57,7 @@
     </div>
 
     <div class="card-list">
-      <wir-vs-virus-volunteer-card
-        [data]="volunteer"
-        *ngFor="let volunteer of volunteers$ | async"
-      >
-      </wir-vs-virus-volunteer-card>
+      <router-outlet></router-outlet>
     </div>
   </div>
 </div>
-
-<br />
-<br />
-<br />
-<button (click)="postVolunteer()">Save new Helper</button>
-<br />
-<br />
-<br />
-
-<!-- <div *ngFor="let volunteer of volunteers$ | async" style="margin: 15px;">
-  Name: {{ volunteer.name }}<br />
-  Email: {{ volunteer.email }}<br />
-  PLZ: {{ volunteer.plz }}<br />
-</div> -->
