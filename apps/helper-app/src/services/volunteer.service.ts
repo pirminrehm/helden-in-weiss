@@ -10,7 +10,7 @@ import { HttpClient } from '@angular/common/http';
 export class VolunteerService {
   constructor(private http: HttpClient) {}
 
-  private useMockData = false;
+  private useMockData = true;
 
   // todo Volunteer rückgabe wert
   public getAll(): Observable<Volunteer[]> {
