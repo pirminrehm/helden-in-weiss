@@ -4,8 +4,10 @@ import { ConfigModule } from '@nestjs/config';
 
 import { AppController } from './app.controller';
 import { VolunteerController } from '../volunteer/volunteer.controller';
+import { InstitutionController } from '../institution/institution.controller';
 import { DatabaseService } from '../services/database.service';
 import { VolunteerSchema } from '../volunteer/volunteer.schema';
+import { InstitutionSchema } from '../institution/institution.schema';
 
 @Module({
   imports: [
@@ -14,11 +16,10 @@ import { VolunteerSchema } from '../volunteer/volunteer.schema';
     }),
     MongooseModule.forRoot(`mongodb+srv://virusUser:${process.env.MONGO_PASSWD}@grip-playground-sxifp.azure.mongodb.net/test?retryWrites=true&w=majority`),
     MongooseModule.forFeature([{ name: 'Volunteer', schema: VolunteerSchema }]),
+    MongooseModule.forFeature([{ name: 'Institution', schema: InstitutionSchema }]),
   ],
-  controllers: [AppController, VolunteerController],
+  controllers: [AppController, VolunteerController, InstitutionController],
   providers: [DatabaseService]
 })
 
 export class AppModule {}
-
-

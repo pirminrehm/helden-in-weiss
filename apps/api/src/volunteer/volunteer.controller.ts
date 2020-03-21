@@ -1,6 +1,4 @@
 import { Controller, Get, Post, Body, Logger } from '@nestjs/common';
-
-import { CreateVolunteerDto } from './dto/create-volunteer.dto';
 import { Volunteer } from '@wir-vs-virus/api-interfaces';
 import { DatabaseService } from '../services/database.service';
 
@@ -10,12 +8,12 @@ export class VolunteerController {
 
   @Get()
   getAllVolunteer(): Promise<[Volunteer]> {
-    return this.databaseService.getVolunteers();
+    return this.databaseService.getAllVolunteers();
   }
 
   @Post()
-  async createVolunteer(@Body() createVolunteerDto: CreateVolunteerDto) {
-    Logger.log(createVolunteerDto)
-    return await  this.databaseService.saveVolunteer(createVolunteerDto);
+  async createVolunteer(@Body() volunteer: Volunteer) {
+    Logger.log(volunteer)
+    return await this.databaseService.saveVolunteer(volunteer);
   }
 }

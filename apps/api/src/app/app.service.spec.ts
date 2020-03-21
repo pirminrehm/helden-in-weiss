@@ -15,7 +15,7 @@ describe('DatabaseService', () => {
 
   describe('getData', () => {
     it('should return "Welcome to api!"', () => {
-      expect(service.getVolunteers()).toEqual([{
+      expect(service.getAllVolunteers()).toEqual([{
           name: 'Peter Pan',
           email: 'peter.pan@example.com',
           plz: 70569
