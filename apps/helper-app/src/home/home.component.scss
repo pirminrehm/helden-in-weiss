@@ -93,8 +93,13 @@
       font-weight: 500;
       display: inline-block;
 
-      &.active {
+      &.bg-blue {
         background-color: $primary;
+        color: white;
+      }
+
+      &.bg-red {
+        background-color: $accent;
         color: white;
       }
     }
@@ -176,7 +181,7 @@
         }
 
         &:last-child {
-          background-color: $secondary;
+          background-color: $accent;
         }
       }
     }
