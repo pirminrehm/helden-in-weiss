@@ -31,17 +31,26 @@
 
 <div class="container">
   <div class="content-area">
+    <div class="actions">
+      <h3>Hilfe anbieten oder suchen</h3>
+      <a class="action-card" href="#">
+        <img src="assets/medical_staff.svg" />
+        <div class="text">Ich suche nach medizinischen Aushilfen</div>
+        <img class="arrow" src="assets/chevron_right-24px.svg" />
+      </a>
+      <a class="action-card" href="#">
+        <img src="assets/health.svg" />
+        <div class="text">Ich suche nach medizinischen Aushilfen</div>
+        <img class="arrow" src="assets/chevron_right-24px.svg" />
+      </a>
+    </div>
+
     <div class="card-list">
       <wir-vs-virus-volunteer-card
         [data]="volunteer"
         *ngFor="let volunteer of volunteers$ | async"
       >
       </wir-vs-virus-volunteer-card>
-    </div>
-    <div class="actions">
-      <h3>Hilfe anbieten oder suchen</h3>
-      <div class="action-card">bin karte 1</div>
-      <div class="action-card">bin karte 2</div>
     </div>
   </div>
 </div>
