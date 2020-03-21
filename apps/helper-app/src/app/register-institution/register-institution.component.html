@@ -1,0 +1,40 @@
+<div class="header">
+  <div class="content-center">
+    <div class="nav-bar">
+      <img class="app-logo" src="/assets/logo.svg" />
+      <div class="links">
+        <a href="">FAQ</a>
+        <a href="">Spenden</a>
+      </div>
+    </div>
+  </div>
+</div>
+<main>
+  <a class="back-navigation" [routerLink]="'..'">
+    <img src="/assets/chevron_left-24px.svg">Zurück
+  </a>
+
+  <h1 class="title">Suchen Sie Hilfe für Ihre Einrichtung</h1>
+
+  <p class="description">
+    Being the savage's bowsman, that is, the person who pulled the bow-oar in his boat (the second one from forward), it
+    was my cheerful duty to attend upon him while taking that hand-scrabble scramble.
+  </p>
+
+  <form [formGroup]="volunteerForm" (ngSubmit)="onSubmit()">
+    <h1 class="section-title">Angaben zur Einrichtung und Ihrem Bedarf</h1>
+    <input type="text" placeholder="Name der Einrichtung" formControlName="institutionName">
+    <input type="text" placeholder="Postleitzahl" formControlName="zipCode">
+    <textarea placeholder="Ein paar Worte dazu, wonach sie genau suchen." formControlName="description"></textarea>
+
+    <h1 class="section-title">Angaben zur Kontaktperson</h1>
+    <input type="text" placeholder="Vor- & Nachname" formControlName="contactName">
+    <input type="text" placeholder="Telefonnummer" formControlName="contactPhone">
+    <input type="text" placeholder="E-Mail" formControlName="contactMail">
+    <div class="disclaimer">
+      <img src="/assets/info-24px.svg">
+      <div>Ihre Anzeige ist für 30 Tage gültig und wird aus Datenschutzgründen anschließend automatisch entfernt</div>
+    </div>
+    <input type="submit" value="Anfrage online stellen">
+  </form>
+</main>
