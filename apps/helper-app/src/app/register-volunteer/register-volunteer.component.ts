@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormGroup, FormControl } from '@angular/forms';
+import { FormGroup, FormControl, Validators } from '@angular/forms';
 
 @Component({
   selector: 'wir-vs-virus-register-volunteer',
@@ -9,13 +9,20 @@ import { FormGroup, FormControl } from '@angular/forms';
 export class RegisterVolunteerComponent implements OnInit {
 
   volunteerForm = new FormGroup({
-    firstName: new FormControl(''),
-    lastName: new FormControl(''),
+    name: new FormControl('', [Validators.required, Validators.maxLength(300)]),
+    zipCode: new FormControl('', [Validators.required, Validators.maxLength(300)]),
+    knowledge: new FormControl('', [Validators.required, Validators.maxLength(300)]),
+    phone: new FormControl('', [Validators.required, Validators.maxLength(300)]),
+    mail: new FormControl('', [Validators.required, Validators.maxLength(300)]),
   });
 
   constructor() { }
 
   ngOnInit(): void {
+  }
+
+  onSubmit() {
+    console.log(this.volunteerForm.value);
   }
 
 }

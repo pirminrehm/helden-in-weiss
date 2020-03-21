@@ -21,12 +21,12 @@
     was my cheerful duty to attend upon him while taking that hand-scrabble scramble.
   </p>
 
-  <form [formGroup]="volunteerForm">
-    <input type="text" placeholder="Vor- & Nachname">
-    <input type="text" placeholder="Postleitzahl Wohnort">
-    <textarea placeholder="Ein paar Worte zu Ihren medizinischen Kenntnissen"></textarea>
-    <input type="text" placeholder="Telefonnummer">
-    <input type="text" placeholder="E-Mail">
+  <form [formGroup]="volunteerForm" (ngSubmit)="onSubmit()">
+    <input type="text" placeholder="Vor- & Nachname" formControlName="name">
+    <input type="text" placeholder="Postleitzahl Wohnort" formControlName="zipCode">
+    <textarea placeholder="Ein paar Worte zu Ihren medizinischen Kenntnissen" formControlName="knowledge"></textarea>
+    <input type="text" placeholder="Telefonnummer" formControlName="phone">
+    <input type="text" placeholder="E-Mail" formControlName="mail">
     <div class="disclaimer">
       <img src="/assets/info-24px.svg">
       <div>Ihre Anzeige ist für 30 Tage gültig und wird aus Datenschutzgründen anschließend automatisch entfernt</div>
