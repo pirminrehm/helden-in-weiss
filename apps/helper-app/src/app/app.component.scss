@@ -1,7 +1,7 @@
 .hero-card {
   width: 100%;
   position: relative;
-  height: 450px;
+  height: 400px;
   background-image: url('/assets/Hero.png');
   background-position: center;
   background-repeat: no-repeat;
@@ -53,6 +53,30 @@
       font-size: 14px;
       line-height: 21px;
       width: 100%;
+    }
+  }
+
+  .search-help-toggle {
+    position: absolute;
+    bottom: -21px;
+    background: white;
+    overflow: hidden;
+    border-radius: 500px;
+    box-shadow: 0px 1px 2px 0px #bfbfbf;
+
+    @media (max-width: 550px) {
+      display: none;
+    }
+
+    a {
+      font-weight: 500;
+      padding: 11px 1.5rem;
+      display: inline-block;
+
+      &.active {
+        background-color: rgb(66, 165, 245);
+        color: white;
+      }
     }
   }
 }
