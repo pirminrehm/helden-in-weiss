@@ -7,7 +7,8 @@ import { RegisterInstitutionComponent } from './register-institution/register-in
 import { RegisterVolunteerComponent } from './register-volunteer/register-volunteer.component';
 
 const routes: Routes = [
-  { path: '', redirectTo: 'home/institutions', pathMatch: 'full' },
+  { path: '', redirectTo: '/home/institutions', pathMatch: 'full' },
+  { path: '*', redirectTo: '/home/institutions' },
   {
     path: 'home',
     component: HomeComponent,
