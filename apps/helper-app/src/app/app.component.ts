@@ -8,14 +8,14 @@ import { Helper } from '@wir-vs-virus/api-interfaces';
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent {
-  hello$ = this.http.get<[Helper]>('/api/helpers');
+  helpers$ = this.http.get<[Helper]>('/api/helpers');
   constructor(private http: HttpClient) {}
 
   postHelper() {
-    console.log('helper1')
+    console.log('Send Post Request')
     this.http.post<Helper>('/api/helper', JSON.stringify({
         name: 'TestHelper_' + Math.round(Math.random()*100),
-        email: 'noMail' + console.log('helper2'),
+        email: 'noMail',
         plz: 111111
       })
     ).subscribe(

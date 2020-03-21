@@ -1,8 +1,15 @@
 <div style="text-align:center">
   <h1>Welcome to helper-app!</h1>
 </div>
-<div>Message: {{ hello$ | async | json }}</div>
-<br>
-<br>
-<br>
+
 <button (click)="postHelper()">Save new Helper</button>
+
+<br>
+<br>
+<br>
+
+<div *ngFor="let helper of helpers$ | async" style="margin: 15px;">
+  Name: {{helper.name}}<br>
+  Email: {{helper.email}}<br>
+  PLZ: {{helper.plz}}<br>
+</div>
