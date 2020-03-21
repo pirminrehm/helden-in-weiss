@@ -89,3 +89,19 @@
     width: 90%;
   }
 }
+
+// boostrap breakpoints
+// 540px 720px 960px 1140px
+
+.container {
+  display: flex;
+  justify-content: center;
+  padding-top: 30px;
+
+  .content-area {
+    max-width: 1140px;
+    width: 100%;
+    margin: 20px;
+    display: flex;
+  }
+}

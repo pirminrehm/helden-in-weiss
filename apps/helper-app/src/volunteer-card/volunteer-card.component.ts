@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
+import { Volunteer } from '@wir-vs-virus/api-interfaces';
 
 @Component({
   selector: 'wir-vs-virus-volunteer-card',
@@ -6,10 +7,10 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./volunteer-card.component.scss']
 })
 export class VolunteerCardComponent implements OnInit {
+  constructor() {}
 
-  constructor() { }
+  @Input()
+  data: any; // toto type volunteer
 
-  ngOnInit(): void {
-  }
-
+  ngOnInit(): void {}
 }

@@ -29,21 +29,29 @@
   </div>
 </div>
 
-<div class="content-center">
-  <button (click)="postVolunteer()">Save new Helper</button>
-
-  <div style="width: 600x; margin: 20px;">
-    <wir-vs-virus-volunteer-card></wir-vs-virus-volunteer-card>
+<div class="container">
+  <div class="content-area">
+    <div class="card-list">
+      <wir-vs-virus-volunteer-card
+        [data]="volunteer"
+        *ngFor="let volunteer of volunteers$ | async"
+      >
+      </wir-vs-virus-volunteer-card>
+    </div>
+    <div class="actions"></div>
   </div>
-
-  <br />
-  <br />
-  <br />
-
-  <div *ngFor="let volunteer of volunteers$ | async" style="margin: 15px;">
-    Name: {{ volunteer.name }}<br />
-    Email: {{ volunteer.email }}<br />
-    PLZ: {{ volunteer.plz }}<br />
-  </div>
-  -->
 </div>
+
+<br />
+<br />
+<br />
+<button (click)="postVolunteer()">Save new Helper</button>
+<br />
+<br />
+<br />
+
+<!-- <div *ngFor="let volunteer of volunteers$ | async" style="margin: 15px;">
+  Name: {{ volunteer.name }}<br />
+  Email: {{ volunteer.email }}<br />
+  PLZ: {{ volunteer.plz }}<br />
+</div> -->
