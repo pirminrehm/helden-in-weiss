@@ -5,6 +5,7 @@ import { Model } from 'mongoose';
 
 @Injectable()
 export class DatabaseService {
+
   constructor(@InjectModel('Volunteer') private volunteerModel: Model<Volunteer>, @InjectModel('Institution') private institutionModel: Model<Institution>) {}
   async getAllVolunteers(): Promise<[Volunteer]> {
     return this.volunteerModel.find().exec();
@@ -12,6 +13,10 @@ export class DatabaseService {
 
   async getAllInstitutions(): Promise<[Institution]> {
     return this.institutionModel.find().exec();
+  }
+
+  async getAllInstitutionsByZipCode(zipcode: Number): Promise<[Institution]> {
+    return this.institutionModel.find({ zipcode: zipcode }).exec();
   }
 
   async saveVolunteer(volunteer: Volunteer): Promise<Volunteer> {
