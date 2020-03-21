@@ -86,16 +86,6 @@
   margin: 0 auto;
 
   @media (max-width: 1100px) {
-   width: 90%;
-  }
-}
-
-mat-card-title {
-  display: flex;
-  justify-content: space-between;
-
-  .date {
-    display: relative;
-    font-size: 0.8rem;
+    width: 90%;
   }
 }

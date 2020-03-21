@@ -1,0 +1,12 @@
+@import 'variables';
+
+mat-card-title {
+  display: flex;
+  justify-content: space-between;
+
+  .date {
+    display: relative;
+    font-size: 0.8em;
+    color: $font-subdude;
+  }
+}

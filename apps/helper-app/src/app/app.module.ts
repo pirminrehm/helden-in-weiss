@@ -5,9 +5,10 @@ import { AppComponent } from './app.component';
 import { HttpClientModule } from '@angular/common/http';
 import { MaterialModule } from '../material/material.module';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { VolunteerCardComponent } from '../volunteer-card/volunteer-card.component';
 
 @NgModule({
-  declarations: [AppComponent],
+  declarations: [AppComponent, VolunteerCardComponent],
   imports: [
     BrowserModule,
     HttpClientModule,

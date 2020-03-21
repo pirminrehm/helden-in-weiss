@@ -25,10 +25,10 @@
               "apps/helper-app/src/favicon.ico",
               "apps/helper-app/src/assets"
             ],
-            "styles": [
-              "./node_modules/@angular/material/prebuilt-themes/indigo-pink.css",
-              "apps/helper-app/src/styles/index.scss"
-            ],
+            "styles": ["apps/helper-app/src/styles/index.scss"],
+            "stylePreprocessorOptions": {
+              "includePaths": ["apps/helper-app/src/styles/"]
+            },
             "scripts": []
           },
           "configurations": {
