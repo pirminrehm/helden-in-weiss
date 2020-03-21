@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="49px" height="43px" viewBox="0 0 49 43" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 63.1 (92452) - https://sketch.com -->
+    <title>Logo</title>
+    <desc>Created with Sketch.</desc>
+    <g id="Wireframes" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="Logo" transform="translate(-5.000000, -9.000000)">
+            <g id="Group-14">
+                <rect id="Rectangle" x="0" y="0" width="60" height="60"></rect>
+                <g id="Group-Copy" transform="translate(0.000000, 4.000000)">
+                    <path d="M11.3019379,44.8229526 L11.3019379,15.0786891 C11.3019379,8.23397949 16.8506713,2.68524601 23.695381,2.68524601 C30.5400906,2.68524601 36.0888241,8.23397949 36.0888241,15.0786891 L36.0888241,44.8229526 L36.0888241,44.8229526 L11.3019379,44.8229526 Z" id="Combined-Shape" fill="#42A5F5" transform="translate(23.695381, 23.754099) rotate(-45.000000) translate(-23.695381, -23.754099) "></path>
+                    <path d="M15.0164092,11.652773 L43.9344431,11.652773 C50.7791527,11.652773 56.3278862,17.2015065 56.3278862,24.0462161 C56.3278862,30.8909258 50.7791527,36.4396593 43.9344431,36.4396593 L15.0164092,36.4396593 L15.0164092,36.4396593 L15.0164092,11.652773 Z" id="Combined-Shape" fill="#EF5350" transform="translate(35.672147, 24.046216) rotate(-45.000000) translate(-35.672147, -24.046216) "></path>
+                </g>
+            </g>
+        </g>
+    </g>
+</svg>

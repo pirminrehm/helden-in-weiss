@@ -1,3 +1,71 @@
+.hero-card {
+  width: 100%;
+  position: relative;
+  height: 450px;
+  background-image: url('/assets/Hero.png');
+  background-position: center;
+  background-repeat: no-repeat;
+  background-color: #373737;
+
+  .nav-bar {
+    margin-top: 1.5rem;
+    position: relative;
+    display: inline-block;
+    width: 100%;
+
+    img.app-logo {
+      height: 2rem;
+    }
+
+    .links {
+      float: right;
+
+      a {
+        color: white;
+        text-decoration: none;
+        padding-left: 3rem;
+        font-size: 1rem;
+        line-height: 28px;
+      }
+    }
+  }
+
+  .title {
+    color: white;
+    font-size: 28px;
+    line-height: 47px;
+    margin-top: 4rem;
+
+    @media (max-width: 550px) {
+      font-size: 25px;
+      line-height: 34px;
+    }
+  }
+
+  .sub-title {
+    color: white;
+    margin-top: 1rem;
+    font-size: 17px;
+    line-height: 30px;
+    width: calc(100% - 10rem);
+
+    @media (max-width: 550px) {
+      font-size: 14px;
+      line-height: 21px;
+      width: 100%;
+    }
+  }
+}
+
+.content-center {
+  width: 50%;
+  margin: 0 auto;
+
+  @media (max-width: 1100px) {
+   width: 90%;
+  }
+}
+
 mat-card-title {
   display: flex;
   justify-content: space-between;
