@@ -3,10 +3,11 @@ import { NgModule } from '@angular/core';
 import { ReactiveFormsModule } from '@angular/forms';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { ActionCardComponent } from '../action-card/action-card.component';
 import { HomeComponent } from '../home/home.component';
+import { InstitutionListComponent } from '../home/institution-list/institution-list.component';
+import { VolunteerCardComponent } from '../home/volunteer-card/volunteer-card.component';
+import { VolunteerListComponent } from '../home/volunteer-list/volunteer-list.component';
 import { MaterialModule } from '../material/material.module';
-import { VolunteerCardComponent } from '../volunteer-card/volunteer-card.component';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { RegisterVolunteerComponent } from './register-volunteer/register-volunteer.component';
@@ -15,9 +16,10 @@ import { RegisterVolunteerComponent } from './register-volunteer/register-volunt
   declarations: [
     AppComponent,
     VolunteerCardComponent,
-    ActionCardComponent,
     HomeComponent,
-    RegisterVolunteerComponent
+    RegisterVolunteerComponent,
+    VolunteerListComponent,
+    InstitutionListComponent
   ],
   imports: [
     BrowserModule,
@@ -30,4 +32,4 @@ import { RegisterVolunteerComponent } from './register-volunteer/register-volunt
   providers: [],
   bootstrap: [AppComponent]
 })
-export class AppModule {}
+export class AppModule { }
