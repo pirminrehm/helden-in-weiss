@@ -3,6 +3,7 @@ import { RouterModule, Routes } from '@angular/router';
 import { HomeComponent } from '../home/home.component';
 import { InstitutionListComponent } from '../home/institution-list/institution-list.component';
 import { VolunteerListComponent } from '../home/volunteer-list/volunteer-list.component';
+import { RegisterInstitutionComponent } from './register-institution/register-institution.component';
 import { RegisterVolunteerComponent } from './register-volunteer/register-volunteer.component';
 
 const routes: Routes = [
@@ -21,7 +22,8 @@ const routes: Routes = [
       }
     ]
   },
-  { path: 'register-volunteer', component: RegisterVolunteerComponent }
+  { path: 'register-volunteer', component: RegisterVolunteerComponent },
+  { path: 'register-institution', component: RegisterInstitutionComponent }
 ];
 
 @NgModule({

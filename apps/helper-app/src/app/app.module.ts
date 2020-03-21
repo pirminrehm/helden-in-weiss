@@ -11,6 +11,7 @@ import { MaterialModule } from '../material/material.module';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { RegisterVolunteerComponent } from './register-volunteer/register-volunteer.component';
+import { RegisterInstitutionComponent } from './register-institution/register-institution.component';
 
 @NgModule({
   declarations: [
@@ -19,7 +20,8 @@ import { RegisterVolunteerComponent } from './register-volunteer/register-volunt
     HomeComponent,
     RegisterVolunteerComponent,
     VolunteerListComponent,
-    InstitutionListComponent
+    InstitutionListComponent,
+    RegisterInstitutionComponent
   ],
   imports: [
     BrowserModule,

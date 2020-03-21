@@ -14,7 +14,7 @@
     <img src="/assets/chevron_left-24px.svg">Zurück
   </a>
 
-  <h1 class="title">Als Helfer registrieren</h1>
+  <h1 class="title">Suchen Sie Hilfe für Ihre Einrichtung</h1>
 
   <p class="description">
     Being the savage's bowsman, that is, the person who pulled the bow-oar in his boat (the second one from forward), it
@@ -22,15 +22,19 @@
   </p>
 
   <form [formGroup]="volunteerForm" (ngSubmit)="onSubmit()">
-    <input type="text" placeholder="Vor- & Nachname" formControlName="name">
-    <input type="text" placeholder="Postleitzahl Wohnort" formControlName="zipCode">
-    <textarea placeholder="Ein paar Worte zu Ihren medizinischen Kenntnissen" formControlName="knowledge"></textarea>
-    <input type="text" placeholder="Telefonnummer" formControlName="phone">
-    <input type="text" placeholder="E-Mail" formControlName="mail">
+    <h1 class="section-title">Angaben zur Einrichtung und Ihrem Bedarf</h1>
+    <input type="text" placeholder="Name der Einrichtung" formControlName="institutionName">
+    <input type="text" placeholder="Postleitzahl" formControlName="zipCode">
+    <textarea placeholder="Ein paar Worte dazu, wonach sie genau suchen." formControlName="description"></textarea>
+
+    <h1 class="section-title">Angaben zur Kontaktperson</h1>
+    <input type="text" placeholder="Vor- & Nachname" formControlName="contactName">
+    <input type="text" placeholder="Telefonnummer" formControlName="contactPhone">
+    <input type="text" placeholder="E-Mail" formControlName="contactMail">
     <div class="disclaimer">
       <img src="/assets/info-24px.svg">
       <div>Ihre Anzeige ist für 30 Tage gültig und wird aus Datenschutzgründen anschließend automatisch entfernt</div>
     </div>
-    <input type="submit" value="Hilfsangebot online stellen">
+    <input type="submit" value="Anfrage online stellen">
   </form>
 </main>
