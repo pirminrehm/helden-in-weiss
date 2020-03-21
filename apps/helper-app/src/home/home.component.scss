@@ -125,7 +125,7 @@
 
   .content-area {
     width: 100%;
-    max-width: 960px;
+    max-width: $breakpoint-lg;
     display: flex;
     flex-flow: row-reverse;
 

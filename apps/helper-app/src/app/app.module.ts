@@ -12,6 +12,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { RegisterVolunteerComponent } from './register-volunteer/register-volunteer.component';
 import { HeaderComponent } from '../header/header.component';
+import { FaqComponent } from '../faq/faq.component';
 
 @NgModule({
   declarations: [
@@ -21,7 +22,8 @@ import { HeaderComponent } from '../header/header.component';
     RegisterVolunteerComponent,
     VolunteerListComponent,
     InstitutionListComponent,
-    HeaderComponent
+    HeaderComponent,
+    FaqComponent
   ],
   imports: [
     BrowserModule,

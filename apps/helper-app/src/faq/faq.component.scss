@@ -1,0 +1,5 @@
+@import 'variables';
+
+mat-accordion:first-child {
+  border-radius: $border-radius !important;
+}

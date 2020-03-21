@@ -1,0 +1,21 @@
+<wir-vs-virus-header></wir-vs-virus-header>
+
+<div class="container">
+  <div class="content-area">
+    <h1>Hi Faq</h1>
+
+    <mat-accordion displayMode="default">
+      <mat-expansion-panel *ngFor="let faq of faqs">
+        <mat-expansion-panel-header>
+          <mat-panel-title>
+            {{ faq.question }}
+          </mat-panel-title>
+          <!-- <mat-panel-description>
+            Type your name and age
+          </mat-panel-description> -->
+        </mat-expansion-panel-header>
+        <p>{{ faq.answer }}</p>
+      </mat-expansion-panel>
+    </mat-accordion>
+  </div>
+</div>

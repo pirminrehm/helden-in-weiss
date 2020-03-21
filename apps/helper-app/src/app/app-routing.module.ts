@@ -4,6 +4,7 @@ import { HomeComponent } from '../home/home.component';
 import { InstitutionListComponent } from '../home/institution-list/institution-list.component';
 import { VolunteerListComponent } from '../home/volunteer-list/volunteer-list.component';
 import { RegisterVolunteerComponent } from './register-volunteer/register-volunteer.component';
+import { FaqComponent } from '../faq/faq.component';
 
 const routes: Routes = [
   { path: '', redirectTo: '/home/institutions', pathMatch: 'full' },
@@ -22,6 +23,7 @@ const routes: Routes = [
       }
     ]
   },
+  { path: 'faq', component: FaqComponent },
   { path: 'register-volunteer', component: RegisterVolunteerComponent }
 ];
 
