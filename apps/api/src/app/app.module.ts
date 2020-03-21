@@ -3,10 +3,9 @@ import { MongooseModule } from '@nestjs/mongoose';
 import { ConfigModule } from '@nestjs/config';
 
 import { AppController } from './app.controller';
-import { DatabaseService } from './database.service';
-import { HelperSchema } from './helper.schema';
-
-const mongoPassword = process.env.MONGO_PASSWD;
+import { VolunteerController } from '../volunteer/volunteer.controller';
+import { DatabaseService } from '../services/database.service';
+import { VolunteerSchema } from '../volunteer/volunteer.schema';
 
 @Module({
   imports: [
@@ -14,9 +13,9 @@ const mongoPassword = process.env.MONGO_PASSWD;
       envFilePath: 'apps/api/src/app/.env',
     }),
     MongooseModule.forRoot(`mongodb+srv://virusUser:${process.env.MONGO_PASSWD}@grip-playground-sxifp.azure.mongodb.net/test?retryWrites=true&w=majority`),
-    MongooseModule.forFeature([{ name: 'Helper', schema: HelperSchema }]),
+    MongooseModule.forFeature([{ name: 'Volunteer', schema: VolunteerSchema }]),
   ],
-  controllers: [AppController],
+  controllers: [AppController, VolunteerController],
   providers: [DatabaseService]
 })
 

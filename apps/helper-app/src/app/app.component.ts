@@ -8,16 +8,16 @@ import { Helper } from '@wir-vs-virus/api-interfaces';
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent {
-  helpers$ = this.http.get<[Helper]>('/api/helpers');
+  helpers$ = this.http.get<[Helper]>('/api/volunteer');
   constructor(private http: HttpClient) {}
 
   postHelper() {
     console.log('Send Post Request')
-    this.http.post<Helper>('/api/helper', JSON.stringify({
+    this.http.post<Helper>('/api/volunteer', {
         name: 'TestHelper_' + Math.round(Math.random()*100),
         email: 'noMail',
         plz: 111111
-      })
+      }
     ).subscribe(
       (val) => {
           console.log("POST call successful value returned in body", val);
