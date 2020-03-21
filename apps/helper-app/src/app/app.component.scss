@@ -1,3 +1,5 @@
+@import 'variables';
+
 .hero-card {
   width: 100%;
   position: relative;
@@ -6,6 +8,8 @@
   background-position: center;
   background-repeat: no-repeat;
   background-color: #373737;
+  display: flex;
+  justify-content: center;
 
   .nav-bar {
     margin-top: 1.5rem;
@@ -32,11 +36,11 @@
 
   .title {
     color: white;
-    font-size: 28px;
+    font-size: 34px;
     line-height: 47px;
     margin-top: 4rem;
 
-    @media (max-width: 550px) {
+    @media (max-width: $breakpoint-md) {
       font-size: 25px;
       line-height: 34px;
     }
@@ -45,11 +49,11 @@
   .sub-title {
     color: white;
     margin-top: 1rem;
-    font-size: 17px;
-    line-height: 30px;
+    font-size: 18px;
+    line-height: 26px;
     width: calc(100% - 10rem);
 
-    @media (max-width: 550px) {
+    @media (max-width: $breakpoint-xs) {
       font-size: 14px;
       line-height: 21px;
       width: 100%;
@@ -58,23 +62,38 @@
 
   .search-help-toggle {
     position: absolute;
-    bottom: -21px;
+    height: 56px;
+    width: 8 * $grid-col-width;
+    bottom: -28px;
     background: white;
     overflow: hidden;
     border-radius: 500px;
-    box-shadow: 0px 1px 2px 0px #bfbfbf;
+    box-shadow: $shadow-1;
+    font-size: 18px;
+    letter-spacing: 0.1px;
+    display: flex;
+    justify-content: stretch;
+    line-height: 56px;
 
-    @media (max-width: 550px) {
+    @media (max-width: $breakpoint-md) {
+      width: 500px;
+      font-size: 14px;
+      height: 42px;
+      line-height: 42px;
+    }
+
+    @media (max-width: $breakpoint-xs) {
       display: none;
     }
 
     a {
+      text-align: center;
+      flex-grow: 1;
       font-weight: 500;
-      padding: 11px 1.5rem;
       display: inline-block;
 
       &.active {
-        background-color: rgb(66, 165, 245);
+        background-color: $primary;
         color: white;
       }
     }
@@ -82,26 +101,53 @@
 }
 
 .content-center {
-  width: 50%;
-  margin: 0 auto;
+  width: 960px;
+  margin: 0 32px;
 
-  @media (max-width: 1100px) {
-    width: 90%;
+  @media (max-width: $breakpoint-xl) {
+    width: 100%;
   }
 }
 
 // boostrap breakpoints
-// 540px 720px 960px 1140px
+// $breakpoint-xs 720px 960px 1140px
 
 .container {
   display: flex;
   justify-content: center;
-  padding-top: 30px;
+  padding: 32px;
 
   .content-area {
-    max-width: 1140px;
     width: 100%;
-    margin: 20px;
+    max-width: 960px;
     display: flex;
+    margin-top: 32px;
+
+    .card-list {
+      max-width: 8 * $grid-col-width;
+      width: 100%;
+
+      @media (max-width: $breakpoint-md) {
+        max-width: 100%;
+      }
+    }
+
+    .actions {
+      max-width: 4 * $grid-col-width;
+      width: 100%;
+      margin: 0 16px;
+
+      .action-card {
+        height: 80px;
+        margin: 16px 0;
+        border-radius: $border-radius;
+        padding: $basic-spacer * 2;
+        background-color: $primary;
+
+        &:last-child {
+          background-color: $secondary;
+        }
+      }
+    }
   }
 }

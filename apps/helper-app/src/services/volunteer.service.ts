@@ -10,7 +10,7 @@ export class VolunteerService {
   constructor() {}
 
   // todo Volunteer rückgabe wert
-  public getAll(): Observable<any> {
+  public getAll(): Observable<Volunteer[]> {
     return of([
       {
         name: 'Lang',
