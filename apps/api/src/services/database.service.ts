@@ -5,7 +5,6 @@ import { Model } from 'mongoose';
 
 @Injectable()
 export class DatabaseService {
-
   constructor(@InjectModel('Volunteer') private volunteerModel: Model<Volunteer>, @InjectModel('Institution') private institutionModel: Model<Institution>) {}
   async getAllVolunteers(): Promise<[Volunteer]> {
     return this.volunteerModel.find().exec();
@@ -15,8 +14,17 @@ export class DatabaseService {
     return this.institutionModel.find().exec();
   }
 
-  async getAllInstitutionsByZipCode(zipcode: Number): Promise<[Institution]> {
+  async getAllInstitutionsByZipCode(zipcode: number): Promise<[Institution]> {
     return this.institutionModel.find({ zipcode: zipcode }).exec();
+  }
+
+  getAllInstitutionsWithinRadius(coordinates: [number], radius: number): Promise<[Institution]> {
+    const radiusNormalized : number = radius / 6371;
+    return this.institutionModel.find({
+      location: {
+        $geoWithin: { $centerSphere: [coordinates, radiusNormalized]}
+      }
+    }).exec()
   }
 
   async saveVolunteer(volunteer: Volunteer): Promise<Volunteer> {

@@ -3,9 +3,9 @@ export interface Volunteer {
   name: String,
   firstname: String,
   email: String,
-  zipcode: Number,
+  zipcode: number,
   city: String,
-  age: Number,
+  age: number,
   phone: String,
   description: String,
   qualification: String,
@@ -15,7 +15,7 @@ export interface Volunteer {
 
 export interface Institution {
   name: String,
-  zipcode: Number,
+  zipcode: number,
   city: String,
   title: String,
   description: String,
@@ -24,5 +24,9 @@ export interface Institution {
     firstname: String,
     phone: String,
     email: String,
+  },
+  location?: {
+    type: String,
+    coordinates: [number]
   }
 }
