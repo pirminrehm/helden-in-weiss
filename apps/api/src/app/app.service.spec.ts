@@ -1,6 +1,6 @@
 import { Test } from '@nestjs/testing';
 
-import { DatabaseService } from './database.service';
+import { DatabaseService } from '../services/database.service';
 
 describe('DatabaseService', () => {
   let service: DatabaseService;
@@ -15,7 +15,7 @@ describe('DatabaseService', () => {
 
   describe('getData', () => {
     it('should return "Welcome to api!"', () => {
-      expect(service.getHelpers()).toEqual([{
+      expect(service.getVolunteers()).toEqual([{
           name: 'Peter Pan',
           email: 'peter.pan@example.com',
           plz: 70569
