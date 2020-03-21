@@ -1,4 +1,4 @@
-import { Controller, Get, Post, Body, Logger } from '@nestjs/common';
+import { Controller, Get, Post, Body, Logger, Param, Query } from '@nestjs/common';
 import { Institution } from '@wir-vs-virus/api-interfaces';
 import { DatabaseService } from '../services/database.service';
 
@@ -7,8 +7,12 @@ export class InstitutionController {
   constructor(private readonly databaseService: DatabaseService){}
 
   @Get()
-  getAllInstitutions(): Promise<[Institution]> {
-    return this.databaseService.getAllInstitutions();
+  getAllInstitutionsByZipCode(@Query('zipcode') zipcode: Number): Promise<[Institution]> {
+    if (zipcode) {
+      return this.databaseService.getAllInstitutionsByZipCode(zipcode);
+    } else {
+      return this.databaseService.getAllInstitutions();
+    }
   }
 
   @Post()

@@ -4,6 +4,7 @@ export const InstitutionSchema = new mongoose.Schema({
   name: { type: String, required: true},
   zipcode: { type: Number, required: true},
   city: { type: String, required: true},
+  title: { type: String, required: true},
   description: { type: String, required: true},
   contact: {
     name: { type: String, required: true},
