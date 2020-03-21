@@ -4,12 +4,34 @@
 
 <button (click)="postVolunteer()">Save new Helper</button>
 
-<br>
-<br>
-<br>
+<mat-card class="example-card">
+  <mat-card-header>
+    <mat-card-title>
+      <div class="title">
+        Ehemalige Krankenschwester mit Spezilausbildung im Bereich Physotherapie
+      </div>
+      <div class="date">
+        22.03.2020
+      </div>
+    </mat-card-title>
+    <mat-card-subtitle>70569 Stuttgart</mat-card-subtitle>
+  </mat-card-header>
+
+  <mat-card-content>
+    <p>
+      The Shiba Inu is the smallest of the six original and distinct spitz
+      breeds of dog from Japan. A small, agile dog that copes very well with
+      mountainous terrain, the Shiba Inu was originally bred for hunting.
+    </p>
+  </mat-card-content>
+</mat-card>
+
+<br />
+<br />
+<br />
 
 <div *ngFor="let volunteer of volunteers$ | async" style="margin: 15px;">
-  Name: {{volunteer.name}}<br>
-  Email: {{volunteer.email}}<br>
-  PLZ: {{volunteer.plz}}<br>
+  Name: {{ volunteer.name }}<br />
+  Email: {{ volunteer.email }}<br />
+  PLZ: {{ volunteer.plz }}<br />
 </div>
