@@ -21,14 +21,14 @@ mat-card {
 
       .date {
         display: relative;
-        color: $font-subdude;
+        color: $text-subdude;
       }
     }
     .subtitle {
       font-size: 12px;
       letter-spacing: 0.4px;
       margin-top: 5px;
-      color: $font-subdude;
+      color: $text-subdude;
     }
   }
 
@@ -37,7 +37,7 @@ mat-card {
 
     .description,
     .detail-content {
-      color: $font-subdude;
+      color: $text-subdude;
     }
 
     .description {

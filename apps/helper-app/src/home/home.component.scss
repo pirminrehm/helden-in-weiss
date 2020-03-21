@@ -1,0 +1,184 @@
+@import 'variables';
+
+.hero-card {
+  width: 100%;
+  position: relative;
+  height: 400px;
+  background-image: url('/assets/Hero.png');
+  background-position: center;
+  background-repeat: no-repeat;
+  background-color: #373737;
+  display: flex;
+  justify-content: center;
+
+  .nav-bar {
+    margin-top: 1.5rem;
+    position: relative;
+    display: inline-block;
+    width: 100%;
+
+    img.app-logo {
+      height: 2rem;
+    }
+
+    .links {
+      float: right;
+
+      a {
+        color: white;
+        text-decoration: none;
+        padding-left: 3rem;
+        font-size: 1rem;
+        line-height: 28px;
+      }
+    }
+  }
+
+  .title {
+    color: white;
+    font-size: 34px;
+    line-height: 47px;
+    margin-top: 4rem;
+
+    @media (max-width: $breakpoint-md) {
+      font-size: 25px;
+      line-height: 34px;
+      margin-top: 2rem;
+    }
+  }
+
+  .sub-title {
+    color: white;
+    margin-top: 1rem;
+    font-size: 18px;
+    line-height: 26px;
+    width: calc(100% - 10rem);
+
+    @media (max-width: $breakpoint-xs) {
+      font-size: 14px;
+      line-height: 21px;
+      width: 100%;
+    }
+  }
+
+  .search-help-toggle {
+    position: absolute;
+    height: 56px;
+    width: 8 * $grid-col-width;
+    bottom: -28px;
+    background: white;
+    overflow: hidden;
+    border-radius: 500px;
+    box-shadow: $shadow-1;
+    font-size: 18px;
+    letter-spacing: 0.1px;
+    display: flex;
+    justify-content: stretch;
+    line-height: 56px;
+
+    @media (max-width: $breakpoint-md) {
+      width: 500px;
+      font-size: 14px;
+      height: 42px;
+      line-height: 42px;
+    }
+
+    @media (max-width: $breakpoint-xs) {
+      display: none;
+    }
+
+    a {
+      text-align: center;
+      flex-grow: 1;
+      font-weight: 500;
+      display: inline-block;
+
+      &.active {
+        background-color: $primary;
+        color: white;
+      }
+    }
+  }
+}
+
+.content-center {
+  width: 960px;
+  margin: 0 4 * $basic-spacer;
+
+  @media (max-width: $breakpoint-xl) {
+    width: 100%;
+  }
+}
+
+// boostrap breakpoints
+// $breakpoint-xs 720px 960px 1140px
+
+.container {
+  display: flex;
+  justify-content: center;
+  padding: 4 * $basic-spacer;
+
+  .content-area {
+    width: 100%;
+    max-width: 960px;
+    display: flex;
+    flex-flow: row-reverse;
+
+    margin-top: 4 * $basic-spacer;
+    @media (max-width: $breakpoint-md) {
+      flex-direction: column;
+      margin-top: $basic-spacer;
+    }
+
+    .card-list {
+      max-width: 8 * $grid-col-width;
+      width: 100%;
+
+      @media (max-width: $breakpoint-md) {
+        max-width: 100%;
+      }
+    }
+
+    .actions {
+      max-width: 4 * $grid-col-width;
+      width: 100%;
+      margin: 0 16px;
+
+      @media (max-width: $breakpoint-md) {
+        margin: 0;
+      }
+
+      a.action-card {
+        height: 80px;
+        margin: 16px 0;
+        border-radius: $border-radius;
+        padding: $basic-spacer * 2;
+        background-color: $primary;
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        justify-content: space-between;
+        text-decoration: none;
+        color: #fff;
+
+        .text {
+          padding: 2 * $basic-spacer 0 2 * $basic-spacer 2 * $basic-spacer;
+        }
+
+        img {
+          padding: 0 $basic-spacer;
+          height: 48px;
+
+          &.arrow {
+            opacity: 0.6;
+            height: 28px;
+          }
+        }
+
+        &:last-child {
+          background-color: $secondary;
+        }
+      }
+    }
+  }
+}

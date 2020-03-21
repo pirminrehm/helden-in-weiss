@@ -1,0 +1,75 @@
+<div class="hero-card">
+  <div class="content-center">
+    <div class="nav-bar">
+      <img class="app-logo" src="/assets/logo.svg" />
+      <div class="links">
+        <a href="">FAQ</a>
+        <a href="">Spenden</a>
+      </div>
+    </div>
+    <div class="hero-content">
+      <div class="title">
+        Medizinische Experten für die Corona-Krise.<br />
+        Ihre Fähigkeiten machen den Unterschied.
+      </div>
+      <div class="sub-title">
+        Von Hebammen, über Medizinstudenten bis zu Veteranen - aktuell herrscht
+        ein akuter Mangel an Fachpersonal im medizinischen Sektor. Helfen Sie
+        mit, um gemeinsam diese Herausforderung zu meistern. Jeder Helfer zählt.
+      </div>
+    </div>
+    <div class="search-help-toggle">
+      <a>
+        Einrichtungen, die Hilfe suchen
+      </a>
+      <a class="active">
+        Engagierte, die helfen wollen
+      </a>
+    </div>
+  </div>
+</div>
+
+<div class="container">
+  <div class="content-area">
+    <div class="actions">
+      <h3>Hilfe anbieten oder suchen</h3>
+      <!-- <wir-vs-virus-action-card
+        icon="assets/medical_staff.svg"
+        *ngFor="let volunteer of volunteers$ | async"
+      > -->
+
+      <a class="action-card" href="#">
+        <img src="assets/medical_staff.svg" />
+        <div class="text">Ich suche nach medizinischen Aushilfen</div>
+        <img class="arrow" src="assets/chevron_right-24px.svg" />
+      </a>
+      <a class="action-card" href="#">
+        <img src="assets/health.svg" />
+        <div class="text">Ich suche nach medizinischen Aushilfen</div>
+        <img class="arrow" src="assets/chevron_right-24px.svg" />
+      </a>
+    </div>
+
+    <div class="card-list">
+      <wir-vs-virus-volunteer-card
+        [data]="volunteer"
+        *ngFor="let volunteer of volunteers$ | async"
+      >
+      </wir-vs-virus-volunteer-card>
+    </div>
+  </div>
+</div>
+
+<br />
+<br />
+<br />
+<button (click)="postVolunteer()">Save new Helper</button>
+<br />
+<br />
+<br />
+
+<!-- <div *ngFor="let volunteer of volunteers$ | async" style="margin: 15px;">
+  Name: {{ volunteer.name }}<br />
+  Email: {{ volunteer.email }}<br />
+  PLZ: {{ volunteer.plz }}<br />
+</div> -->
