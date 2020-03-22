@@ -1,35 +1,77 @@
-import { Controller, Get, Post, Body, Logger, Query, HttpService, Response } from '@nestjs/common';
+import {
+  Controller,
+  Get,
+  Post,
+  Body,
+  Logger,
+  Query,
+  HttpService,
+  HttpException,
+  HttpStatus
+} from '@nestjs/common';
 import { Institution } from '@wir-vs-virus/api-interfaces';
 import { DatabaseService } from '../services/database.service';
 import { LocationService } from '../services/location.service';
+import { removeMongoIdFromArray } from '../common/utils';
 
 @Controller('institution')
 export class InstitutionController {
-  constructor(private readonly databaseService: DatabaseService, private readonly locationService: LocationService, private readonly httpservice: HttpService) { }
+  constructor(
+    private readonly databaseService: DatabaseService,
+    private readonly locationService: LocationService,
+    private readonly httpservice: HttpService
+  ) {}
 
   @Get()
-  async getAllInstitutions(@Query('searchTerm') searchTerm, @Query('searchPLZ') searchPLZ, @Query('searchRadius') searchRadius): Promise<[Institution]> {
-    // if (zipcode && radius) {
-    //   const coordinates = await this.locationService.getCoordinatesFromZipcode(zipcode);
-    //   return this.databaseService.getAllInstitutionsWithinRadius(coordinates, radius);
-    // } else if (zipcode) {
-    //   return this.databaseService.getAllInstitutionsByZipCode(zipcode);
-    // } else {
-    return this.databaseService.getInstitutions(searchTerm, searchPLZ);
-    // }
+  async getAllInstitutions(
+    @Query('searchTerm') searchTerm: string,
+    @Query('zipcode') zipcode: number,
+    @Query('radius') radius: number
+  ): Promise<Institution[]> {
+    if (zipcode && radius) {
+      try {
+        const coordinates = await this.locationService.getCoordinatesFromZipcode(
+          zipcode
+        );
+        return removeMongoIdFromArray(
+          await this.databaseService.getAllInstitutionsWithinRadius(
+            coordinates,
+            radius
+          )
+        );
+      } catch (e) {
+        throw new HttpException(e.message, HttpStatus.NOT_FOUND);
+      }
+    }
+    if (zipcode) {
+      return removeMongoIdFromArray(
+        await this.databaseService.getAllInstitutionsByZipCode(zipcode)
+      );
+    }
+    return removeMongoIdFromArray(
+      await this.databaseService.getInstitutions(searchTerm, zipcode)
+    );
   }
 
   @Post()
   async createInstitution(@Body() institution: Institution) {
-
     const zipcode = institution.zipcode;
-    const coordinates = await this.locationService.getCoordinatesFromZipcode(zipcode);
+    let coordinates;
+
+    try {
+      coordinates = await this.locationService.getCoordinatesFromZipcode(
+        zipcode
+      );
+    } catch (e) {
+      throw new HttpException(e.message, HttpStatus.NOT_FOUND);
+    }
+
     console.log('coordinates', coordinates);
     institution.location = {
-      type: "Point",
+      type: 'Point',
       coordinates: coordinates
-    }
-    Logger.log(institution)
+    };
+    Logger.log(institution);
     return await this.databaseService.saveInstitution(institution);
   }
 }

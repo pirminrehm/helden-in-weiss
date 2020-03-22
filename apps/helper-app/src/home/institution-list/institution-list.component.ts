@@ -16,24 +16,33 @@ export class InstitutionListComponent implements OnInit, OnDestroy {
 
   constructor(
     private route: ActivatedRoute,
-    private institutionsService: InstitutionService,
+    private institutionsService: InstitutionService
   ) {}
 
   ngOnInit(): void {
-    this.route.queryParams.pipe(
-      takeUntil(this.destroyed$),
-      tap(params => {
-        this.getInstitutions(params.searchTerm, params.searchPLZ, params.radius);
-      })
-    ).subscribe();
+    this.route.queryParams
+      .pipe(
+        takeUntil(this.destroyed$),
+        tap(params => {
+          this.getInstitutions(
+            params.searchTerm,
+            params.searchPLZ,
+            params.radius
+          );
+        })
+      )
+      .subscribe();
   }
 
   getInstitutions(searchTerm = '', searchPLZ = '', searchRadius = 10) {
     this.loading = true;
-    this.institutions$ = this.institutionsService.getAll(searchTerm, searchPLZ, searchRadius).pipe(
-      map(res => res.sort(this.sortByNewestDate)),
-      tap(() => (this.loading = false))
-    );
+    this.institutions$ = this.institutionsService
+      .getAll(searchTerm, searchPLZ, searchRadius)
+      .pipe(
+        tap(res => console.log(res)),
+        map(res => res.sort(this.sortByNewestDate)),
+        tap(() => (this.loading = false))
+      );
   }
 
   private sortByNewestDate(a, b) {

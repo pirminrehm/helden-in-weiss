@@ -5,60 +5,78 @@ import { Model } from 'mongoose';
 
 @Injectable()
 export class DatabaseService {
-  constructor(@InjectModel('Volunteer') private volunteerModel: Model<Volunteer>, @InjectModel('Institution') private institutionModel: Model<Institution>) { }
-  async getAllVolunteers(): Promise<[Volunteer]> {
+  constructor(
+    @InjectModel('Volunteer') private volunteerModel: Model<Volunteer>,
+    @InjectModel('Institution') private institutionModel: Model<Institution>
+  ) {}
+  async getAllVolunteers(): Promise<Volunteer[]> {
     return this.volunteerModel.find().exec();
   }
 
-  getVolunteers(searchTerm: string, searchPLZ: string): Promise<[Volunteer]> {
+  getVolunteers(searchTerm: string, searchPLZ: string): Promise<Volunteer[]> {
     const query: any = {
       $and: [
         {
           $or: [
-            { title: new RegExp(searchTerm, "i") },
-            { description: new RegExp(searchTerm, "i") },
+            { title: new RegExp(searchTerm, 'i') },
+            { description: new RegExp(searchTerm, 'i') }
           ]
         }
       ]
     };
     if (searchPLZ) {
-      query.$and.push({ zipcode: Number(searchPLZ) || undefined, })
+      query.$and.push({ zipcode: Number(searchPLZ) || undefined });
     }
     return this.volunteerModel.find(query);
   }
 
-  getAllInstitutions(): Promise<[Institution]> {
+  async getLatestsVolunteers(): Promise<Volunteer[]> {
+    return this.volunteerModel
+      .find()
+      .limit(10)
+      .exec();
+  }
+
+  async getAllInstitutions(): Promise<Institution[]> {
     return this.institutionModel.find().exec();
   }
 
-  getInstitutions(searchTerm: string, searchPLZ: string): Promise<[Institution]> {
+  async getInstitutions(
+    searchTerm: string,
+    searchPLZ: number
+  ): Promise<Institution[]> {
     const query: any = {
       $and: [
         {
           $or: [
-            { name: new RegExp(searchTerm, "i") },
-            { description: new RegExp(searchTerm, "i") },
+            { name: new RegExp(searchTerm, 'i') },
+            { description: new RegExp(searchTerm, 'i') }
           ]
         }
       ]
     };
     if (searchPLZ) {
-      query.$and.push({ zipcode: Number(searchPLZ) || undefined, })
+      query.$and.push({ zipcode: Number(searchPLZ) || undefined });
     }
-    return this.institutionModel.find(query);
+    return this.institutionModel.find(query).exec();
   }
 
-  async getAllInstitutionsByZipCode(zipcode: number): Promise<[Institution]> {
+  async getAllInstitutionsByZipCode(zipcode: number): Promise<Institution[]> {
     return this.institutionModel.find({ zipcode: zipcode }).exec();
   }
 
-  getAllInstitutionsWithinRadius(coordinates: [number], radius: number): Promise<[Institution]> {
+  getAllInstitutionsWithinRadius(
+    coordinates: [number],
+    radius: number
+  ): Promise<Institution[]> {
     const radiusNormalized: number = radius / 6371;
-    return this.institutionModel.find({
-      location: {
-        $geoWithin: { $centerSphere: [coordinates, radiusNormalized] }
-      }
-    }).exec()
+    return this.institutionModel
+      .find({
+        location: {
+          $geoWithin: { $centerSphere: [coordinates, radiusNormalized] }
+        }
+      })
+      .exec();
   }
 
   async saveVolunteer(volunteer: Volunteer): Promise<Volunteer> {

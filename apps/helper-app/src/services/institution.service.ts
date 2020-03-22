@@ -8,19 +8,38 @@ import { HttpClient } from '@angular/common/http';
   providedIn: 'root'
 })
 export class InstitutionService {
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient) {}
 
   private useMockData = false;
 
-  public getAll(searchTerm: string, searchPLZ: string, searchRadius: number): Observable<Institution[]> {
+  public getAll(
+    searchTerm: string,
+    zipCode: string,
+    radius: number
+  ): Observable<Institution[]> {
     if (this.useMockData) {
       return this.getMockData();
     }
-    return this.http.get<Institution[]>(`/api/institution?searchTerm=${searchTerm}&searchPLZ=${searchPLZ}`);
+    return this.http.get<Institution[]>(
+      `/api/institution?searchTerm=${searchTerm}&zipcode=${zipCode}&radius=${radius}`
+    );
   }
 
-  public create(volunteer: Volunteer) {
-    return this.http.post<Volunteer[]>('/api/volunteer', volunteer);
+  // public getByZipCode(zipCode): Observable<Institution[]> {
+  //   return this.http.get<Institution[]>(`/api/institution?zipcode=${zipCode}`);
+  // }
+
+  // public getByZipCodeAndRadius(
+  //   zipCode: number,
+  //   radius: number
+  // ): Observable<Institution[]> {
+  //   return this.http.get<Institution[]>(
+  //     `/api/institution?zipcode=${zipCode}&radius=${radius}`
+  //   );
+  // }
+
+  public create(institution: Institution) {
+    return this.http.post<Institution[]>('/api/volunteer', institution);
   }
 
   private getMockData() {
@@ -37,7 +56,7 @@ export class InstitutionService {
           name: 'string',
           firstname: 'string',
           phone: 'string',
-          email: 'string',
+          email: 'string'
         },
         description: 'Wir benötigen Helfer.',
         title: 'EInstitutionInstitutionInstitution',
