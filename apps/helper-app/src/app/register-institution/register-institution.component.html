@@ -2,14 +2,15 @@
 
 <main>
   <a class="back-navigation" [routerLink]="'..'">
-    <img src="/assets/chevron_left-24px.svg">Zurück
+    <img src="/assets/chevron_left-24px.svg" />Zurück
   </a>
 
   <h1 class="title">Suchen Sie Hilfe für Ihre Einrichtung</h1>
 
   <p class="description">
-    Being the savage's bowsman, that is, the person who pulled the bow-oar in his boat (the second one from forward), it
-    was my cheerful duty to attend upon him while taking that hand-scrabble scramble.
+    Being the savage's bowsman, that is, the person who pulled the bow-oar in
+    his boat (the second one from forward), it was my cheerful duty to attend
+    upon him while taking that hand-scrabble scramble.
   </p>
 
   <form [formGroup]="institutionForm" (ngSubmit)="onSubmit()">
@@ -17,51 +18,107 @@
 
     <mat-form-field appearance="fill">
       <mat-label>Name der Einrichtung</mat-label>
-      <input matInput placeholder="Name der Einrichtung" formControlName="institutionName" required />
-      <mat-error *ngIf="true">Name der Einrichtung ist erforderlich</mat-error>
+      <input
+        matInput
+        placeholder="Name der Einrichtung"
+        formControlName="institutionName"
+        required
+      />
+      <mat-error *ngIf="institutionForm.get('institutionName').errors"
+        >Name der Einrichtung ist erforderlich</mat-error
+      >
     </mat-form-field>
 
     <mat-form-field appearance="fill">
       <mat-label>Postleitzahl</mat-label>
       <input matInput placeholder="12345" formControlName="zipCode" required />
-      <mat-error *ngIf="institutionForm.get('zipCode').errors">
+      <mat-error
+        *ngIf="
+          institutionForm.get('zipCode').errors &&
+          !institutionForm.get('zipCode').hasError('notExists')
+        "
+      >
         PLZ ist erforderlich
+      </mat-error>
+      <mat-error *ngIf="institutionForm.get('zipCode').hasError('notExists')">
+        PLZ existiert nicht
       </mat-error>
     </mat-form-field>
 
     <mat-form-field appearance="fill">
       <mat-label>Ein paar Worte dazu, wonach Sie genau suchen.</mat-label>
-      <textarea matInput formControlName="description" placeholder="Ich suche ..." maxlength="300"></textarea>
+      <textarea
+        matInput
+        formControlName="description"
+        placeholder="Ich suche ..."
+        maxlength="300"
+      ></textarea>
       <mat-hint align="end">
         {{ institutionForm.get('description').value?.length || 0 }}/300
       </mat-hint>
-      <mat-error *ngIf="true">Angabe der Beschreibung ist erforderlich</mat-error>
+      <mat-error *ngIf="institutionForm.get('description').errors"
+        >Angabe der Beschreibung ist erforderlich</mat-error
+      >
     </mat-form-field>
 
     <h1 class="section-title">Angaben zur Kontaktperson</h1>
 
     <mat-form-field appearance="fill">
       <mat-label>Vor- & Nachname</mat-label>
-      <input matInput type="string" placeholder="Peter Müller" formControlName="contactName" required />
-      <mat-error *ngIf="true">Vor- & Nachname ist erforderlich</mat-error>
+      <input
+        matInput
+        type="string"
+        placeholder="Peter Müller"
+        formControlName="contactName"
+        required
+      />
+      <mat-error *ngIf="institutionForm.get('contactName').errors"
+        >Vor- & Nachname ist erforderlich</mat-error
+      >
     </mat-form-field>
 
     <mat-form-field appearance="fill">
       <mat-label>Telefon</mat-label>
-      <input matInput type="tel" placeholder="0721 8472371" formControlName="contactPhone" required />
-      <mat-error *ngIf="true">Telefonnummer ist erforderlich</mat-error>
+      <input
+        matInput
+        type="tel"
+        placeholder="0721 8472371"
+        formControlName="contactPhone"
+        required
+      />
+      <mat-error *ngIf="institutionForm.get('contactPhone').errors"
+        >Telefonnummer ist erforderlich</mat-error
+      >
     </mat-form-field>
 
     <mat-form-field appearance="fill">
       <mat-label>E-Mail</mat-label>
-      <input matInput type="email" placeholder="maxim.muster@example.com" formControlName="contactMail" required />
-      <mat-error *ngIf="true">E-Mail Adresse ist erforderlich</mat-error>
+      <input
+        matInput
+        type="email"
+        placeholder="maxim.muster@example.com"
+        formControlName="contactMail"
+        required
+      />
+      <mat-error *ngIf="institutionForm.get('contactMail').errors"
+        >E-Mail Adresse ist erforderlich</mat-error
+      >
     </mat-form-field>
     <div class="alert">
-      <img src="/assets/info-24px.svg">
-      <div>Ihre Anzeige ist für 30 Tage gültig und wird aus Datenschutzgründen anschließend automatisch entfernt</div>
+      <img src="/assets/info-24px.svg" />
+      <div>
+        Ihre Anzeige ist für 30 Tage gültig und wird aus Datenschutzgründen
+        anschließend automatisch entfernt
+      </div>
     </div>
 
-    <button class="submit-button" type="submit" mat-raised-button color="primary">Anfrage online stellen</button>
+    <button
+      class="submit-button"
+      type="submit"
+      mat-raised-button
+      color="primary"
+    >
+      Anfrage online stellen
+    </button>
   </form>
 </main>
