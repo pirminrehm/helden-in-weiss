@@ -132,7 +132,7 @@ textarea {
   outline: 0;
 }
 
-.disclaimer {
+.alert {
   border: solid 1px rgba(0,0,0,.12);
   border-radius: 5px;
   display: flex;
@@ -160,4 +160,17 @@ input[type="submit"] {
   margin-top: 1.5rem;
   margin-bottom: 3rem;
   border-radius: 5px;
+  cursor: pointer;
+}
+
+.error {
+  color: #EF5350;
+  margin-bottom: 1rem;
+
+  img {
+    margin-top: 0px;
+    float: left;
+    margin-right: 10px;
+    height: 21px;
+  }
 }

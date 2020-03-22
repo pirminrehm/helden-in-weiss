@@ -14,11 +14,33 @@
 
   <form [formGroup]="volunteerForm" (ngSubmit)="onSubmit()">
     <input type="text" placeholder="Vor- & Nachname" formControlName="name">
+    <div class="error" *ngIf="volunteerForm.get('name').hasError('required') && volunteerForm.get('name').touched">
+      <img src="/assets/error_outline-24px.svg">
+      Vor- & Nachname ist erforderlich
+    </div>
     <input type="text" placeholder="Postleitzahl Wohnort" formControlName="zipCode">
+    <div class="error"
+      *ngIf="volunteerForm.get('zipCode').hasError('required') && volunteerForm.get('zipCode').touched">
+      <img src="/assets/error_outline-24px.svg">
+      PLZ ist erforderlich
+    </div>
     <textarea placeholder="Ein paar Worte zu Ihren medizinischen Kenntnissen" formControlName="knowledge"></textarea>
+    <div class="error"
+      *ngIf="volunteerForm.get('knowledge').hasError('required') && volunteerForm.get('knowledge').touched">
+      <img src="/assets/error_outline-24px.svg">
+      Angabe der Kenntnisse sind erforderlich
+    </div>
     <input type="text" placeholder="Telefonnummer" formControlName="phone">
+    <div class="error" *ngIf="volunteerForm.get('phone').hasError('required') && volunteerForm.get('phone').touched">
+      <img src="/assets/error_outline-24px.svg">
+      Telefonnummer ist erforderlich
+    </div>
     <input type="text" placeholder="E-Mail" formControlName="mail">
-    <div class="disclaimer">
+    <div class="error" *ngIf="volunteerForm.get('mail').hasError('required') && volunteerForm.get('mail').touched">
+      <img src="/assets/error_outline-24px.svg">
+      E-Mail Adresse ist erforderlich
+    </div>
+    <div class="alert">
       <img src="/assets/info-24px.svg">
       <div>Ihre Anzeige ist für 30 Tage gültig und wird aus Datenschutzgründen anschließend automatisch entfernt</div>
     </div>
