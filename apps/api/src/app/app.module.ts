@@ -13,15 +13,16 @@ import { InstitutionSchema } from '../institution/institution.schema';
 @Module({
   imports: [
     ConfigModule.forRoot({
-      envFilePath: 'apps/api/src/app/.env',
+      envFilePath: 'apps/api/src/app/.env'
     }),
-    MongooseModule.forRoot(`mongodb+srv://virusUser:${process.env.MONGO_PASSWD}@grip-playground-sxifp.azure.mongodb.net/test?retryWrites=true&w=majority`),
+    MongooseModule.forRoot(process.env.MONGO_CONNECTION),
     MongooseModule.forFeature([{ name: 'Volunteer', schema: VolunteerSchema }]),
-    MongooseModule.forFeature([{ name: 'Institution', schema: InstitutionSchema }]),
+    MongooseModule.forFeature([
+      { name: 'Institution', schema: InstitutionSchema }
+    ]),
     HttpModule
   ],
   controllers: [AppController, VolunteerController, InstitutionController],
   providers: [DatabaseService, LocationService]
 })
-
 export class AppModule {}
