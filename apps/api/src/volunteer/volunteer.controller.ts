@@ -48,7 +48,7 @@ export class VolunteerController {
       );
     }
     return removeMongoIdFromArray(
-      await this.databaseService.getVolunteers(searchTerm, zipcode)
+      await this.databaseService.getVolunteers(searchTerm, zipcode.toString())
     );
   }
 
