@@ -1,0 +1,40 @@
+<mat-card class="example-card">
+  <div class="card-header">
+    <div class="title-container">
+      <div class="title">
+        {{ data.title }}
+      </div>
+      <div class="date">
+        {{ data.registeredAt | date: 'dd.MM.yy' }}
+      </div>
+    </div>
+    <div class="subtitle">{{ data.zipcode }} {{ data.city }}</div>
+  </div>
+  <br />
+  <mat-card-content>
+    <div class="description">
+      {{ data.description }}
+    </div>
+    <div class="details">
+      <div>
+        <div class="label">
+          Medizinische Ausbildung
+        </div>
+        <div class="detail-content">
+          {{ data.qualification }}
+        </div>
+      </div>
+      <div>
+        <div class="label">
+          Kontakt
+        </div>
+        <div class="detail-content">
+          {{ data.email }}
+        </div>
+        <div class="detail-content">
+          {{ data.phone }}
+        </div>
+      </div>
+    </div>
+  </mat-card-content>
+</mat-card>

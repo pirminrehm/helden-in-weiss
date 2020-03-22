@@ -1,0 +1,61 @@
+@import 'variables';
+
+mat-card {
+  margin-bottom: 20px;
+  border-radius: 8px;
+
+  .card-header {
+    display: flex;
+    flex-direction: column;
+
+    .title-container {
+      display: flex;
+      justify-content: space-between;
+      font-size: 18px;
+      line-height: 24px;
+      letter-spacing: 0.1px;
+      // font-weight: 500;
+
+      .title {
+      }
+
+      .date {
+        display: relative;
+        color: $text-subdude;
+      }
+    }
+    .subtitle {
+      font-size: 12px;
+      letter-spacing: 0.4px;
+      margin-top: 5px;
+      color: $text-subdude;
+    }
+  }
+
+  mat-card-content {
+    letter-spacing: 0.25px;
+
+    .description,
+    .detail-content {
+      color: $text-subdude;
+    }
+
+    .description {
+      margin: 8px 0 16px;
+    }
+
+    .details {
+      display: flex;
+      flex-direction: row;
+      align-items: stretch;
+
+      > div {
+        width: 50%;
+
+        .detail-content {
+          margin: 8px 0;
+        }
+      }
+    }
+  }
+}

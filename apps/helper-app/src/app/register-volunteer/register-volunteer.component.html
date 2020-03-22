@@ -1,0 +1,83 @@
+<wir-vs-virus-header></wir-vs-virus-header>
+
+<main>
+  <a class="back-navigation" [routerLink]="'..'">
+    <img src="/assets/chevron_left-24px.svg" />Zurück
+  </a>
+
+  <h1 class="title">Als Helfer registrieren</h1>
+
+  <p class="description">
+    Being the savage's bowsman, that is, the person who pulled the bow-oar in
+    his boat (the second one from forward), it was my cheerful duty to attend
+    upon him while taking that hand-scrabble scramble.
+  </p>
+
+  <form [formGroup]="volunteerForm" (ngSubmit)="onSubmit()">
+    <mat-form-field appearance="fill">
+      <mat-label>Name</mat-label>
+      <input
+        matInput
+        placeholder="Maxim Muster"
+        formControlName="name"
+        required
+      />
+      <mat-error *ngIf="true">Vor- & Nachname ist erforderlich</mat-error>
+    </mat-form-field>
+
+    <mat-form-field appearance="fill">
+      <mat-label>Postleitzahl</mat-label>
+      <input matInput placeholder="12345" formControlName="zipCode" required />
+      <mat-error *ngIf="volunteerForm.get('zipCode').errors">
+        PLZ ist erforderlich
+      </mat-error>
+    </mat-form-field>
+
+    <mat-form-field appearance="fill">
+      <mat-label>"Ein paar Worte zu Ihren medizinischen Kenntnissen</mat-label>
+      <textarea
+        matInput
+        formControlName="knowledge"
+        placeholder="Ich bin gelernte..."
+        maxlength="300"
+      ></textarea>
+      <mat-hint align="end">
+        {{ volunteerForm.get('knowledge').value?.length || 0 }}/300
+      </mat-hint>
+      <mat-error *ngIf="true">Angabe der Kenntnisse ist erforderlich</mat-error>
+    </mat-form-field>
+
+    <mat-form-field appearance="fill">
+      <mat-label>Telefonnummer</mat-label>
+      <input
+        matInput
+        type="tel"
+        placeholder="0176 1234567"
+        formControlName="phone"
+        required
+      />
+      <mat-error *ngIf="true"> Telefonnummer ist erforderlich</mat-error>
+    </mat-form-field>
+
+    <mat-form-field appearance="fill">
+      <mat-label>"E-Mail</mat-label>
+      <input
+        matInput
+        type="email"
+        placeholder="maxim.muster@example.com"
+        formControlName="mail"
+        required
+      />
+      <mat-error *ngIf="true"> "E-Mail Adresse ist erforderlich</mat-error>
+    </mat-form-field>
+
+    <div class="alert">
+      <img src="/assets/info-24px.svg" />
+      <div>
+        Ihre Anzeige ist für 30 Tage gültig und wird aus Datenschutzgründen
+        anschließend automatisch entfernt
+      </div>
+    </div>
+    <input type="submit" value="Hilfsangebot online stellen" />
+  </form>
+</main>

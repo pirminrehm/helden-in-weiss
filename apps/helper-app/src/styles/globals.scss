@@ -1,0 +1,20 @@
+@import 'variables';
+
+.spinner-container {
+  width: 100%;
+  position: relative;
+  display: flex;
+  justify-content: center;
+  padding-top: 15 * $basic-spacer;
+}
+
+.container {
+  display: flex;
+  justify-content: center;
+  padding: 4 * $basic-spacer;
+
+  .content-area {
+    width: 100%;
+    max-width: $breakpoint-lg;
+  }
+}

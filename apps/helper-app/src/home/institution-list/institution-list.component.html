@@ -1,0 +1,9 @@
+<div class="spinner-container" *ngIf="loading">
+  <mat-spinner diameter="32" color="primary"></mat-spinner>
+</div>
+
+<wir-vs-virus-volunteer-card
+  [data]="volunteer"
+  *ngFor="let volunteer of institutions$ | async"
+>
+</wir-vs-virus-volunteer-card>

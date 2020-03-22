@@ -1,0 +1,57 @@
+<div class="hero-card">
+  <div class="content-center">
+    <div class="nav-bar">
+      <img class="app-logo" src="/assets/logo.svg" />
+      <div class="links">
+        <a routerLink="/faq">FAQ</a>
+        <a href="">Spenden</a>
+      </div>
+    </div>
+    <div class="hero-content">
+      <div class="title">
+        Medizinische Experten für die Corona-Krise.<br />
+        Ihre Fähigkeiten machen den Unterschied.
+      </div>
+      <div class="sub-title">
+        Von Hebammen, über Medizinstudenten bis zu Veteranen - aktuell herrscht
+        ein akuter Mangel an Fachpersonal im medizinischen Sektor. Helfen Sie
+        mit, um gemeinsam diese Herausforderung zu meistern. Jeder Helfer zählt.
+      </div>
+    </div>
+    <div class="search-help-toggle">
+      <a routerLinkActive="bg-blue" routerLink="institutions">
+        Einrichtungen, die Hilfe suchen
+      </a>
+      <a routerLinkActive="bg-red" routerLink="volunteers">
+        Engagierte, die helfen wollen
+      </a>
+    </div>
+  </div>
+</div>
+
+<div class="container">
+  <div class="content-area">
+    <div class="actions">
+      <h3>Hilfe anbieten oder suchen</h3>
+      <!-- <wir-vs-virus-action-card
+        icon="assets/medical_staff.svg"
+        *ngFor="let volunteer of volunteers$ | async"
+      > -->
+
+      <a class="action-card" routerLink="/register-institution">
+        <img src="assets/medical_staff.svg" />
+        <div class="text">Ich suche nach medizinischen Aushilfen</div>
+        <img class="arrow" src="assets/chevron_right-24px.svg" />
+      </a>
+      <a class="action-card" routerLink="/register-volunteer">
+        <img src="assets/health.svg" />
+        <div class="text">Ich biete meine medizinische Expertise an</div>
+        <img class="arrow" src="assets/chevron_right-24px.svg" />
+      </a>
+    </div>
+
+    <div class="card-list">
+      <router-outlet></router-outlet>
+    </div>
+  </div>
+</div>
