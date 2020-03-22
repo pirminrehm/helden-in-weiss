@@ -10,7 +10,8 @@
 
 ## Demo
 
-Sorry, we do not have a Demo deployed yet :/
+Please send an email to helden-in-weiss@7kw.de for the demo link.
+**Users from devpost can find the link there in the "Try it out" area of our project page.**
 
 ## Video
 
