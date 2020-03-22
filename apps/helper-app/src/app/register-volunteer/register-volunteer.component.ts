@@ -2,8 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 
 import { Volunteer } from '@wir-vs-virus/api-interfaces';
-import { VolunteerCardComponent } from '../../home/volunteer-card/volunteer-card.component';
 import { VolunteerService } from '../../services/volunteer.service';
+
+import { zipCodeRegExp, phoneRegExp } from '../common/utils';
 
 @Component({
   selector: 'wir-vs-virus-register-volunteer',
@@ -12,23 +13,24 @@ import { VolunteerService } from '../../services/volunteer.service';
 })
 export class RegisterVolunteerComponent implements OnInit {
   volunteerForm = new FormGroup({
-    name: new FormControl('', [Validators.required, Validators.maxLength(50)]),
+    name: new FormControl('', [Validators.required, Validators.maxLength(70)]),
     zipCode: new FormControl('', [
       Validators.required,
-      Validators.pattern(/[0-9]{5}/)
+      Validators.pattern(zipCodeRegExp)
     ]),
     knowledge: new FormControl('', [
       Validators.required,
       Validators.maxLength(300)
     ]),
+
     phone: new FormControl('', [
       Validators.required,
-      Validators.pattern(/^\+?[0-9]{5,30}$/)
+      Validators.pattern(phoneRegExp)
     ]),
     mail: new FormControl('', [
       Validators.required,
       Validators.email,
-      Validators.maxLength(50)
+      Validators.maxLength(70)
     ])
   });
 
@@ -37,7 +39,7 @@ export class RegisterVolunteerComponent implements OnInit {
   ngOnInit(): void {}
 
   onSubmit() {
-    this.volunteerForm.updateValueAndValidity();
+    // this.volunteerForm.updateValueAndValidity();
     if (!this.volunteerForm.valid) {
       return;
     }
