@@ -22,7 +22,9 @@
         formControlName="name"
         required
       />
-      <mat-error *ngIf="true">Vor- & Nachname ist erforderlich</mat-error>
+      <mat-error *ngIf="volunteerForm.get('name').errors"
+        >Vor- & Nachname ist erforderlich</mat-error
+      >
     </mat-form-field>
 
     <mat-form-field appearance="fill">
@@ -52,7 +54,9 @@
       <mat-hint align="end">
         {{ volunteerForm.get('knowledge').value?.length || 0 }}/300
       </mat-hint>
-      <mat-error *ngIf="true">Angabe der Kenntnisse ist erforderlich</mat-error>
+      <mat-error *ngIf="volunteerForm.get('knowledge').errors"
+        >Angabe der Kenntnisse ist erforderlich</mat-error
+      >
     </mat-form-field>
 
     <mat-form-field appearance="fill">
@@ -64,7 +68,9 @@
         formControlName="phone"
         required
       />
-      <mat-error *ngIf="true"> Telefonnummer ist erforderlich</mat-error>
+      <mat-error *ngIf="volunteerForm.get('phone').errors">
+        Telefonnummer ist erforderlich</mat-error
+      >
     </mat-form-field>
 
     <mat-form-field appearance="fill">
@@ -76,8 +82,47 @@
         formControlName="mail"
         required
       />
-      <mat-error *ngIf="true">E-Mail Adresse ist erforderlich</mat-error>
+      <mat-error *ngIf="volunteerForm.get('mail').errors"
+        >E-Mail Adresse ist erforderlich</mat-error
+      >
     </mat-form-field>
+
+    <mat-form-field>
+      <mat-chip-list #chipList>
+        <mat-chip
+          *ngFor="let qaulification of qualifications"
+          [selectable]="selectable"
+          [removable]="removable"
+          (removed)="remove(qaulification)"
+        >
+          {{ qaulification }}
+          <mat-icon matChipRemove *ngIf="removable">cancel</mat-icon>
+        </mat-chip>
+        <input
+          placeholder="Ihre Qualifikation(en)"
+          #qaulificationInput
+          formControlName="qualifications"
+          [matAutocomplete]="auto"
+          [matChipInputFor]="chipList"
+          [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
+          (matChipInputTokenEnd)="add($event)"
+        />
+      </mat-chip-list>
+      <mat-autocomplete
+        #auto="matAutocomplete"
+        (optionSelected)="selected($event)"
+      >
+        <mat-option
+          *ngFor="let qualification of filteredQualifications | async"
+          [value]="qualification"
+        >
+          {{ qualification }}
+        </mat-option>
+      </mat-autocomplete>
+    </mat-form-field>
+    <!-- <mat-error *ngIf="volunteerForm.get('qualifications').errors"
+      >Angabe von Qualifikationen erforderlich
+    </mat-error> -->
 
     <div class="alert">
       <img src="/assets/info-24px.svg" />

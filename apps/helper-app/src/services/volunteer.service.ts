@@ -44,7 +44,7 @@ export class VolunteerService {
         title:
           'Ehemalige Krankenschwester mit Sepzialausbildung im Bereich Physiotherapie',
         created: '2020-03-21T15:36:50.756Z',
-        qualification: 'Krankenschwester'
+        qualification: ['Krankenschwester']
       },
       {
         name: 'Kurz',
@@ -57,7 +57,7 @@ export class VolunteerService {
         description: 'Kann gerne helfen.',
         title: 'Ehemaliger Zivi Kankenwagenfahrer',
         created: '2020-03-21T15:36:50.756Z',
-        qualification: 'Rettungshelfer'
+        qualification: ['Rettungshelfer']
       }
     ]).pipe(delay(1000));
   }
