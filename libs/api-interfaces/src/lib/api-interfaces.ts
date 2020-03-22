@@ -9,6 +9,10 @@ export interface Volunteer {
   phone: string;
   description: string;
   qualification: string;
+  location?: {
+    type: string;
+    coordinates: [number];
+  };
   active?: Boolean;
   registeredAt?: string;
 }

@@ -1,6 +1,6 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { Volunteer } from '@wir-vs-virus/api-interfaces';
+import { Volunteer, customErrorCodes } from '@wir-vs-virus/api-interfaces';
 import { Observable, Subject } from 'rxjs';
 import { map, takeUntil, tap } from 'rxjs/operators';
 import { VolunteerService } from '../../services/volunteer.service';
@@ -12,29 +12,49 @@ import { VolunteerService } from '../../services/volunteer.service';
 })
 export class VolunteerListComponent implements OnInit, OnDestroy {
   volunteers$: Observable<Volunteer[]>;
+  volunteers: Volunteer[];
   loading = true;
   destroyed$ = new Subject();
 
   constructor(
     private volunteerService: VolunteerService,
-    private route: ActivatedRoute,
-  ) { }
+    private route: ActivatedRoute
+  ) {}
 
   ngOnInit() {
-    this.route.queryParams.pipe(
-      takeUntil(this.destroyed$),
-      tap(params => {
-        this.getVolunteers(params.searchTerm, params.searchPLZ, params.radius);
-      })
-    ).subscribe();
+    this.route.queryParams
+      .pipe(
+        takeUntil(this.destroyed$),
+        tap(params => {
+          this.getVolunteers(
+            params.searchTerm,
+            params.searchPLZ,
+            params.radius
+          );
+        })
+      )
+      .subscribe();
   }
 
   getVolunteers(searchTerm = '', searchPLZ = '', searchRadius = 10) {
     this.loading = true;
-    this.volunteers$ = this.volunteerService.getAll(searchTerm, searchPLZ, searchRadius).pipe(
-      map(res => res.sort(this.sortByNewestDate)),
-      tap(() => (this.loading = false))
-    );
+    // this.volunteers$ =
+    this.volunteerService
+      .getAll(searchTerm, searchPLZ, searchRadius)
+      .pipe(
+        takeUntil(this.destroyed$),
+        tap(res => console.log(res)),
+        map(res => res.sort(this.sortByNewestDate)),
+        tap(() => (this.loading = false))
+      )
+      .subscribe({
+        next: data => (this.volunteers = data),
+        error: err => {
+          if (err.error.message === customErrorCodes.ZIP_NOT_FOUND) {
+            alert('Unbekannte PLZ');
+          }
+        }
+      });
   }
 
   private sortByNewestDate(a, b) {

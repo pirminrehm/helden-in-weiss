@@ -37,6 +37,24 @@ export class DatabaseService {
       .exec();
   }
 
+  async getAllVolunteersWithinRadius(
+    coordinates: [number],
+    radius: number
+  ): Promise<Volunteer[]> {
+    const radiusNormalized: number = radius / 6371;
+    return this.volunteerModel
+      .find({
+        location: {
+          $geoWithin: { $centerSphere: [coordinates, radiusNormalized] }
+        }
+      })
+      .exec();
+  }
+
+  async getAllVolunteersByZipCode(zipcode: number): Promise<Volunteer[]> {
+    return this.volunteerModel.find({ zipcode: zipcode }).exec();
+  }
+
   async getAllInstitutions(): Promise<Institution[]> {
     return this.institutionModel.find().exec();
   }

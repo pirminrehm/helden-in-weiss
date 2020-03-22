@@ -28,8 +28,16 @@
     <mat-form-field appearance="fill">
       <mat-label>Postleitzahl</mat-label>
       <input matInput placeholder="12345" formControlName="zipCode" required />
-      <mat-error *ngIf="volunteerForm.get('zipCode').errors">
+      <mat-error
+        *ngIf="
+          volunteerForm.get('zipCode').errors &&
+          !volunteerForm.get('zipCode').hasError('notExists')
+        "
+      >
         PLZ ist erforderlich
+      </mat-error>
+      <mat-error *ngIf="volunteerForm.get('zipCode').hasError('notExists')">
+        PLZ existiert nicht
       </mat-error>
     </mat-form-field>
 
@@ -79,6 +87,13 @@
       </div>
     </div>
 
-    <button class="submit-button" type="submit" mat-raised-button color="primary">Hilfsangebot online stellen</button>
+    <button
+      class="submit-button"
+      type="submit"
+      mat-raised-button
+      color="primary"
+    >
+      Hilfsangebot online stellen
+    </button>
   </form>
 </main>

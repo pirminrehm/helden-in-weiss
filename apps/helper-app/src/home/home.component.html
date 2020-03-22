@@ -58,19 +58,21 @@
           <mat-form-field appearance="outline">
             <mat-icon matPrefix>search</mat-icon>
             <mat-label>Suche</mat-label>
-            <input matInput formControlName="term">
+            <input matInput formControlName="term" />
           </mat-form-field>
           <mat-form-field appearance="outline">
             <mat-label>PLZ</mat-label>
-            <input type="number" matInput formControlName="plz">
+            <input type="number" matInput formControlName="plz" />
           </mat-form-field>
           <mat-form-field appearance="outline">
             <mat-label>Radius</mat-label>
             <mat-select formControlName="plz">
-              <mat-option value="option">5 km</mat-option>
-              <mat-option value="option">10 km</mat-option>
-              <mat-option value="option">25 km</mat-option>
-              <mat-option value="option">50 km</mat-option>
+              <mat-option value="5">5 km</mat-option>
+              <mat-option value="10">10 km</mat-option>
+              <mat-option value="25">25 km</mat-option>
+              <mat-option value="50">50 km</mat-option>
+              <mat-option value="100">100 km</mat-option>
+              <mat-option value="200">200 km</mat-option>
             </mat-select>
           </mat-form-field>
         </form>
