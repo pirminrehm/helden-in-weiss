@@ -5,8 +5,10 @@ import { MatCardModule } from '@angular/material/card';
 import { MatRippleModule } from '@angular/material/core';
 import { MatExpansionModule } from '@angular/material/expansion';
 import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+import { MatSelectModule } from '@angular/material/select';
 
 const materialModules = [
   MatCardModule,
@@ -16,6 +18,8 @@ const materialModules = [
   MatInputModule,
   MatButtonModule,
   MatRippleModule,
+  MatIconModule,
+  MatSelectModule,
 ];
 
 @NgModule({

@@ -140,6 +140,15 @@
       margin-top: $basic-spacer;
     }
 
+    .filter-controls {
+      display: flex;
+      justify-content: space-between;
+
+      .mat-form-field {
+        width: 31%;
+      }
+    }
+
     .card-list {
       max-width: 8 * $grid-col-width;
       width: 100%;
