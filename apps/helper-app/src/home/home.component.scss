@@ -175,6 +175,16 @@
           padding: 2 * $basic-spacer 0 2 * $basic-spacer 2 * $basic-spacer;
         }
 
+        &.bg-blue {
+          background-color: $primary;
+          color: white;
+        }
+
+        &.bg-red {
+          background-color: $accent;
+          color: white;
+        }
+
         img {
           padding: 0 $basic-spacer;
           height: 48px;
@@ -188,6 +198,10 @@
         &:last-child {
           background-color: $accent;
         }
+      }
+
+      .color-red {
+        color: $accent;
       }
     }
 

@@ -38,16 +38,18 @@
         *ngFor="let volunteer of volunteers$ | async"
       > -->
 
-      <a class="action-card" matRipple routerLink="/register-institution">
+      <a class="action-card bg-blue" routerLink="/register-institution">
         <img src="assets/medical_staff.svg" />
         <div class="text">Ich suche nach medizinischen Aushilfen</div>
         <img class="arrow" src="assets/chevron_right-24px.svg" />
       </a>
-      <a class="action-card" matRipple routerLink="/register-volunteer">
+      <a class="action-card bg-red" routerLink="/register-volunteer">
         <img src="assets/health.svg" />
         <div class="text">Ich biete meine medizinische Expertise an</div>
         <img class="arrow" src="assets/chevron_right-24px.svg" />
       </a>
+
+      <a class="color-red" href="">Welche Fähigkeiten werden benötigt?</a>
     </div>
 
     <div class="card-list">
