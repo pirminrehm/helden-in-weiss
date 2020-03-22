@@ -42,6 +42,7 @@ export class InstitutionListComponent implements OnInit, OnDestroy {
     this.institutionsService
       .getAll(searchTerm, searchPLZ, searchRadius)
       .pipe(
+        takeUntil(this.destroyed$),
         tap(res => console.log(res)),
         map(res => res.sort(this.sortByNewestDate)),
         tap(() => (this.loading = false))

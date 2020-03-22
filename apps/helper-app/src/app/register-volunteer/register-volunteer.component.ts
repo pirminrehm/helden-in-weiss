@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 
-import { Volunteer } from '@wir-vs-virus/api-interfaces';
+import { Volunteer, customErrorCodes } from '@wir-vs-virus/api-interfaces';
 import { VolunteerService } from '../../services/volunteer.service';
 
 import { zipCodeRegExp, phoneRegExp } from '../common/utils';
@@ -39,7 +39,6 @@ export class RegisterVolunteerComponent implements OnInit {
   ngOnInit(): void {}
 
   onSubmit() {
-    // this.volunteerForm.updateValueAndValidity();
     if (!this.volunteerForm.valid) {
       return;
     }
@@ -65,10 +64,18 @@ export class RegisterVolunteerComponent implements OnInit {
     this.volunteerService.create(volunteer).subscribe(
       res => {
         console.log(res);
+        alert('success');
       },
       err => {
-        console.log(err);
-        alert('etwas ist scheif gelaufen');
+        console.error(err);
+        if (err.error.message === customErrorCodes.ZIP_NOT_FOUND) {
+          // this.institutionForm.get('zipCode').setErrors({ incorrect: true });
+          this.volunteerForm.get('zipCode').setErrors({
+            notExists: true
+          });
+        } else {
+          alert('etwas ist scheif gelaufen');
+        }
       }
     );
   }
