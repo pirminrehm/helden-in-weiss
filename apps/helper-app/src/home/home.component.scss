@@ -4,7 +4,7 @@
   width: 100%;
   position: relative;
   height: 400px;
-  background-image: url('/assets/Hero.png');
+  background-image: url('/assets/hero.png');
   background-position: center;
   background-repeat: no-repeat;
   background-color: #373737;
@@ -94,6 +94,9 @@
       flex-grow: 1;
       font-weight: 500;
       display: inline-block;
+      font-size: 18px;
+      letter-spacing: 0.1px;
+      font-family: Roboto;
 
       &.bg-blue {
         background-color: $primary;
@@ -186,6 +189,14 @@
           background-color: $accent;
         }
       }
+    }
+
+    h3 {
+      color: rgba(0,0,0,0.87);
+      font-weight: 500;
+      font-size: 20px;
+      line-height: 24px;
+      letter-spacing: 0.15px;
     }
   }
 }

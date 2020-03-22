@@ -19,10 +19,10 @@
       </div>
     </div>
     <div class="search-help-toggle">
-      <a routerLinkActive="bg-blue" routerLink="institutions">
+      <a routerLinkActive="bg-blue" matRipple routerLink="institutions">
         Einrichtungen, die Hilfe suchen
       </a>
-      <a routerLinkActive="bg-red" routerLink="volunteers">
+      <a routerLinkActive="bg-red" matRipple routerLink="volunteers">
         Engagierte, die helfen wollen
       </a>
     </div>
@@ -38,12 +38,12 @@
         *ngFor="let volunteer of volunteers$ | async"
       > -->
 
-      <a class="action-card" routerLink="/register-institution">
+      <a class="action-card" matRipple routerLink="/register-institution">
         <img src="assets/medical_staff.svg" />
         <div class="text">Ich suche nach medizinischen Aushilfen</div>
         <img class="arrow" src="assets/chevron_right-24px.svg" />
       </a>
-      <a class="action-card" routerLink="/register-volunteer">
+      <a class="action-card" matRipple routerLink="/register-volunteer">
         <img src="assets/health.svg" />
         <div class="text">Ich biete meine medizinische Expertise an</div>
         <img class="arrow" src="assets/chevron_right-24px.svg" />

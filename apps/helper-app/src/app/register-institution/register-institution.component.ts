@@ -8,7 +8,7 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 })
 export class RegisterInstitutionComponent implements OnInit {
 
-  volunteerForm = new FormGroup({
+  institutionForm = new FormGroup({
     institutionName: new FormControl('', [Validators.required, Validators.maxLength(300)]),
     zipCode: new FormControl('', [Validators.required, Validators.maxLength(300)]),
     description: new FormControl('', [Validators.required, Validators.maxLength(300)]),
@@ -23,6 +23,6 @@ export class RegisterInstitutionComponent implements OnInit {
   }
 
   onSubmit() {
-    console.log(this.volunteerForm.value);
+    console.log(this.institutionForm.value);
   }
 }
