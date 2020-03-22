@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
 import { ActivatedRoute, Params, Router } from '@angular/router';
 
@@ -7,17 +7,19 @@ import { ActivatedRoute, Params, Router } from '@angular/router';
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.scss']
 })
-export class HomeComponent {
+export class HomeComponent implements OnInit {
 
   searchForm = new FormGroup({
-    term: new FormControl(''),
-    plz: new FormControl(''),
+    term: new FormControl(this.route.snapshot.queryParams.searchTerm || ''),
+    plz: new FormControl(this.route.snapshot.queryParams.searchPLZ || ''),
   });
 
   constructor(
     private router: Router,
     private route: ActivatedRoute,
   ) { }
+
+  ngOnInit() { }
 
   onChangeSearch() {
     const queryParams: Params = {};
