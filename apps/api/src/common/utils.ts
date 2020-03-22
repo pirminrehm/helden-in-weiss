@@ -6,8 +6,13 @@ export const removeMongoId = item => {
 };
 
 export const removeMongoIdFromArray = items => {
-  // drops all attributes explicit specified, e.g. _id
-  return items
-    .map(item => item.toObject())
-    .map(({ _id, __v, ...keepAttrs }) => keepAttrs);
+  return (
+    items
+      // resolve to object if mongoose obj
+      .map(item =>
+        typeof item.toObject === 'function' ? item.toObject() : item
+      )
+      // drops all attributes explicit specified, e.g. _id
+      .map(({ _id, __v, ...keepAttrs }) => keepAttrs)
+  );
 };

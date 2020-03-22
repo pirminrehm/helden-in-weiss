@@ -24,16 +24,17 @@ export class InstitutionController {
 
   @Get()
   async getAllInstitutions(
+    @Query('searchTerm') searchTerm: string,
     @Query('zipcode') zipcode: number,
     @Query('radius') radius: number
-  ): Promise<[Institution]> {
+  ): Promise<Institution[]> {
     if (zipcode && radius) {
       try {
         const coordinates = await this.locationService.getCoordinatesFromZipcode(
           zipcode
         );
         return removeMongoIdFromArray(
-          this.databaseService.getAllInstitutionsWithinRadius(
+          await this.databaseService.getAllInstitutionsWithinRadius(
             coordinates,
             radius
           )
@@ -44,15 +45,16 @@ export class InstitutionController {
     }
     if (zipcode) {
       return removeMongoIdFromArray(
-        this.databaseService.getAllInstitutionsByZipCode(zipcode)
+        await this.databaseService.getAllInstitutionsByZipCode(zipcode)
       );
     }
-    return removeMongoIdFromArray(this.databaseService.getAllInstitutions());
+    return removeMongoIdFromArray(
+      await this.databaseService.getInstitutions(searchTerm, zipcode)
+    );
   }
 
   @Post()
   async createInstitution(@Body() institution: Institution) {
-    console.log(institution);
     const zipcode = institution.zipcode;
     let coordinates;
 

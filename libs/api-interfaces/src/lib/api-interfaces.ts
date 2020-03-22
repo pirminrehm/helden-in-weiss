@@ -8,7 +8,11 @@ export interface Volunteer {
   age: number;
   phone: string;
   description: string;
-  qualification: string;
+  qualification: string[];
+  location?: {
+    type: string;
+    coordinates: [number];
+  };
   active?: Boolean;
   registeredAt?: string;
 }

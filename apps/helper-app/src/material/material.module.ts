@@ -9,6 +9,8 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { MatSelectModule } from '@angular/material/select';
+import { MatChipsModule } from '@angular/material/chips';
+import { MatAutocompleteModule } from '@angular/material/autocomplete';
 
 const materialModules = [
   MatCardModule,
@@ -20,16 +22,13 @@ const materialModules = [
   MatRippleModule,
   MatIconModule,
   MatSelectModule,
+  MatChipsModule,
+  MatAutocompleteModule
 ];
 
 @NgModule({
   declarations: [],
-  imports: [
-    CommonModule,
-    ...materialModules,
-  ],
-  exports: [
-    ...materialModules,
-  ]
+  imports: [CommonModule, ...materialModules],
+  exports: [...materialModules]
 })
-export class MaterialModule { }
+export class MaterialModule {}

@@ -1,5 +1,17 @@
 @import 'variables';
 
+/* Chrome, Safari, Edge, Opera */
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+/* Firefox */
+input[type='number'] {
+  -moz-appearance: textfield;
+}
+
 .header {
   width: 100%;
   position: relative;
@@ -165,6 +177,7 @@
 
       @media (max-width: $breakpoint-md) {
         margin: 0;
+        margin-bottom: 2rem;
       }
 
       a.action-card {
@@ -215,7 +228,7 @@
     }
 
     h3 {
-      color: rgba(0,0,0,0.87);
+      color: rgba(0, 0, 0, 0.87);
       font-weight: 500;
       font-size: 20px;
       line-height: 24px;

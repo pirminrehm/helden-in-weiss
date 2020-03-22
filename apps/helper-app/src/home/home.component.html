@@ -19,10 +19,20 @@
       </div>
     </div>
     <div class="search-help-toggle">
-      <a routerLinkActive="bg-blue" matRipple routerLink="institutions">
+      <a
+        routerLinkActive="bg-blue"
+        matRipple
+        routerLink="institutions"
+        queryParamsHandling="merge"
+      >
         Einrichtungen, die Hilfe suchen
       </a>
-      <a routerLinkActive="bg-red" matRipple routerLink="volunteers">
+      <a
+        routerLinkActive="bg-red"
+        matRipple
+        routerLink="volunteers"
+        queryParamsHandling="merge"
+      >
         Engagierte, die helfen wollen
       </a>
     </div>
@@ -54,24 +64,31 @@
 
     <div class="card-list">
       <div class="filter-controls">
-        <mat-form-field appearance="outline">
-          <mat-icon matPrefix>search</mat-icon>
-          <mat-label>Suche</mat-label>
-          <input matInput>
-        </mat-form-field>
-        <mat-form-field appearance="outline">
-          <mat-label>PLZ</mat-label>
-          <input matInput>
-        </mat-form-field>
-        <mat-form-field appearance="outline">
-          <mat-label>Radius</mat-label>
-          <mat-select>
-            <mat-option value="option">5 km</mat-option>
-            <mat-option value="option">10 km</mat-option>
-            <mat-option value="option">25 km</mat-option>
-            <mat-option value="option">50 km</mat-option>
-          </mat-select>
-        </mat-form-field>
+        <form [formGroup]="searchForm" (keydown.enter)="onChangeSearch()">
+          <mat-form-field appearance="outline">
+            <mat-icon matPrefix>search</mat-icon>
+            <mat-label>Suche</mat-label>
+            <input matInput formControlName="term" />
+          </mat-form-field>
+          <mat-form-field appearance="outline">
+            <mat-label>PLZ</mat-label>
+            <input type="number" matInput formControlName="plz" />
+          </mat-form-field>
+          <mat-form-field appearance="outline">
+            <mat-label>Radius</mat-label>
+            <mat-select
+              formControlName="radius"
+              (selectionChange)="onChangeSearch()"
+            >
+              <mat-option value="5">5 km</mat-option>
+              <mat-option value="10">10 km</mat-option>
+              <mat-option value="25">25 km</mat-option>
+              <mat-option value="50">50 km</mat-option>
+              <mat-option value="100">100 km</mat-option>
+              <mat-option value="200">200 km</mat-option>
+            </mat-select>
+          </mat-form-field>
+        </form>
       </div>
       <router-outlet></router-outlet>
     </div>
