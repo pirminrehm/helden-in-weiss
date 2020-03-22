@@ -1,10 +1,10 @@
 @import 'variables';
 
-.hero-card {
+.header {
   width: 100%;
   position: relative;
   height: 400px;
-  background-image: url('/assets/Hero.png');
+  background-image: url('/assets/hero.png');
   background-position: center;
   background-repeat: no-repeat;
   background-color: #373737;
@@ -19,6 +19,8 @@
 
     img.app-logo {
       height: 2rem;
+      cursor: pointer;
+      outline: 0;
     }
 
     .links {
@@ -92,6 +94,9 @@
       flex-grow: 1;
       font-weight: 500;
       display: inline-block;
+      font-size: 18px;
+      letter-spacing: 0.1px;
+      font-family: Roboto;
 
       &.bg-blue {
         background-color: $primary;
@@ -135,6 +140,15 @@
       margin-top: $basic-spacer;
     }
 
+    .filter-controls {
+      display: flex;
+      justify-content: space-between;
+
+      .mat-form-field {
+        width: 31%;
+      }
+    }
+
     .card-list {
       max-width: 8 * $grid-col-width;
       width: 100%;
@@ -170,6 +184,16 @@
           padding: 2 * $basic-spacer 0 2 * $basic-spacer 2 * $basic-spacer;
         }
 
+        &.bg-blue {
+          background-color: $primary;
+          color: white;
+        }
+
+        &.bg-red {
+          background-color: $accent;
+          color: white;
+        }
+
         img {
           padding: 0 $basic-spacer;
           height: 48px;
@@ -184,6 +208,18 @@
           background-color: $accent;
         }
       }
+
+      .color-red {
+        color: $accent;
+      }
+    }
+
+    h3 {
+      color: rgba(0,0,0,0.87);
+      font-weight: 500;
+      font-size: 20px;
+      line-height: 24px;
+      letter-spacing: 0.15px;
     }
   }
 }

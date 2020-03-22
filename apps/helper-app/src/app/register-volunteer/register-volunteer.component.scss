@@ -51,6 +51,10 @@ p.description {
 
 mat-form-field {
   width: 100%;
+
+  &:first-child {
+    margin-top: 1.5rem;
+  }
 }
 
 .alert {
@@ -84,14 +88,8 @@ input[type='submit'] {
   cursor: pointer;
 }
 
-.error {
-  color: #ef5350;
-  margin-bottom: 1rem;
-
-  img {
-    margin-top: 0px;
-    float: left;
-    margin-right: 10px;
-    height: 21px;
-  }
+.submit-button {
+  margin-top: 1.5rem;
+  text-transform: uppercase;
+  margin-bottom: 3rem;
 }

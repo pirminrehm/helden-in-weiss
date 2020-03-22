@@ -30,3 +30,7 @@ export interface Institution {
     coordinates: [number];
   };
 }
+
+export const customErrorCodes = {
+  ZIP_NOT_FOUND: 'ZIP_NOT_FOUND'
+};

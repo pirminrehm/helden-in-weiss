@@ -6,7 +6,8 @@ import {
   Logger,
   Query,
   HttpService,
-  Response
+  HttpException,
+  HttpStatus
 } from '@nestjs/common';
 import { Institution } from '@wir-vs-virus/api-interfaces';
 import { DatabaseService } from '../services/database.service';
@@ -27,12 +28,19 @@ export class InstitutionController {
     @Query('radius') radius: number
   ): Promise<[Institution]> {
     if (zipcode && radius) {
-      const coordinates = await this.locationService.getCoordinatesFromZipcode(
-        zipcode
-      );
-      return removeMongoIdFromArray(
-        this.databaseService.getAllInstitutionsWithinRadius(coordinates, radius)
-      );
+      try {
+        const coordinates = await this.locationService.getCoordinatesFromZipcode(
+          zipcode
+        );
+        return removeMongoIdFromArray(
+          this.databaseService.getAllInstitutionsWithinRadius(
+            coordinates,
+            radius
+          )
+        );
+      } catch (e) {
+        throw new HttpException(e.message, HttpStatus.NOT_FOUND);
+      }
     }
     if (zipcode) {
       return removeMongoIdFromArray(
@@ -44,10 +52,18 @@ export class InstitutionController {
 
   @Post()
   async createInstitution(@Body() institution: Institution) {
+    console.log(institution);
     const zipcode = institution.zipcode;
-    const coordinates = await this.locationService.getCoordinatesFromZipcode(
-      zipcode
-    );
+    let coordinates;
+
+    try {
+      coordinates = await this.locationService.getCoordinatesFromZipcode(
+        zipcode
+      );
+    } catch (e) {
+      throw new HttpException(e.message, HttpStatus.NOT_FOUND);
+    }
+
     console.log('coordinates', coordinates);
     institution.location = {
       type: 'Point',

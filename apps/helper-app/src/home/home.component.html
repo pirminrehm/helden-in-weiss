@@ -1,7 +1,7 @@
-<div class="hero-card">
+<div class="header">
   <div class="content-center">
     <div class="nav-bar">
-      <img class="app-logo" src="/assets/logo.svg" />
+      <img class="app-logo" src="/assets/logo.svg" routerLink="/" />
       <div class="links">
         <a routerLink="/faq">FAQ</a>
         <a href="">Spenden</a>
@@ -19,10 +19,10 @@
       </div>
     </div>
     <div class="search-help-toggle">
-      <a routerLinkActive="bg-blue" routerLink="institutions">
+      <a routerLinkActive="bg-blue" matRipple routerLink="institutions">
         Einrichtungen, die Hilfe suchen
       </a>
-      <a routerLinkActive="bg-red" routerLink="volunteers">
+      <a routerLinkActive="bg-red" matRipple routerLink="volunteers">
         Engagierte, die helfen wollen
       </a>
     </div>
@@ -38,19 +38,41 @@
         *ngFor="let volunteer of volunteers$ | async"
       > -->
 
-      <a class="action-card" routerLink="/register-institution">
+      <a class="action-card bg-blue" routerLink="/register-institution">
         <img src="assets/medical_staff.svg" />
         <div class="text">Ich suche nach medizinischen Aushilfen</div>
         <img class="arrow" src="assets/chevron_right-24px.svg" />
       </a>
-      <a class="action-card" routerLink="/register-volunteer">
+      <a class="action-card bg-red" routerLink="/register-volunteer">
         <img src="assets/health.svg" />
         <div class="text">Ich biete meine medizinische Expertise an</div>
         <img class="arrow" src="assets/chevron_right-24px.svg" />
       </a>
+
+      <a class="color-red" href="">Welche Fähigkeiten werden benötigt?</a>
     </div>
 
     <div class="card-list">
+      <div class="filter-controls">
+        <mat-form-field appearance="outline">
+          <mat-icon matPrefix>search</mat-icon>
+          <mat-label>Suche</mat-label>
+          <input matInput>
+        </mat-form-field>
+        <mat-form-field appearance="outline">
+          <mat-label>PLZ</mat-label>
+          <input matInput>
+        </mat-form-field>
+        <mat-form-field appearance="outline">
+          <mat-label>Radius</mat-label>
+          <mat-select>
+            <mat-option value="option">5 km</mat-option>
+            <mat-option value="option">10 km</mat-option>
+            <mat-option value="option">25 km</mat-option>
+            <mat-option value="option">50 km</mat-option>
+          </mat-select>
+        </mat-form-field>
+      </div>
       <router-outlet></router-outlet>
     </div>
   </div>

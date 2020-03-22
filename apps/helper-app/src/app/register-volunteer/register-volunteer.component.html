@@ -34,7 +34,7 @@
     </mat-form-field>
 
     <mat-form-field appearance="fill">
-      <mat-label>"Ein paar Worte zu Ihren medizinischen Kenntnissen</mat-label>
+      <mat-label>Ein paar Worte zu Ihren medizinischen Kenntnissen</mat-label>
       <textarea
         matInput
         formControlName="knowledge"
@@ -60,7 +60,7 @@
     </mat-form-field>
 
     <mat-form-field appearance="fill">
-      <mat-label>"E-Mail</mat-label>
+      <mat-label>E-Mail</mat-label>
       <input
         matInput
         type="email"
@@ -68,7 +68,7 @@
         formControlName="mail"
         required
       />
-      <mat-error *ngIf="true"> "E-Mail Adresse ist erforderlich</mat-error>
+      <mat-error *ngIf="true">E-Mail Adresse ist erforderlich</mat-error>
     </mat-form-field>
 
     <div class="alert">
@@ -78,6 +78,7 @@
         anschließend automatisch entfernt
       </div>
     </div>
-    <input type="submit" value="Hilfsangebot online stellen" />
+
+    <button class="submit-button" type="submit" mat-raised-button color="primary">Hilfsangebot online stellen</button>
   </form>
 </main>

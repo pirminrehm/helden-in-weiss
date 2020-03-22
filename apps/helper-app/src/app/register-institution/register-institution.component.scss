@@ -1,45 +1,5 @@
 @import 'variables';
 
-.header {
-  width: 100%;
-  position: relative;
-  height: 100px;
-  display: flex;
-  justify-content: center;
-
-  .content-center {
-    width: 960px;
-    margin: 0 4 * $basic-spacer;
-
-    @media (max-width: $breakpoint-xl) {
-      width: 100%;
-    }
-  }
-
-  .nav-bar {
-    margin-top: 1.5rem;
-    position: relative;
-    display: inline-block;
-    width: 100%;
-
-    img.app-logo {
-      height: 2rem;
-    }
-
-    .links {
-      float: right;
-
-      a {
-        color: #1f1f1f;
-        text-decoration: none;
-        padding-left: 3rem;
-        font-size: 1rem;
-        line-height: 28px;
-      }
-    }
-  }
-}
-
 main {
   width: 456px;
   margin: 0 auto;
@@ -82,7 +42,7 @@ h1.section-title {
   letter-spacing: 0.1px;
   line-height: 26px;
   margin: 0;
-  padding-top: 1rem;
+  padding: 1rem 0;
   color: #757575;
 
   @media(max-width: $breakpoint-xs) {
@@ -100,36 +60,8 @@ p.description {
   line-height: 26px;
 }
 
-::placeholder {
-  color: rgba(0,0,0,0.38);
-  font-weight: 500;
-  opacity: 1;
-  font-family: Roboto;
-}
-
-input[type="text"] {
+mat-form-field {
   width: 100%;
-  border: 0;
-  border-radius: 5px;
-  outline: 0;
-  padding: 1rem;
-  margin: 11px 0;
-  background-color: rgb(228,228,228);
-
-  &:first-child {
-    margin-top: 2rem;
-  }
-}
-
-textarea {
-  background-color: #e4e4e4;
-  border: 0;
-  width: 100%;
-  border-radius: 5px;
-  padding: 1rem;
-  margin: 11px 0;
-  font-family: Roboto;
-  outline: 0;
 }
 
 .alert {
@@ -146,31 +78,8 @@ textarea {
   }
 }
 
-input[type="submit"] {
-  background-color: #448aff;
-  color: white;
-  line-height: 16px;
-  border: 0;
-  padding: 8px 15px;
-  text-transform: uppercase;
-  font-weight: 500;
-  font-family: Roboto;
-  font-size: 14px;
-  letter-spacing: 1.25px;
+.submit-button {
   margin-top: 1.5rem;
+  text-transform: uppercase;
   margin-bottom: 3rem;
-  border-radius: 5px;
-  cursor: pointer;
-}
-
-.error {
-  color: #EF5350;
-  margin-bottom: 1rem;
-
-  img {
-    margin-top: 0px;
-    float: left;
-    margin-right: 10px;
-    height: 21px;
-  }
 }
