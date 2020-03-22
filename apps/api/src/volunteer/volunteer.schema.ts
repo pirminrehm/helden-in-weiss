@@ -10,7 +10,7 @@ export const VolunteerSchema = new mongoose.Schema({
   age: { type: Number, required: true },
   phone: { type: String, required: true },
   description: String,
-  qualification: { type: String, required: true },
+  qualification: { type: [String], required: true },
   active: { type: Boolean, default: true },
   registeredAt: { type: Date, default: Date.now },
   location: {

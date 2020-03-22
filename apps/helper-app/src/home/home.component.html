@@ -19,10 +19,20 @@
       </div>
     </div>
     <div class="search-help-toggle">
-      <a routerLinkActive="bg-blue" matRipple routerLink="institutions" queryParamsHandling="merge">
+      <a
+        routerLinkActive="bg-blue"
+        matRipple
+        routerLink="institutions"
+        queryParamsHandling="merge"
+      >
         Einrichtungen, die Hilfe suchen
       </a>
-      <a routerLinkActive="bg-red" matRipple routerLink="volunteers" queryParamsHandling="merge">
+      <a
+        routerLinkActive="bg-red"
+        matRipple
+        routerLink="volunteers"
+        queryParamsHandling="merge"
+      >
         Engagierte, die helfen wollen
       </a>
     </div>
@@ -66,7 +76,10 @@
           </mat-form-field>
           <mat-form-field appearance="outline">
             <mat-label>Radius</mat-label>
-            <mat-select formControlName="plz">
+            <mat-select
+              formControlName="radius"
+              (selectionChange)="onChangeSearch()"
+            >
               <mat-option value="5">5 km</mat-option>
               <mat-option value="10">10 km</mat-option>
               <mat-option value="25">25 km</mat-option>
