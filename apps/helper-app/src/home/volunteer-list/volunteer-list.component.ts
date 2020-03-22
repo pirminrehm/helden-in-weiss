@@ -3,7 +3,7 @@ import { Observable } from 'rxjs';
 import { Volunteer } from '@wir-vs-virus/api-interfaces';
 import { HttpClient } from '@angular/common/http';
 import { VolunteerService } from '../../services/volunteer.service';
-import { tap } from 'rxjs/operators';
+import { tap, map } from 'rxjs/operators';
 
 @Component({
   selector: 'wir-vs-virus-volunteer-list',
@@ -47,9 +47,14 @@ export class VolunteerListComponent implements OnInit {
 
   getVolunteers() {
     this.volunteers$ = this.volunteerService.getAll().pipe(
-      tap(() => {
-        this.loading = false;
-      })
+      map(res => res.sort(this.sortByNewestDate)),
+      tap(() => (this.loading = false))
+    );
+  }
+
+  private sortByNewestDate(a, b) {
+    return (
+      new Date(b.registeredAt).getTime() - new Date(a.registeredAt).getTime()
     );
   }
 }

@@ -10,14 +10,17 @@ import { HttpClient } from '@angular/common/http';
 export class VolunteerService {
   constructor(private http: HttpClient) {}
 
-  private useMockData = true;
+  private useMockData = false;
 
-  // todo Volunteer rückgabe wert
   public getAll(): Observable<Volunteer[]> {
     if (this.useMockData) {
       return this.getMockData();
     }
-    return this.http.get<[Volunteer]>('/api/volunteer');
+    return this.http.get<Volunteer[]>('/api/volunteer');
+  }
+
+  public create(volunteer: Volunteer) {
+    return this.http.post<Volunteer[]>('/api/volunteer', volunteer);
   }
 
   private getMockData() {

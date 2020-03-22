@@ -1,32 +1,32 @@
 export interface Volunteer {
-  title: String,
-  name: String,
-  firstname: String,
-  email: String,
-  zipcode: number,
-  city: String,
-  age: number,
-  phone: String,
-  description: String,
-  qualification: String,
-  active?: Boolean,
-  registeredAt?: Date
+  title: string;
+  name: string;
+  firstname: string;
+  email: string;
+  zipcode: number;
+  city: string;
+  age: number;
+  phone: string;
+  description: string;
+  qualification: string;
+  active?: Boolean;
+  registeredAt?: string;
 }
 
 export interface Institution {
-  name: String,
-  zipcode: number,
-  city: String,
-  title: String,
-  description: String,
+  name: string;
+  zipcode: number;
+  city: string;
+  title: string;
+  description: string;
   contact: {
-    name: String,
-    firstname: String,
-    phone: String,
-    email: String,
-  },
+    name: string;
+    firstname: string;
+    phone: string;
+    email: string;
+  };
   location?: {
-    type: String,
-    coordinates: [number]
-  }
+    type: string;
+    coordinates: [number];
+  };
 }
