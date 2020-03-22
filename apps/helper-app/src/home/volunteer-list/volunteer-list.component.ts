@@ -1,52 +1,37 @@
-import { Component, OnInit } from '@angular/core';
-import { Observable } from 'rxjs';
+import { Component, OnInit, OnDestroy } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
 import { Volunteer } from '@wir-vs-virus/api-interfaces';
-import { HttpClient } from '@angular/common/http';
+import { Observable, Subject } from 'rxjs';
+import { map, takeUntil, tap } from 'rxjs/operators';
 import { VolunteerService } from '../../services/volunteer.service';
-import { tap, map } from 'rxjs/operators';
 
 @Component({
   selector: 'wir-vs-virus-volunteer-list',
   templateUrl: './volunteer-list.component.html',
   styleUrls: ['./volunteer-list.component.scss']
 })
-export class VolunteerListComponent implements OnInit {
+export class VolunteerListComponent implements OnInit, OnDestroy {
   volunteers$: Observable<Volunteer[]>;
   loading = true;
+  destroyed$ = new Subject();
 
   constructor(
-    private http: HttpClient,
-    private volunteerService: VolunteerService
-  ) {}
+    private volunteerService: VolunteerService,
+    private route: ActivatedRoute,
+  ) { }
 
   ngOnInit() {
-    this.getVolunteers();
-  }
-
-  postVolunteer() {
-    console.log('Send Post Request');
-    this.http
-      .post<Volunteer>('/api/volunteer', {
-        name: 'TestHelper_' + Math.round(Math.random() * 100),
-        email: 'noMail',
-        plz: 111111
+    this.route.queryParams.pipe(
+      takeUntil(this.destroyed$),
+      tap(params => {
+        this.getVolunteers(params.searchTerm, params.searchPLZ, params.radius);
       })
-      .subscribe(
-        val => {
-          console.log('POST call successful value returned in body', val);
-          this.getVolunteers();
-        },
-        response => {
-          console.log('POST call in error', response);
-        },
-        () => {
-          console.log('The POST observable is now completed.');
-        }
-      );
+    ).subscribe();
   }
 
-  getVolunteers() {
-    this.volunteers$ = this.volunteerService.getAll().pipe(
+  getVolunteers(searchTerm = '', searchPLZ = '', searchRadius = 10) {
+    this.loading = true;
+    this.volunteers$ = this.volunteerService.getAll(searchTerm, searchPLZ, searchRadius).pipe(
       map(res => res.sort(this.sortByNewestDate)),
       tap(() => (this.loading = false))
     );
@@ -56,5 +41,10 @@ export class VolunteerListComponent implements OnInit {
     return (
       new Date(b.registeredAt).getTime() - new Date(a.registeredAt).getTime()
     );
+  }
+
+  ngOnDestroy() {
+    this.destroyed$.next();
+    this.destroyed$.complete();
   }
 }

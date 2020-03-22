@@ -12,11 +12,11 @@ export class VolunteerService {
 
   private useMockData = false;
 
-  public getAll(): Observable<Volunteer[]> {
+  public getAll(searchTerm: string, searchPLZ: string, searchRadius: number): Observable<Volunteer[]> {
     if (this.useMockData) {
       return this.getMockData();
     }
-    return this.http.get<Volunteer[]>('/api/volunteer');
+    return this.http.get<Volunteer[]>(`/api/volunteer?searchTerm=${searchTerm}&searchPLZ=${searchPLZ}`);
   }
 
   public create(volunteer: Volunteer) {

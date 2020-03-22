@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
-import { Router } from '@angular/router';
+import { FormControl, FormGroup } from '@angular/forms';
+import { ActivatedRoute, Params, Router } from '@angular/router';
 
 @Component({
   selector: 'wir-vs-virus-home',
@@ -7,5 +8,30 @@ import { Router } from '@angular/router';
   styleUrls: ['./home.component.scss']
 })
 export class HomeComponent {
-  constructor() { }
+
+  searchForm = new FormGroup({
+    term: new FormControl(''),
+    plz: new FormControl(''),
+  });
+
+  constructor(
+    private router: Router,
+    private route: ActivatedRoute,
+  ) { }
+
+  onChangeSearch() {
+    const queryParams: Params = {};
+
+    queryParams.searchTerm = this.searchForm.value.term;
+    queryParams.searchPLZ = this.searchForm.value.plz;
+
+    this.router.navigate(
+      [],
+      {
+        relativeTo: this.route,
+        queryParams: queryParams,
+        queryParamsHandling: 'merge',
+        replaceUrl: true,
+      });
+  }
 }

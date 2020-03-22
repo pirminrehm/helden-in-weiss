@@ -1,38 +1,49 @@
-import { Component, OnInit } from '@angular/core';
-import { Observable, of } from 'rxjs';
-import { delay, tap } from 'rxjs/operators';
+import { Component, OnDestroy, OnInit } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
+import { Observable, Subject } from 'rxjs';
+import { map, takeUntil, tap } from 'rxjs/operators';
+import { InstitutionService } from '../../services/institution.service';
 
 @Component({
   selector: 'wir-vs-virus-institution-list',
   templateUrl: './institution-list.component.html',
   styleUrls: ['./institution-list.component.scss']
 })
-export class InstitutionListComponent implements OnInit {
+export class InstitutionListComponent implements OnInit, OnDestroy {
   institutions$: Observable<any>;
   loading = true;
+  destroyed$ = new Subject();
 
-  constructor() {}
+  constructor(
+    private route: ActivatedRoute,
+    private institutionsService: InstitutionService,
+  ) {}
 
   ngOnInit(): void {
-    this.institutions$ = of([
-      {
-        name: 'Institution',
-        firstname: 'Institution',
-        email: 'Institution',
-        zipcode: 70569,
-        city: 'Institution',
-        age: 27,
-        phone: '-',
-        description: 'Wir benötigen Helfer.',
-        title: 'EInstitutionInstitutionInstitution',
-        created: '2020-03-21T15:36:50.756Z',
-        qualification: 'Institution'
-      }
-    ]).pipe(
-      delay(1000),
-      tap(() => {
-        this.loading = false;
+    this.route.queryParams.pipe(
+      takeUntil(this.destroyed$),
+      tap(params => {
+        this.getInstitutions(params.searchTerm, params.searchPLZ, params.radius);
       })
+    ).subscribe();
+  }
+
+  getInstitutions(searchTerm = '', searchPLZ = '', searchRadius = 10) {
+    this.loading = true;
+    this.institutions$ = this.institutionsService.getAll(searchTerm, searchPLZ, searchRadius).pipe(
+      map(res => res.sort(this.sortByNewestDate)),
+      tap(() => (this.loading = false))
     );
+  }
+
+  private sortByNewestDate(a, b) {
+    return (
+      new Date(b.registeredAt).getTime() - new Date(a.registeredAt).getTime()
+    );
+  }
+
+  ngOnDestroy() {
+    this.destroyed$.next();
+    this.destroyed$.complete();
   }
 }
