@@ -42,14 +42,14 @@ export class RegisterInstitutionComponent implements OnInit {
   constructor(private institutionService: InstitutionService) {}
 
   ngOnInit(): void {
-    this.institutionForm.setValue({
-      institutionName: 'tessdt',
-      zipCode: 12345,
-      description: 'test',
-      contactName: 'test',
-      contactPhone: '123213123',
-      contactMail: 'test@sdafasdf'
-    });
+    // this.institutionForm.setValue({
+    //   institutionName: 'tessdt',
+    //   zipCode: 12345,
+    //   description: 'test',
+    //   contactName: 'test',
+    //   contactPhone: '123213123',
+    //   contactMail: 'test@sdafasdf'
+    // });
   }
 
   onSubmit() {

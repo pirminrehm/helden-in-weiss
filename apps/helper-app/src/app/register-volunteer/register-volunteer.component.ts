@@ -13,6 +13,7 @@ import {
 import { startWith, map } from 'rxjs/operators';
 import { MatChipInputEvent } from '@angular/material/chips';
 import { Observable } from 'rxjs';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'wir-vs-virus-register-volunteer',
@@ -55,7 +56,10 @@ export class RegisterVolunteerComponent implements OnInit {
   qualifications: string[] = [];
   allQualifications: string[] = this.getQulifications();
 
-  constructor(private volunteerService: VolunteerService) {}
+  constructor(
+    private router: Router,
+    private volunteerService: VolunteerService
+  ) {}
 
   ngOnInit(): void {
     this.filteredQualifications = this.volunteerForm
@@ -68,14 +72,14 @@ export class RegisterVolunteerComponent implements OnInit {
         )
       );
 
-    this.volunteerForm.setValue({
-      name: 'test name',
-      zipCode: 70569,
-      knowledge: 'asdfsfadsdfdsaf',
-      phone: 3231231213,
-      mail: 'mail@mail',
-      qualifications: ['Quali1', 'Qali2']
-    });
+    // this.volunteerForm.setValue({
+    //   name: 'test name',
+    //   zipCode: 70569,
+    //   knowledge: 'asdfsfadsdfdsaf',
+    //   phone: 3231231213,
+    //   mail: 'mail@mail',
+    //   qualifications: ['Quali1', 'Qali2']
+    // });
   }
 
   onSubmit() {
@@ -109,7 +113,7 @@ export class RegisterVolunteerComponent implements OnInit {
     this.volunteerService.create(volunteer).subscribe(
       res => {
         console.log(res);
-        alert('success');
+        this.router.navigate(['/home/volunteers']);
       },
       err => {
         console.error(err);
