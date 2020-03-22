@@ -3,6 +3,7 @@ import { ActivatedRoute } from '@angular/router';
 import { Observable, Subject } from 'rxjs';
 import { map, takeUntil, tap } from 'rxjs/operators';
 import { InstitutionService } from '../../services/institution.service';
+import { customErrorCodes, Institution } from '@wir-vs-virus/api-interfaces';
 
 @Component({
   selector: 'wir-vs-virus-institution-list',
@@ -10,7 +11,8 @@ import { InstitutionService } from '../../services/institution.service';
   styleUrls: ['./institution-list.component.scss']
 })
 export class InstitutionListComponent implements OnInit, OnDestroy {
-  institutions$: Observable<any>;
+  institutions$: Observable<Institution[]>;
+  institutions: Institution[];
   loading = true;
   destroyed$ = new Subject();
 
@@ -36,13 +38,22 @@ export class InstitutionListComponent implements OnInit, OnDestroy {
 
   getInstitutions(searchTerm = '', searchPLZ = '', searchRadius = 10) {
     this.loading = true;
-    this.institutions$ = this.institutionsService
+    // this.institutions$ =
+    this.institutionsService
       .getAll(searchTerm, searchPLZ, searchRadius)
       .pipe(
         tap(res => console.log(res)),
         map(res => res.sort(this.sortByNewestDate)),
         tap(() => (this.loading = false))
-      );
+      )
+      .subscribe({
+        next: data => (this.institutions = data),
+        error: err => {
+          if (err.error.message === customErrorCodes.ZIP_NOT_FOUND) {
+            alert('Unbekannte PLZ');
+          }
+        }
+      });
   }
 
   private sortByNewestDate(a, b) {
