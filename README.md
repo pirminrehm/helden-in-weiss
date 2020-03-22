@@ -58,7 +58,7 @@ What's next for Helden in Weiß
 ## Setup
 
 - you have node.js 12 or later installed
-- clone the project and go into project folder `cd wir-vs-virus`
+- clone the project and go into project folder `cd helden-in-weiss`
 - `npm install`
 - `npm install -g @nrwl/cli`
 - add in `/apps/api/.env/` a mongodb connection string
