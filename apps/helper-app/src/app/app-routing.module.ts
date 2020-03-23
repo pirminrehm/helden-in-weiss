@@ -8,8 +8,13 @@ import { RegisterVolunteerComponent } from './register-volunteer/register-volunt
 import { FaqComponent } from '../faq/faq.component';
 
 const routes: Routes = [
-  { path: '', redirectTo: '/home/institutions', pathMatch: 'full' },
-  { path: '*', redirectTo: '/home/institutions' },
+  // todo: activate this routes for prod
+  // { path: '', redirectTo: '/home/institutions', pathMatch: 'full' },
+  // { path: '*', redirectTo: '/home/institutions' },
+
+  // use this as default route for demo
+  { path: '', redirectTo: '/home/volunteers', pathMatch: 'full' },
+  { path: '*', redirectTo: '/home/volunteers' },
   {
     path: 'home',
     component: HomeComponent,
