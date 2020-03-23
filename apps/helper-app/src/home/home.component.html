@@ -48,12 +48,16 @@
         *ngFor="let volunteer of volunteers$ | async"
       > -->
 
-      <a class="action-card bg-blue" routerLink="/register-institution">
+      <a
+        class="action-card bg-blue"
+        routerLink="/register-institution"
+        matRipple
+      >
         <img src="assets/medical_staff.svg" />
         <div class="text">Ich suche nach medizinischen Aushilfen</div>
         <img class="arrow" src="assets/chevron_right-24px.svg" />
       </a>
-      <a class="action-card bg-red" routerLink="/register-volunteer">
+      <a class="action-card bg-red" routerLink="/register-volunteer" matRipple>
         <img src="assets/health.svg" />
         <div class="text">Ich biete meine medizinische Expertise an</div>
         <img class="arrow" src="assets/chevron_right-24px.svg" />
@@ -62,34 +66,53 @@
       <a class="color-red" href="">Welche Fähigkeiten werden benötigt?</a>
     </div>
 
+    <div class="search-help-toggle-mobile">
+      <a
+        routerLinkActive="bg-blue"
+        matRipple
+        routerLink="institutions"
+        queryParamsHandling="merge"
+      >
+        Einrichtungen,<br />die Hilfe suchen
+      </a>
+      <a
+        routerLinkActive="bg-red"
+        matRipple
+        routerLink="volunteers"
+        queryParamsHandling="merge"
+      >
+        Engagierte,<br />die helfen wollen
+      </a>
+    </div>
+
     <div class="card-list">
-      <div class="filter-controls">
-        <form [formGroup]="searchForm" (keydown.enter)="onChangeSearch()">
-          <mat-form-field appearance="outline">
-            <mat-icon matPrefix>search</mat-icon>
-            <mat-label>Suche</mat-label>
-            <input matInput formControlName="term" />
-          </mat-form-field>
-          <mat-form-field appearance="outline">
-            <mat-label>PLZ</mat-label>
-            <input type="number" matInput formControlName="plz" />
-          </mat-form-field>
-          <mat-form-field appearance="outline">
-            <mat-label>Radius</mat-label>
-            <mat-select
-              formControlName="radius"
-              (selectionChange)="onChangeSearch()"
-            >
-              <mat-option value="5">5 km</mat-option>
-              <mat-option value="10">10 km</mat-option>
-              <mat-option value="25">25 km</mat-option>
-              <mat-option value="50">50 km</mat-option>
-              <mat-option value="100">100 km</mat-option>
-              <mat-option value="200">200 km</mat-option>
-            </mat-select>
-          </mat-form-field>
-        </form>
-      </div>
+      <!-- <div class="filter-controls"> -->
+      <form [formGroup]="searchForm" (keydown.enter)="onChangeSearch()">
+        <mat-form-field appearance="outline">
+          <mat-icon matPrefix>search</mat-icon>
+          <mat-label>Suche</mat-label>
+          <input matInput formControlName="term" />
+        </mat-form-field>
+        <mat-form-field appearance="outline">
+          <mat-label>PLZ</mat-label>
+          <input type="number" matInput formControlName="plz" />
+        </mat-form-field>
+        <mat-form-field appearance="outline">
+          <mat-label>Radius</mat-label>
+          <mat-select
+            formControlName="radius"
+            (selectionChange)="onChangeSearch()"
+          >
+            <mat-option value="5">5 km</mat-option>
+            <mat-option value="10">10 km</mat-option>
+            <mat-option value="25">25 km</mat-option>
+            <mat-option value="50">50 km</mat-option>
+            <mat-option value="100">100 km</mat-option>
+            <mat-option value="200">200 km</mat-option>
+          </mat-select>
+        </mat-form-field>
+      </form>
+      <!-- </div> -->
       <router-outlet></router-outlet>
     </div>
   </div>

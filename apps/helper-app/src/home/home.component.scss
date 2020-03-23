@@ -97,7 +97,7 @@ input[type='number'] {
       line-height: 42px;
     }
 
-    @media (max-width: $breakpoint-xs) {
+    @media (max-width: $breakpoint-md) {
       display: none;
     }
 
@@ -145,38 +145,40 @@ input[type='number'] {
     max-width: $breakpoint-lg;
     display: flex;
     flex-flow: row-reverse;
-
     margin-top: 4 * $basic-spacer;
+
     @media (max-width: $breakpoint-md) {
       flex-direction: column;
       margin-top: $basic-spacer;
     }
 
-    .filter-controls {
-      display: flex;
-      justify-content: space-between;
-
-      .mat-form-field {
-        width: 31%;
-      }
-    }
-
     .card-list {
       max-width: 8 * $grid-col-width;
-      width: 100%;
+      width: calc(100% - 257px - 32px);
 
       @media (max-width: $breakpoint-md) {
         max-width: 100%;
+        width: 100%;
+      }
+
+      form {
+        display: flex;
+        justify-content: space-between;
+
+        mat-form-field {
+          width: 31%;
+        }
       }
     }
 
     .actions {
       max-width: 4 * $grid-col-width;
-      width: 100%;
       margin: 0 16px;
 
       @media (max-width: $breakpoint-md) {
         margin: 0;
+        max-width: 100%;
+        width: 100%;
         margin-bottom: 2rem;
       }
 
@@ -233,6 +235,54 @@ input[type='number'] {
       font-size: 20px;
       line-height: 24px;
       letter-spacing: 0.15px;
+    }
+  }
+}
+
+.search-help-toggle-mobile {
+  overflow: hidden;
+  white-space: pre-wrap;
+  letter-spacing: 0.1px;
+  display: flex;
+  flex-direction: row;
+  line-height: 56px;
+  width: 100%;
+  font-size: 14px;
+  line-height: 20px;
+  margin: 5 * $basic-spacer 0;
+  border-radius: 250px;
+
+  @media (min-width: $breakpoint-md) {
+    display: none;
+  }
+
+  a {
+    padding: $basic-spacer 2 * $basic-spacer;
+    flex-grow: 1;
+    font-weight: 500;
+    display: inline-block;
+    // height: 28px;
+    // margin: $basic-spacer 0;
+    box-shadow: $shadow-1;
+    background-color: white;
+
+    &:first-child {
+      text-align: right;
+    }
+
+    // alles passt
+    // alles passt
+    // alles passt
+    // alles passt
+
+    &.bg-blue {
+      background-color: $primary;
+      color: white;
+    }
+
+    &.bg-red {
+      background-color: $accent;
+      color: white;
     }
   }
 }
