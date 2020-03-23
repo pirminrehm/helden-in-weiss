@@ -97,7 +97,7 @@ export class RegisterVolunteerComponent implements OnInit {
 
     const volunteer: Volunteer = {
       age: -1,
-      city: '--',
+      city: '',
       description: val.knowledge,
       email: val.mail,
       firstname: '--',

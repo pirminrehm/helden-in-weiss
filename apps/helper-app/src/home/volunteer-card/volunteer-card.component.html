@@ -4,13 +4,15 @@
       <div class="title">
         {{ data.name }}
       </div>
+      <div class="zipcode">
+        {{ data.city }}
+      </div>
       <div class="date">
         {{ data.registeredAt | date: 'dd.MM.yy' }}
       </div>
     </div>
     <div class="subtitle">{{ data.zipcode }}</div>
   </div>
-  <br />
   <mat-card-content>
     <div class="description">
       {{ data.description }}
@@ -21,7 +23,16 @@
           Medizinische Ausbildung
         </div>
         <div class="detail-content">
-          {{ data.qualification }}
+          <mat-chip-list [selectable]="'false'">
+            <mat-chip
+              chipListSelectable="'false'"
+              [selectable]="'false'"
+              disableRipple
+              *ngFor="let qualification of data.qualification"
+            >
+              {{ qualification }}
+            </mat-chip>
+          </mat-chip-list>
         </div>
       </div>
       <div>

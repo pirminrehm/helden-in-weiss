@@ -10,24 +10,38 @@ mat-card {
 
     .title-container {
       display: flex;
-      justify-content: space-between;
+      // justify-content: space-between;
+      // flex-flow: row wrap;
+      align-items: stretch;
       font-size: 18px;
       line-height: 24px;
       letter-spacing: 0.1px;
       // font-weight: 500;
 
       .title {
+        width: 50%;
+      }
+
+      .zipcode {
+        width: 35%;
+        padding-right: 8px;
+        overflow: hidden;
+        white-space: nowrap;
+        text-overflow: ellipsis;
       }
 
       .date {
-        display: relative;
-        color: $text-subdude;
+        width: 15%;
+        text-align: right;
+        min-width: 80px;
       }
     }
     .subtitle {
       font-size: 12px;
       letter-spacing: 0.4px;
       margin-top: 5px;
+      width: 50%;
+      align-self: end;
       color: $text-subdude;
     }
   }
@@ -53,7 +67,20 @@ mat-card {
         width: 50%;
 
         .detail-content {
-          margin: 8px 0;
+          margin: 8px 8px 8px 0;
+          mat-chip {
+            transition: none !important;
+            white-space: nowrap;
+            overflow: hidden;
+          }
+          // disable hover effect on chip
+          .mat-standard-chip {
+            &:hover::after,
+            &:active::after,
+            &:focus::after {
+              opacity: 0;
+            }
+          }
         }
       }
     }
