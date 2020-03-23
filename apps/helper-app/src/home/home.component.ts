@@ -28,7 +28,7 @@ export class HomeComponent implements OnInit {
 
       this.searchForm
         .get('radius')
-        .setValue(this.route.snapshot.queryParams.radius);
+        .setValue(this.route.snapshot.queryParams.radius || '50');
     });
   }
 
