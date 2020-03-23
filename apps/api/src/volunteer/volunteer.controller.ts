@@ -13,6 +13,7 @@ import { DatabaseService } from '../services/database.service';
 
 import { removeMongoIdFromArray } from '../common/utils';
 import { LocationService } from '../services/location.service';
+import { Location } from '../services/location.interface';
 
 @Controller('volunteer')
 export class VolunteerController {
@@ -29,12 +30,12 @@ export class VolunteerController {
   ): Promise<Volunteer[]> {
     if (zipcode && radius) {
       try {
-        const coordinates = await this.locationService.getCoordinatesFromZipcode(
+        const locationData = await this.locationService.getLocationInfoByZipcode(
           zipcode
         );
         return removeMongoIdFromArray(
           await this.databaseService.getAllVolunteersWithinRadius(
-            coordinates,
+            locationData.coordinates,
             radius
           )
         );
@@ -55,19 +56,20 @@ export class VolunteerController {
   @Post()
   async createVolunteer(@Body() volunteer: Volunteer) {
     const zipcode = volunteer.zipcode;
-    let coordinates;
+    let locationData: Location;
     try {
-      coordinates = await this.locationService.getCoordinatesFromZipcode(
+      locationData = await this.locationService.getLocationInfoByZipcode(
         zipcode
       );
     } catch (e) {
       throw new HttpException(e.message, HttpStatus.NOT_FOUND);
     }
-    Logger.log('coordinates', coordinates);
+    Logger.log('coordinates', locationData.coordinates.toString());
     volunteer.location = {
       type: 'Point',
-      coordinates: coordinates
+      coordinates: locationData.coordinates
     };
+    volunteer.city = locationData.city;
     Logger.log(volunteer);
     return await this.databaseService.saveVolunteer(volunteer);
   }

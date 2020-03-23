@@ -12,6 +12,7 @@ import {
 import { Institution } from '@wir-vs-virus/api-interfaces';
 import { DatabaseService } from '../services/database.service';
 import { LocationService } from '../services/location.service';
+import { Location } from '../services/location.interface';
 import { removeMongoIdFromArray } from '../common/utils';
 
 @Controller('institution')
@@ -30,12 +31,12 @@ export class InstitutionController {
   ): Promise<Institution[]> {
     if (zipcode && radius) {
       try {
-        const coordinates = await this.locationService.getCoordinatesFromZipcode(
+        const locationData = await this.locationService.getLocationInfoByZipcode(
           zipcode
         );
         return removeMongoIdFromArray(
           await this.databaseService.getAllInstitutionsWithinRadius(
-            coordinates,
+            locationData.coordinates,
             radius
           )
         );
@@ -56,21 +57,22 @@ export class InstitutionController {
   @Post()
   async createInstitution(@Body() institution: Institution) {
     const zipcode = institution.zipcode;
-    let coordinates;
+    let locationData: Location;
 
     try {
-      coordinates = await this.locationService.getCoordinatesFromZipcode(
+      locationData = await this.locationService.getLocationInfoByZipcode(
         zipcode
       );
     } catch (e) {
       throw new HttpException(e.message, HttpStatus.NOT_FOUND);
     }
 
-    console.log('coordinates', coordinates);
+    console.log('coordinates', locationData.coordinates);
     institution.location = {
       type: 'Point',
-      coordinates: coordinates
+      coordinates: locationData.coordinates
     };
+    institution.city = locationData.city;
     Logger.log(institution);
     return await this.databaseService.saveInstitution(institution);
   }

@@ -11,7 +11,7 @@ export interface Volunteer {
   qualification: string[];
   location?: {
     type: string;
-    coordinates: [number];
+    coordinates: number[];
   };
   active?: Boolean;
   registeredAt?: string;
@@ -31,7 +31,7 @@ export interface Institution {
   };
   location?: {
     type: string;
-    coordinates: [number];
+    coordinates: number[];
   };
 }
 

@@ -38,7 +38,7 @@ export class DatabaseService {
   }
 
   async getAllVolunteersWithinRadius(
-    coordinates: [number],
+    coordinates: number[],
     radius: number
   ): Promise<Volunteer[]> {
     const radiusNormalized: number = radius / 6371;
@@ -84,7 +84,7 @@ export class DatabaseService {
   }
 
   getAllInstitutionsWithinRadius(
-    coordinates: [number],
+    coordinates: number[],
     radius: number
   ): Promise<Institution[]> {
     const radiusNormalized: number = radius / 6371;
