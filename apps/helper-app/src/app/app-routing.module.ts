@@ -10,10 +10,6 @@ import { ImprintComponent } from '../imprint/imprint.component';
 import { PrivacyComponent } from '../privacy/privacy.component';
 
 const routes: Routes = [
-  // todo: activate this routes for prod
-  // { path: '', redirectTo: '/home/institutions', pathMatch: 'full' },
-  // { path: '*', redirectTo: '/home/institutions' },
-
   // use this as default route for demo
   { path: '', redirectTo: '/home/volunteers', pathMatch: 'full' },
   { path: '*', redirectTo: '/home/volunteers' },
@@ -21,21 +17,15 @@ const routes: Routes = [
     path: 'home',
     component: HomeComponent,
     children: [
-      {
-        path: 'volunteers',
-        component: VolunteerListComponent
-      },
-      {
-        path: 'institutions',
-        component: InstitutionListComponent
-      }
+      { path: 'volunteers', component: VolunteerListComponent },
+      { path: 'institutions', component: InstitutionListComponent }
     ]
   },
-  { path: 'faq', component: FaqComponent },
-  { path: 'register-volunteer', component: RegisterVolunteerComponent },
-  { path: 'register-institution', component: RegisterInstitutionComponent },
-  { path: 'imprint', component: ImprintComponent },
-  { path: 'privacy', component: PrivacyComponent }
+  { path: 'faq', component: FaqComponent, data: { title: 'FAQ' } },
+  { path: 'register-volunteer', component: RegisterVolunteerComponent, data: { title: 'Helfer registrieren' } },
+  { path: 'register-institution', component: RegisterInstitutionComponent, data: { title: 'Institution registrieren' } },
+  { path: 'imprint', component: ImprintComponent, data: { title: 'Impressum' } },
+  { path: 'privacy', component: PrivacyComponent, data: { title: 'Datenschutz' } }
 ];
 
 @NgModule({
@@ -44,4 +34,4 @@ const routes: Routes = [
   ],
   exports: [RouterModule]
 })
-export class AppRoutingModule {}
+export class AppRoutingModule { }
