@@ -20,6 +20,7 @@ mat-card {
 
       .title {
         width: 50%;
+        padding-right: 2 * $basic-spacer;
       }
 
       .zipcode {
@@ -28,21 +29,25 @@ mat-card {
         overflow: hidden;
         white-space: nowrap;
         text-overflow: ellipsis;
+
+        .city {
+          // text-overflow: ellipsis;
+          overflow: hidden;
+          position: relative;
+        }
+
+        .zip {
+          font-size: 12px;
+          letter-spacing: 0.4px;
+          color: $text-subdude;
+        }
       }
 
       .date {
         width: 15%;
         text-align: right;
-        min-width: 80px;
+        min-width: 70px;
       }
-    }
-    .subtitle {
-      font-size: 12px;
-      letter-spacing: 0.4px;
-      margin-top: 5px;
-      width: 50%;
-      align-self: end;
-      color: $text-subdude;
     }
   }
 
@@ -63,8 +68,16 @@ mat-card {
       flex-direction: row;
       align-items: stretch;
 
+      @media (max-width: $breakpoint-xs) {
+        flex-direction: column;
+      }
+
       > div {
         width: 50%;
+
+        @media (max-width: $breakpoint-xs) {
+          width: 100%;
+        }
 
         .detail-content {
           margin: 8px 8px 8px 0;

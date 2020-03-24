@@ -1,17 +1,15 @@
 <mat-card class="example-card">
   <div class="card-header">
     <div class="title-container">
-      <div class="title">
-        {{ data.name }}
-      </div>
+      <div class="title">{{ data.name }}</div>
       <div class="zipcode">
-        {{ data.city }}
+        <div title="{{ data.city }}" class="city">{{ data.city }}</div>
+        <div class="zip">{{ data.zipcode }}</div>
       </div>
       <div class="date">
         {{ data.registeredAt | date: 'dd.MM.yy' }}
       </div>
     </div>
-    <div class="subtitle">{{ data.zipcode }}</div>
   </div>
   <mat-card-content>
     <div class="description">
