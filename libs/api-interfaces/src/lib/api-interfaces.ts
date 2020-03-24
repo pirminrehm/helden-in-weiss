@@ -35,6 +35,12 @@ export interface Institution {
   };
 }
 
+export interface ContactMessage {
+  recieverId: string;
+  senderEmailAddr: string;
+  message: string;
+}
+
 export const customErrorCodes = {
   ZIP_NOT_FOUND: 'ZIP_NOT_FOUND'
 };
