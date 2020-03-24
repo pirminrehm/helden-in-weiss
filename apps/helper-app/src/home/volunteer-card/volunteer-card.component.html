@@ -16,38 +16,44 @@
       {{ data.description }}
     </div>
     <div class="details">
-      <div>
-        <div class="label">
-          Medizinische Ausbildung
-        </div>
-        <div class="detail-content">
-          <mat-chip-list [selectable]="'false'">
-            <mat-chip
-              chipListSelectable="'false'"
-              [selectable]="'false'"
-              disableRipple
-              *ngFor="let qualification of data.qualification"
-            >
-              {{ qualification }}
-            </mat-chip>
-          </mat-chip-list>
-        </div>
+      <div class="label">
+        Medizinische Ausbildung
       </div>
-      <div>
-        <div class="label">
-          Kontakt
-        </div>
-        <div class="detail-content">
-          <a
-            href="mailto:{{ data.email }}?subject=Helden%20in%20Weiss%20Anfrage"
+      <div class="detail-content">
+        <mat-chip-list [selectable]="'false'">
+          <mat-chip
+            chipListSelectable="'false'"
+            [selectable]="'false'"
+            disableRipple
+            *ngFor="let qualification of data.qualification"
           >
-            {{ data.email }}</a
-          >
-        </div>
-        <div class="detail-content">
-          <a href="tel:{{ data.phone }}"> {{ data.phone }}</a>
-        </div>
+            {{ qualification }}
+          </mat-chip>
+        </mat-chip-list>
       </div>
     </div>
+    <mat-expansion-panel class="mat-elevation-z0" collapsedHeight="*" expandedHeight="*">
+      <mat-expansion-panel-header>
+        <mat-icon fontSet="material-icons-outlined">mail</mat-icon>
+        <span>Kontakt aufnehmen</span>
+      </mat-expansion-panel-header>
+
+      <mat-form-field appearance="fill">
+        <mat-label>Was möchten Sie dem Helfer mitteilen</mat-label>
+        <textarea
+          matInput
+          placeholder="Was möchten Sie dem Helfer mitteilen"
+          maxlength="300"
+        ></textarea>
+      </mat-form-field>
+      <button
+        class="send-mail-button"
+        type="submit"
+        mat-raised-button
+        color="primary"
+      >
+        E-Mail senden
+      </button>
+    </mat-expansion-panel>
   </mat-card-content>
 </mat-card>

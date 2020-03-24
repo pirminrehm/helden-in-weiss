@@ -99,3 +99,29 @@ mat-card {
     }
   }
 }
+
+mat-expansion-panel {
+  margin-top: 1rem;
+  border-top: 1px solid #eee;
+  padding-top: 15px;
+
+  mat-expansion-panel-header {
+    padding: 0rem 1rem 0 0;
+    font-size: 16px;
+
+    mat-icon.mat-icon {
+      color: $primary;
+      margin-right: 1rem;
+      line-height: 19px;
+    }
+  }
+}
+
+mat-form-field.mat-form-field {
+  width: 100%;
+  left: 0;
+}
+
+.send-mail-button {
+  text-transform: uppercase;
+}
