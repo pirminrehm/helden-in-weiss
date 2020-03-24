@@ -14,6 +14,8 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { RegisterInstitutionComponent } from './register-institution/register-institution.component';
 import { RegisterVolunteerComponent } from './register-volunteer/register-volunteer.component';
+import { ImprintComponent } from '../imprint/imprint.component';
+import { PrivacyComponent } from '../privacy/privacy.component';
 
 @NgModule({
   declarations: [
@@ -26,7 +28,9 @@ import { RegisterVolunteerComponent } from './register-volunteer/register-volunt
     HeaderComponent,
     FaqComponent,
     RegisterInstitutionComponent,
-    HeaderComponent
+    HeaderComponent,
+    ImprintComponent,
+    PrivacyComponent
   ],
   imports: [
     BrowserModule,

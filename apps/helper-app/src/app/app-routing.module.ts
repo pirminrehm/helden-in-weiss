@@ -6,6 +6,8 @@ import { VolunteerListComponent } from '../home/volunteer-list/volunteer-list.co
 import { RegisterInstitutionComponent } from './register-institution/register-institution.component';
 import { RegisterVolunteerComponent } from './register-volunteer/register-volunteer.component';
 import { FaqComponent } from '../faq/faq.component';
+import { ImprintComponent } from '../imprint/imprint.component';
+import { PrivacyComponent } from '../privacy/privacy.component';
 
 const routes: Routes = [
   // todo: activate this routes for prod
@@ -31,7 +33,9 @@ const routes: Routes = [
   },
   { path: 'faq', component: FaqComponent },
   { path: 'register-volunteer', component: RegisterVolunteerComponent },
-  { path: 'register-institution', component: RegisterInstitutionComponent }
+  { path: 'register-institution', component: RegisterInstitutionComponent },
+  { path: 'imprint', component: ImprintComponent },
+  { path: 'privacy', component: PrivacyComponent }
 ];
 
 @NgModule({
