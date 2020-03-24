@@ -2,17 +2,14 @@
 
 <div class="container">
   <div class="content-area">
-    <h1>Hi Faq</h1>
+    <h1>Häufig gestellte Fragen</h1>
 
     <mat-accordion displayMode="default">
       <mat-expansion-panel *ngFor="let faq of faqs">
-        <mat-expansion-panel-header>
+        <mat-expansion-panel-header collapsedHeight="*" expandedHeight="*">
           <mat-panel-title>
             {{ faq.question }}
           </mat-panel-title>
-          <!-- <mat-panel-description>
-            Type your name and age
-          </mat-panel-description> -->
         </mat-expansion-panel-header>
         <p>{{ faq.answer }}</p>
       </mat-expansion-panel>
