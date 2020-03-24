@@ -3,3 +3,9 @@
 mat-accordion:first-child {
   border-radius: $border-radius !important;
 }
+
+mat-expansion-panel {
+  mat-expansion-panel-header {
+    padding: 1rem 1.5rem;
+  }
+}
