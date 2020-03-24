@@ -1,0 +1,12 @@
+@import 'variables';
+
+.error-message {
+  width: 100%;
+  border: 1px solid $warn;
+  padding: 1rem;
+  color: $warn;
+  border-radius: 5px;
+  font-weight: 500;
+  display: flex;
+  justify-content: space-between;
+}

@@ -15,6 +15,7 @@ export class VolunteerListComponent implements OnInit, OnDestroy {
   volunteers: Volunteer[];
   loading = true;
   destroyed$ = new Subject();
+  errorMessage: string;
 
   constructor(
     private volunteerService: VolunteerService,
@@ -38,6 +39,7 @@ export class VolunteerListComponent implements OnInit, OnDestroy {
 
   getVolunteers(searchTerm = '', searchPLZ = '', searchRadius = 10) {
     this.loading = true;
+    this.errorMessage = '';
     // this.volunteers$ =
     this.volunteerService
       .getAll(searchTerm, searchPLZ, searchRadius)
@@ -51,7 +53,9 @@ export class VolunteerListComponent implements OnInit, OnDestroy {
         next: data => (this.volunteers = data),
         error: err => {
           if (err.error.message === customErrorCodes.ZIP_NOT_FOUND) {
-            alert('Unbekannte PLZ');
+            this.errorMessage = 'Unbekannte PLZ';
+            this.volunteers = [];
+            this.loading = false;
           }
         }
       });
