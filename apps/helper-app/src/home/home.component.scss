@@ -37,6 +37,14 @@ input[type='number'] {
 
     .links {
       float: right;
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: right;
+      text-align: right;
+
+      @media (max-width: $breakpoint-xs) {
+        flex-direction: column;
+      }
 
       a {
         color: white;
