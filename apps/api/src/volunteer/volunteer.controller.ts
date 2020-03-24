@@ -12,8 +12,8 @@ import { Volunteer } from '@wir-vs-virus/api-interfaces';
 import { DatabaseService } from '../services/database.service';
 
 import { removeMongoIdFromArray } from '../common/utils';
-import { LocationService } from '../services/location.service';
-import { Location } from '../services/location.interface';
+import { LocationService } from '../services/location/location.service';
+import { Location } from '../services/location/location.interface';
 
 @Controller('volunteer')
 export class VolunteerController {

@@ -7,7 +7,7 @@ import { AppController } from './app.controller';
 import { VolunteerController } from '../volunteer/volunteer.controller';
 import { InstitutionController } from '../institution/institution.controller';
 import { DatabaseService } from '../services/database.service';
-import { LocationService } from '../services/location.service';
+import { LocationService } from '../services/location/location.service';
 import { VolunteerSchema } from '../volunteer/volunteer.schema';
 import { InstitutionSchema } from '../institution/institution.schema';
 

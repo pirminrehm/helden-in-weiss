@@ -11,8 +11,8 @@ import {
 } from '@nestjs/common';
 import { Institution } from '@wir-vs-virus/api-interfaces';
 import { DatabaseService } from '../services/database.service';
-import { LocationService } from '../services/location.service';
-import { Location } from '../services/location.interface';
+import { LocationService } from '../services/location/location.service';
+import { Location } from '../services/location/location.interface';
 import { removeMongoIdFromArray } from '../common/utils';
 
 @Controller('institution')
