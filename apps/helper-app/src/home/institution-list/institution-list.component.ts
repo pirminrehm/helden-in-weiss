@@ -15,6 +15,7 @@ export class InstitutionListComponent implements OnInit, OnDestroy {
   institutions: Institution[];
   loading = true;
   destroyed$ = new Subject();
+  errorMessage: string;
 
   constructor(
     private route: ActivatedRoute,
@@ -38,6 +39,7 @@ export class InstitutionListComponent implements OnInit, OnDestroy {
 
   getInstitutions(searchTerm = '', searchPLZ = '', searchRadius = 10) {
     this.loading = true;
+    this.errorMessage = '';
     // this.institutions$ =
     this.institutionsService
       .getAll(searchTerm, searchPLZ, searchRadius)
@@ -51,7 +53,9 @@ export class InstitutionListComponent implements OnInit, OnDestroy {
         next: data => (this.institutions = data),
         error: err => {
           if (err.error.message === customErrorCodes.ZIP_NOT_FOUND) {
-            alert('Unbekannte PLZ');
+            this.errorMessage = 'Unbekannte PLZ';
+            this.institutions = [];
+            this.loading = false;
           }
         }
       });

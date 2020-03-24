@@ -2,6 +2,11 @@
   <mat-spinner diameter="32" color="primary"></mat-spinner>
 </div>
 
+<div class="error-message" *ngIf="errorMessage">
+  <span>{{errorMessage}}</span>
+  <mat-icon>warning</mat-icon>
+</div>
+
 <wir-vs-virus-volunteer-card
   [data]="volunteer"
   *ngFor="let volunteer of volunteers"
