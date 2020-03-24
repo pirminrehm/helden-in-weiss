@@ -8,9 +8,7 @@
   <h1 class="title">Als Helfer registrieren</h1>
 
   <p class="description">
-    Being the savage's bowsman, that is, the person who pulled the bow-oar in
-    his boat (the second one from forward), it was my cheerful duty to attend
-    upon him while taking that hand-scrabble scramble.
+    Um eine Anzeige online zu stellen, füllen Sie bitte folgende Felder aus.
   </p>
 
   <form [formGroup]="volunteerForm" (ngSubmit)="onSubmit()">
@@ -87,20 +85,21 @@
       >
     </mat-form-field>
 
-    <mat-form-field>
+    <mat-form-field appearance="fill">
+      <mat-label>Ihre Qualifikationen</mat-label>
       <mat-chip-list #chipList>
         <mat-chip
-          *ngFor="let qaulification of qualifications"
+          *ngFor="let qualification of qualifications"
           [selectable]="selectable"
           [removable]="removable"
-          (removed)="remove(qaulification)"
+          (removed)="remove(qualification)"
         >
-          {{ qaulification }}
+          {{ qualification }}
           <mat-icon matChipRemove *ngIf="removable">cancel</mat-icon>
         </mat-chip>
         <input
-          placeholder="Ihre Qualifikation(en)"
-          #qaulificationInput
+          placeholder="Allgemeinmedizin"
+          #qualificationInput
           formControlName="qualifications"
           [matAutocomplete]="auto"
           [matChipInputFor]="chipList"
