@@ -7,5 +7,14 @@ mat-accordion:first-child {
 mat-expansion-panel {
   mat-expansion-panel-header {
     padding: 1rem 1.5rem;
+    font-size: 16px;
+  }
+
+  p {
+    color: #757575;
+    font-size: 16px;
+    line-height: 21px;
+    font-family: Roboto;
   }
 }
+

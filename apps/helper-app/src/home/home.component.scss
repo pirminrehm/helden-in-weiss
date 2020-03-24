@@ -96,12 +96,12 @@ input[type='number'] {
   .search-help-toggle {
     position: absolute;
     height: 56px;
-    width: 8 * $grid-col-width;
-    bottom: -28px;
+    width: 617px;
+    bottom: -27px;
     background: white;
     overflow: hidden;
-    border-radius: 500px;
-    box-shadow: $shadow-1;
+    border-radius: 8px;
+    box-shadow: 0px 1px 2px 0px #bfbfbf;
     font-size: 18px;
     letter-spacing: 0.1px;
     display: flex;
@@ -127,6 +127,10 @@ input[type='number'] {
       font-size: 18px;
       letter-spacing: 0.1px;
       font-family: Roboto;
+
+      strong {
+        font-weight: 700;
+      }
 
       &.bg-blue {
         background-color: $primary;
@@ -229,7 +233,7 @@ input[type='number'] {
 
         img {
           padding: 0 $basic-spacer;
-          height: 48px;
+          width: 63px;
 
           &.arrow {
             opacity: 0.6;
@@ -267,8 +271,8 @@ input[type='number'] {
   width: 100%;
   font-size: 14px;
   line-height: 20px;
-  margin: 5 * $basic-spacer 0;
-  border-radius: 250px;
+  margin: 10px 0 30px 0;
+  border-radius: 8px;
 
   @media (min-width: $breakpoint-md + 1px) {
     display: none;
