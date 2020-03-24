@@ -44,7 +44,7 @@ export class RegisterVolunteerComponent implements OnInit {
     qualifications: new FormControl('')
   });
 
-  @ViewChild('qaulificationInput') qualificationInput: ElementRef<
+  @ViewChild('qualificationInput') qualificationInput: ElementRef<
     HTMLInputElement
   >;
   @ViewChild('auto') matAutocomplete: MatAutocomplete;
@@ -54,7 +54,7 @@ export class RegisterVolunteerComponent implements OnInit {
   separatorKeysCodes: number[] = [ENTER, COMMA];
   filteredQualifications: Observable<string[]>;
   qualifications: string[] = [];
-  allQualifications: string[] = this.getQulifications();
+  allQualifications: string[] = this.getQualifications();
 
   constructor(
     private router: Router,
@@ -174,7 +174,7 @@ export class RegisterVolunteerComponent implements OnInit {
     return this.allQualifications;
   }
 
-  getQulifications() {
+  getQualifications() {
     return [
       'Akupunktur',
       'Allergologie',
