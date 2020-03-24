@@ -40,10 +40,14 @@
           Kontakt
         </div>
         <div class="detail-content">
-          {{ data.email }}
+          <a
+            href="mailto:{{ data.email }}?subject=Helden%20in%20Weiss%20Anfrage"
+          >
+            {{ data.email }}</a
+          >
         </div>
         <div class="detail-content">
-          {{ data.phone }}
+          <a href="tel:{{ data.phone }}"> {{ data.phone }}</a>
         </div>
       </div>
     </div>
