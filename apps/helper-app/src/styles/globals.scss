@@ -22,3 +22,9 @@
 a:hover {
   color: $primary;
 }
+
+button {
+  text-transform: uppercase;
+  line-height: 1.14;
+  letter-spacing: 1.25px;
+}
