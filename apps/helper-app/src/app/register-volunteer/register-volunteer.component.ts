@@ -6,7 +6,7 @@ import { MatChipInputEvent } from '@angular/material/chips';
 import { Router } from '@angular/router';
 import { customErrorCodes, Volunteer } from '@wir-vs-virus/api-interfaces';
 import { Observable } from 'rxjs';
-import { map, startWith } from 'rxjs/operators';
+import { first, map, startWith } from 'rxjs/operators';
 import { VolunteerService } from '../../services/volunteer.service';
 import { phoneRegExp, zipCodeRegExp } from '../common/utils';
 
@@ -108,7 +108,7 @@ export class RegisterVolunteerComponent implements OnInit {
       registeredAt: new Date().toISOString()
     };
 
-    this.volunteerService.create(volunteer).subscribe(
+    this.volunteerService.create(volunteer).pipe(first()).subscribe(
       res => {
         console.log(res);
         this.router.navigate(['/register-volunteer/success']);

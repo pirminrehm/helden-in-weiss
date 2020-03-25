@@ -4,6 +4,7 @@ import { Router } from '@angular/router';
 import { customErrorCodes, Institution } from '@wir-vs-virus/api-interfaces';
 import { InstitutionService } from '../../services/institution.service';
 import { phoneRegExp, zipCodeRegExp } from '../common/utils';
+import { first } from 'rxjs/operators';
 
 @Component({
   selector: 'wir-vs-virus-register-institution',
@@ -68,22 +69,25 @@ export class RegisterInstitutionComponent implements OnInit {
       zipcode: val.zipCode
     };
 
-    this.institutionService.create(institution).subscribe(
-      res => {
-        console.log(res);
-        this.router.navigate(['/register-institution/success']);
-      },
-      err => {
-        console.error(err);
-        if (err.error.message === customErrorCodes.ZIP_NOT_FOUND) {
-          // this.institutionForm.get('zipCode').setErrors({ incorrect: true });
-          this.institutionForm.get('zipCode').setErrors({
-            notExists: true
-          });
-        } else {
-          alert('etwas ist scheif gelaufen');
+    this.institutionService
+      .create(institution)
+      .pipe(first())
+      .subscribe(
+        res => {
+          console.log(res);
+          this.router.navigate(['/register-institution/success']);
+        },
+        err => {
+          console.error(err);
+          if (err.error.message === customErrorCodes.ZIP_NOT_FOUND) {
+            // this.institutionForm.get('zipCode').setErrors({ incorrect: true });
+            this.institutionForm.get('zipCode').setErrors({
+              notExists: true
+            });
+          } else {
+            alert('etwas ist scheif gelaufen');
+          }
         }
-      }
-    );
+      );
   }
 }

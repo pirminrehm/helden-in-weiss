@@ -1,6 +1,7 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
 import { ActivatedRoute, Params, Router } from '@angular/router';
+import { first } from 'rxjs/operators';
 
 @Component({
   selector: 'wir-vs-virus-home',
@@ -17,7 +18,7 @@ export class HomeComponent implements OnInit {
   constructor(private router: Router, private route: ActivatedRoute) {}
 
   ngOnInit() {
-    this.router.events.subscribe(val => {
+    this.router.events.pipe(first()).subscribe(val => {
       this.searchForm
         .get('term')
         .setValue(this.route.snapshot.queryParams.searchTerm);
