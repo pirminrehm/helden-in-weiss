@@ -8,7 +8,9 @@
   <h1 class="title">Suchen Sie Hilfe für Ihre Einrichtung</h1>
 
   <p class="description">
-    Um eine Anzeige online zu stellen, füllen Sie bitte folgende Felder aus. Beschreiben Sie für Helfer möglichst genau, bei welchen Tätigkeiten Sie Unterstützung suchen.
+    Um eine Anzeige online zu stellen, füllen Sie bitte folgende Felder aus.
+    Beschreiben Sie für Helfer möglichst genau, bei welchen Tätigkeiten Sie
+    Unterstützung suchen.
   </p>
 
   <form [formGroup]="institutionForm" (ngSubmit)="onSubmit()">
@@ -109,6 +111,16 @@
         anschließend automatisch entfernt
       </div>
     </div>
+
+    <re-captcha resolved="" formControlName="recaptcha"#captchaRef="reCaptcha">
+    </re-captcha>
+    <mat-error
+      *ngIf="
+        institutionForm.get('recaptcha').errors &&
+        institutionForm.get('recaptcha').touched
+      "
+      >Bitte bestätigen Sie, dass Sie kein Roboter sind</mat-error
+    >
 
     <button
       class="submit-button"

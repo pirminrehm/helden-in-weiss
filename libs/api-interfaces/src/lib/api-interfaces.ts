@@ -23,6 +23,7 @@ export interface Institution {
   city: string;
   title: string;
   description: string;
+  recaptcha: string;
   contact: {
     name: string;
     firstname: string;
@@ -36,5 +37,6 @@ export interface Institution {
 }
 
 export const customErrorCodes = {
-  ZIP_NOT_FOUND: 'ZIP_NOT_FOUND'
+  ZIP_NOT_FOUND: 'ZIP_NOT_FOUND',
+  CAPTCHA_NOT_FOUND: 'CAPTCHA_NOT_FOUND'
 };

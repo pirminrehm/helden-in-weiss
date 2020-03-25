@@ -48,8 +48,10 @@
     "@nestjs/platform-express": "^6.8.3",
     "@nestjs/serve-static": "^2.1.0",
     "@nrwl/angular": "9.1.2",
+    "@types/request": "^2.48.4",
     "core-js": "^2.5.4",
     "mongoose": "^5.9.5",
+    "ng-recaptcha": "^5.0.0",
     "reflect-metadata": "^0.1.13",
     "rxjs": "~6.5.0",
     "zone.js": "^0.10.2"

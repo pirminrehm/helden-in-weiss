@@ -3,6 +3,12 @@ import { NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import {
+  RecaptchaModule,
+  RecaptchaFormsModule,
+  RECAPTCHA_SETTINGS,
+  RecaptchaSettings
+} from 'ng-recaptcha';
 import { FaqComponent } from '../faq/faq.component';
 import { HeaderComponent } from '../header/header.component';
 import { HomeComponent } from '../home/home.component';
@@ -38,9 +44,18 @@ import { PrivacyComponent } from '../privacy/privacy.component';
     ReactiveFormsModule,
     BrowserAnimationsModule,
     MaterialModule,
-    AppRoutingModule
+    AppRoutingModule,
+    RecaptchaModule,
+    RecaptchaFormsModule
   ],
-  providers: [],
+  providers: [
+    {
+      provide: RECAPTCHA_SETTINGS,
+      useValue: {
+        siteKey: '6Le92eMUAAAAAEDD70XEc2agv0OVTwWEFzJYkkDm'
+      } as RecaptchaSettings
+    }
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule {}

@@ -9,17 +9,19 @@ import {
   HttpException,
   HttpStatus
 } from '@nestjs/common';
-import { Institution } from '@wir-vs-virus/api-interfaces';
+import { Institution, customErrorCodes } from '@wir-vs-virus/api-interfaces';
 import { DatabaseService } from '../services/database.service';
 import { LocationService } from '../services/location.service';
 import { Location } from '../services/location.interface';
 import { removeMongoIdFromArray } from '../common/utils';
+import { RecaptchaService } from '../services/recaptcha/recaptcha.service';
 
 @Controller('institution')
 export class InstitutionController {
   constructor(
     private readonly databaseService: DatabaseService,
     private readonly locationService: LocationService,
+    private readonly recaptchaService: RecaptchaService,
     private readonly httpservice: HttpService
   ) {}
 
@@ -59,6 +61,8 @@ export class InstitutionController {
     const zipcode = institution.zipcode;
     let locationData: Location;
 
+    await this.validateCaptcha(institution.recaptcha);
+
     try {
       locationData = await this.locationService.getLocationInfoByZipcode(
         zipcode
@@ -75,5 +79,16 @@ export class InstitutionController {
     institution.city = locationData.city;
     Logger.log(institution);
     return await this.databaseService.saveInstitution(institution);
+  }
+
+  async validateCaptcha(captcha) {
+    const validation = await this.recaptchaService.validate(captcha);
+    if (!validation.success) {
+      Logger.warn(validation.message);
+      throw new HttpException(
+        customErrorCodes.CAPTCHA_NOT_FOUND,
+        HttpStatus.BAD_REQUEST
+      );
+    }
   }
 }

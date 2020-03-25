@@ -14,7 +14,7 @@ a.back-navigation {
   line-height: 24px;
   padding-left: 7px;
   text-transform: uppercase;
-  color: #448AFF;
+  color: #448aff;
 
   img {
     float: left;
@@ -29,7 +29,7 @@ h1.title {
   font-family: Roboto;
   line-height: 44px;
 
-  @media(max-width: $breakpoint-md) {
+  @media (max-width: $breakpoint-md) {
     font-size: 25px;
     line-height: 34px;
   }
@@ -45,7 +45,7 @@ h1.section-title {
   padding: 1rem 0;
   color: #757575;
 
-  @media(max-width: $breakpoint-xs) {
+  @media (max-width: $breakpoint-xs) {
     font-size: 14px;
     line-height: 21px;
   }
@@ -65,7 +65,7 @@ mat-form-field {
 }
 
 .alert {
-  border: solid 1px rgba(0,0,0,.12);
+  border: solid 1px rgba(0, 0, 0, 0.12);
   border-radius: 5px;
   display: flex;
   padding: 1rem;
@@ -82,4 +82,9 @@ mat-form-field {
   margin-top: 1.5rem;
   text-transform: uppercase;
   margin-bottom: 3rem;
+}
+
+re-captcha {
+  margin-top: 32px;
+  display: block;
 }

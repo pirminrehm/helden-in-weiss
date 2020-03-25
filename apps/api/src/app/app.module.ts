@@ -12,6 +12,7 @@ import { VolunteerSchema } from '../volunteer/volunteer.schema';
 import { InstitutionSchema } from '../institution/institution.schema';
 
 import { join } from 'path';
+import { RecaptchaService } from '../services/recaptcha/recaptcha.service';
 
 @Module({
   imports: [
@@ -29,6 +30,6 @@ import { join } from 'path';
     })
   ],
   controllers: [AppController, VolunteerController, InstitutionController],
-  providers: [DatabaseService, LocationService]
+  providers: [DatabaseService, LocationService, RecaptchaService]
 })
 export class AppModule {}
