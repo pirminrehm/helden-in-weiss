@@ -64,8 +64,8 @@ export class RegisterVolunteerComponent implements OnInit {
       .valueChanges.pipe(
         // tslint:disable-next-line: deprecation
         startWith(null),
-        map((qauli: string | null) =>
-          qauli ? this._filter(qauli) : this.allQualifications.slice()
+        map((qualification: string | null) =>
+          qualification ? this._filter(qualification) : this.allQualifications.slice()
         )
       );
 

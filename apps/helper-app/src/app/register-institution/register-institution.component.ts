@@ -85,7 +85,7 @@ export class RegisterInstitutionComponent implements OnInit {
               notExists: true
             });
           } else {
-            alert('etwas ist scheif gelaufen');
+            alert('Etwas ist schief gelaufen');
           }
         }
       );
