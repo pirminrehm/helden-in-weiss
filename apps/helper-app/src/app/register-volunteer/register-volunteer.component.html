@@ -123,13 +123,21 @@
       >Angabe von Qualifikationen erforderlich
     </mat-error> -->
 
-    <div class="alert">
-      <img src="/assets/info-24px.svg" />
-      <div>
-        Ihre Anzeige ist für 30 Tage gültig und wird aus Datenschutzgründen
-        anschließend automatisch entfernt
-      </div>
-    </div>
+    <wir-vs-virus-info-box>
+      Ihre Anzeige ist für 30 Tage gültig und wird aus Datenschutzgründen
+      anschließend automatisch entfernt
+    </wir-vs-virus-info-box>
+
+    <mat-checkbox color="primary" formControlName="agreePrivacy"
+      >Mit Betätigung des "Hilfsangebot Online stellen" Knopfes erkläre ich
+      meine Einwilligung in die Verarbeitung meiner Daten gemäß der
+      datenschutzrechtlichen Einwilligungserklärung. Ich erkläre mich
+      einverstanden, per E-Mail kontaktiert zu werden. Mit der Kontaktaufnahme
+      nehme ich die Datenschutzerklärung zur Kenntnis.<mat-error
+        *ngIf="showPrivacyError"
+        >Sie müssen der Datenschutzerklärung zustimmen</mat-error
+      ></mat-checkbox
+    >
 
     <button
       class="submit-button"

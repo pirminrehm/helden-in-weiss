@@ -1,0 +1,31 @@
+@import 'variables';
+
+.info-box {
+  width: 100%;
+  display: flex;
+  border-radius: 8px;
+  border: solid 1px rgba(0, 0, 0, 0.12);
+  align-items: center;
+  padding: 1rem 1.5rem;
+  margin: 2rem 0;
+
+  mat-icon {
+    margin-right: 16px;
+    color: $primary;
+  }
+
+  span {
+    font-family: Roboto;
+    font-size: 14px;
+    font-weight: normal;
+    font-stretch: normal;
+    font-style: normal;
+    line-height: 1.43;
+    letter-spacing: 0.25px;
+    color: #1f1f1f;
+  }
+}
+
+a {
+  color: $primary;
+}

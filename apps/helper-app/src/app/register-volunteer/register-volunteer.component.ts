@@ -1,19 +1,14 @@
-import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
-import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { COMMA, ENTER } from '@angular/cdk/keycodes';
-
-import { Volunteer, customErrorCodes } from '@wir-vs-virus/api-interfaces';
-import { VolunteerService } from '../../services/volunteer.service';
-
-import { zipCodeRegExp, phoneRegExp } from '../common/utils';
-import {
-  MatAutocomplete,
-  MatAutocompleteSelectedEvent
-} from '@angular/material/autocomplete';
-import { startWith, map } from 'rxjs/operators';
+import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { MatAutocomplete, MatAutocompleteSelectedEvent } from '@angular/material/autocomplete';
 import { MatChipInputEvent } from '@angular/material/chips';
-import { Observable } from 'rxjs';
 import { Router } from '@angular/router';
+import { customErrorCodes, Volunteer } from '@wir-vs-virus/api-interfaces';
+import { Observable } from 'rxjs';
+import { first, map, startWith } from 'rxjs/operators';
+import { VolunteerService } from '../../services/volunteer.service';
+import { phoneRegExp, zipCodeRegExp } from '../common/utils';
 
 @Component({
   selector: 'wir-vs-virus-register-volunteer',
@@ -21,6 +16,7 @@ import { Router } from '@angular/router';
   styleUrls: ['./register-volunteer.component.scss']
 })
 export class RegisterVolunteerComponent implements OnInit {
+  showPrivacyError = false;
   volunteerForm = new FormGroup({
     name: new FormControl('', [Validators.required, Validators.maxLength(70)]),
     zipCode: new FormControl('', [
@@ -41,7 +37,8 @@ export class RegisterVolunteerComponent implements OnInit {
       Validators.email,
       Validators.maxLength(70)
     ]),
-    qualifications: new FormControl('')
+    qualifications: new FormControl(''),
+    agreePrivacy: new FormControl(false, Validators.requiredTrue),
   });
 
   @ViewChild('qualificationInput') qualificationInput: ElementRef<
@@ -67,8 +64,8 @@ export class RegisterVolunteerComponent implements OnInit {
       .valueChanges.pipe(
         // tslint:disable-next-line: deprecation
         startWith(null),
-        map((qauli: string | null) =>
-          qauli ? this._filter(qauli) : this.allQualifications.slice()
+        map((qualification: string | null) =>
+          qualification ? this._filter(qualification) : this.allQualifications.slice()
         )
       );
 
@@ -88,6 +85,7 @@ export class RegisterVolunteerComponent implements OnInit {
     // } else {
     //   this.volunteerForm.get('qualifications').();
     // }
+    this.showPrivacyError = !!this.volunteerForm.get('agreePrivacy').errors;
     if (!this.volunteerForm.valid || this.qualifications.length === 0) {
       return;
     }
@@ -110,10 +108,10 @@ export class RegisterVolunteerComponent implements OnInit {
       registeredAt: new Date().toISOString()
     };
 
-    this.volunteerService.create(volunteer).subscribe(
+    this.volunteerService.create(volunteer).pipe(first()).subscribe(
       res => {
         console.log(res);
-        this.router.navigate(['/home/volunteers']);
+        this.router.navigate(['/register-volunteer/success']);
       },
       err => {
         console.error(err);
@@ -123,7 +121,7 @@ export class RegisterVolunteerComponent implements OnInit {
             notExists: true
           });
         } else {
-          alert('etwas ist scheif gelaufen');
+          alert('Etwas ist schief gelaufen');
         }
       }
     );
@@ -133,7 +131,7 @@ export class RegisterVolunteerComponent implements OnInit {
     const input = event.input;
     const value = event.value;
 
-    // Add our qaulification
+    // Add our qualification
     if ((value || '').trim()) {
       this.qualifications.push(value.trim());
       // this.volunteerForm.get('qualifications').setValue(value);
@@ -147,8 +145,8 @@ export class RegisterVolunteerComponent implements OnInit {
     this.volunteerForm.get('qualifications').setValue(null);
   }
 
-  remove(qauli: string): void {
-    const index = this.qualifications.indexOf(qauli);
+  remove(qualification: string): void {
+    const index = this.qualifications.indexOf(qualification);
 
     if (index >= 0) {
       this.qualifications.splice(index, 1);
@@ -168,7 +166,7 @@ export class RegisterVolunteerComponent implements OnInit {
       filterValue = value.toLowerCase();
 
       return this.allQualifications.filter(
-        qauli => qauli.toLowerCase().indexOf(filterValue) === 0
+        qualification => qualification.toLowerCase().indexOf(filterValue) === 0
       );
     }
     return this.allQualifications;

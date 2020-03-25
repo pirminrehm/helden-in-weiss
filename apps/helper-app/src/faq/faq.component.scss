@@ -4,17 +4,53 @@ mat-accordion:first-child {
   border-radius: $border-radius !important;
 }
 
+h1 {
+  padding-bottom: 1rem;
+}
+
 mat-expansion-panel {
   mat-expansion-panel-header {
     padding: 1rem 1.5rem;
     font-size: 16px;
+    font-weight: 500;
   }
 
   p {
     color: #757575;
     font-size: 16px;
-    line-height: 21px;
+    line-height: 1.38;
+    letter-spacing: 0.09px;
     font-family: Roboto;
   }
 }
 
+.info-box {
+  width: 100%;
+  height: 72px;
+  display: flex;
+  border-radius: 8px;
+  border: solid 1px rgba(0, 0, 0, 0.12);
+  align-items: center;
+  padding: 0 1.5rem;
+  margin-top: 3rem;
+
+  mat-icon {
+    margin-right: 16px;
+    color: $primary;
+  }
+
+  span {
+    font-family: Roboto;
+    font-size: 14px;
+    font-weight: normal;
+    font-stretch: normal;
+    font-style: normal;
+    line-height: 1.43;
+    letter-spacing: 0.25px;
+    color: #1f1f1f;
+
+    a {
+      color: $primary;
+    }
+  }
+}

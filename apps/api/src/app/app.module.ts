@@ -1,18 +1,18 @@
-import { Module, HttpModule } from '@nestjs/common';
-import { MongooseModule } from '@nestjs/mongoose';
+import { HttpModule, Module } from '@nestjs/common';
 import { ConfigModule } from '@nestjs/config';
+import { MongooseModule } from '@nestjs/mongoose';
 import { ServeStaticModule } from '@nestjs/serve-static';
-
-import { AppController } from './app.controller';
-import { VolunteerController } from '../volunteer/volunteer.controller';
-import { InstitutionController } from '../institution/institution.controller';
-import { DatabaseService } from '../services/database.service';
-import { LocationService } from '../services/location.service';
-import { VolunteerSchema } from '../volunteer/volunteer.schema';
-import { InstitutionSchema } from '../institution/institution.schema';
-
 import { join } from 'path';
+import { ContactController } from '../contact/contact.controller';
+import { InstitutionController } from '../institution/institution.controller';
+import { InstitutionSchema } from '../institution/institution.schema';
+import { DatabaseService } from '../services/database.service';
+import { LocationService } from '../services/location/location.service';
+import { MailService } from '../services/mail/mail.service';
 import { RecaptchaService } from '../services/recaptcha/recaptcha.service';
+import { VolunteerController } from '../volunteer/volunteer.controller';
+import { VolunteerSchema } from '../volunteer/volunteer.schema';
+import { AppController } from './app.controller';
 
 @Module({
   imports: [
@@ -29,7 +29,7 @@ import { RecaptchaService } from '../services/recaptcha/recaptcha.service';
       rootPath: join(__dirname, '..', 'helper-app')
     })
   ],
-  controllers: [AppController, VolunteerController, InstitutionController],
-  providers: [DatabaseService, LocationService, RecaptchaService]
+  controllers: [AppController, VolunteerController, InstitutionController, ContactController],
+  providers: [DatabaseService, LocationService, RecaptchaService, MailService]
 })
 export class AppModule {}

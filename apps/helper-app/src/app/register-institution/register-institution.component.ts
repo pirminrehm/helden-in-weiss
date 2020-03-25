@@ -1,10 +1,11 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
-import { RecaptchaComponent } from 'ng-recaptcha';
-
-import { InstitutionService } from '../../services/institution.service';
-import { zipCodeRegExp, phoneRegExp } from '../common/utils';
+import { Router } from '@angular/router';
 import { customErrorCodes, Institution } from '@wir-vs-virus/api-interfaces';
+import { RecaptchaComponent } from 'ng-recaptcha';
+import { first } from 'rxjs/operators';
+import { InstitutionService } from '../../services/institution.service';
+import { phoneRegExp, zipCodeRegExp } from '../common/utils';
 
 @Component({
   selector: 'wir-vs-virus-register-institution',
@@ -12,6 +13,7 @@ import { customErrorCodes, Institution } from '@wir-vs-virus/api-interfaces';
   styleUrls: ['./register-institution.component.scss']
 })
 export class RegisterInstitutionComponent implements OnInit {
+  showPrivacyError = false;
   institutionForm = new FormGroup({
     institutionName: new FormControl('', [
       Validators.required,
@@ -38,19 +40,24 @@ export class RegisterInstitutionComponent implements OnInit {
       Validators.email,
       Validators.maxLength(70)
     ]),
-    recaptcha: new FormControl(null, [Validators.required])
+    recaptcha: new FormControl(null, [Validators.required]),
+    agreePrivacy: new FormControl(false, Validators.requiredTrue)
   });
 
   @ViewChild(RecaptchaComponent)
   captchaRef: RecaptchaComponent;
 
-  constructor(private institutionService: InstitutionService) {}
+  constructor(
+    private institutionService: InstitutionService,
+    private router: Router
+  ) {}
 
   ngOnInit(): void {}
 
   onSubmit() {
     this.institutionForm.get('recaptcha').markAllAsTouched();
     console.log(this.institutionForm.value);
+    this.showPrivacyError = !!this.institutionForm.get('agreePrivacy').errors;
     if (!this.institutionForm.valid) {
       return;
     }
@@ -71,30 +78,33 @@ export class RegisterInstitutionComponent implements OnInit {
       recaptcha: val.recaptcha
     };
 
-    this.institutionService.create(institution).subscribe(
-      res => {
-        console.log(res);
-        alert('success');
-      },
-      err => {
-        console.error(err.error.message);
-        this.captchaRef.reset();
+    this.institutionService
+      .create(institution)
+      .pipe(first())
+      .subscribe(
+        res => {
+          console.log(res);
+          this.router.navigate(['/register-institution/success']);
+        },
+        err => {
+          console.error(err.error.message);
+          this.captchaRef.reset();
 
-        switch (err.error.message) {
-          case customErrorCodes.ZIP_NOT_FOUND:
-            this.institutionForm.get('zipCode').setErrors({
-              notExists: true
-            });
-            break;
+          switch (err.error.message) {
+            case customErrorCodes.ZIP_NOT_FOUND:
+              this.institutionForm.get('zipCode').setErrors({
+                notExists: true
+              });
+              break;
 
-          case customErrorCodes.CAPTCHA_NOT_FOUND:
-            break;
+            case customErrorCodes.CAPTCHA_NOT_FOUND:
+              break;
 
-          default:
-            alert('Etwas ist scheif gelaufen, versuchs später nochmal.');
-            break;
+            default:
+              alert('Etwas ist schief gelaufen, versuchs später nochmal.');
+              break;
+          }
         }
-      }
-    );
+      );
   }
 }

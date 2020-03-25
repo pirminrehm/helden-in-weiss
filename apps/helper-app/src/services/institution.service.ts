@@ -1,16 +1,13 @@
-import { Injectable } from '@angular/core';
-import { Volunteer, Institution } from '@wir-vs-virus/api-interfaces';
-import { Observable, of } from 'rxjs';
-import { delay } from 'rxjs/operators';
 import { HttpClient } from '@angular/common/http';
+import { Injectable } from '@angular/core';
+import { Institution } from '@wir-vs-virus/api-interfaces';
+import { Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
 })
 export class InstitutionService {
   constructor(private http: HttpClient) {}
-
-  private useMockData = false;
 
   public getAll(
     searchTerm: string,
