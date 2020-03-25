@@ -58,3 +58,20 @@ span.mat-checkbox-label {
   letter-spacing: 0.25px;
   color: #757575;
 }
+
+.qualifications-dialog {
+  width: 480px;
+
+  @media (max-width: $breakpoint-md) {
+    width: 100%;
+  }
+
+  h1 {
+    font-size: 20px;
+  }
+
+  button {
+    text-transform: uppercase;
+    color: $primary;
+  }
+}

@@ -5,7 +5,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { FaqComponent } from '../faq/faq.component';
 import { HeaderComponent } from '../header/header.component';
-import { HomeComponent } from '../home/home.component';
+import { HomeComponent, QualificationsDialogComponent } from '../home/home.component';
 import { InstitutionListComponent } from '../home/institution-list/institution-list.component';
 import { VolunteerCardComponent } from '../home/volunteer-card/volunteer-card.component';
 import { VolunteerListComponent } from '../home/volunteer-list/volunteer-list.component';
@@ -35,7 +35,8 @@ import { RegisterInstitutionSuccessComponent } from './register-institution-succ
     ImprintComponent,
     PrivacyComponent,
     RegisterVolunteerSuccessComponent,
-    RegisterInstitutionSuccessComponent
+    RegisterInstitutionSuccessComponent,
+    QualificationsDialogComponent,
   ],
   imports: [
     BrowserModule,
@@ -47,6 +48,7 @@ import { RegisterInstitutionSuccessComponent } from './register-institution-succ
     SharedModule,
   ],
   providers: [],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
+  entryComponents: [HomeComponent, QualificationsDialogComponent]
 })
 export class AppModule {}
