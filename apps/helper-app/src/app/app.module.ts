@@ -18,6 +18,7 @@ import { RegisterInstitutionComponent } from './register-institution/register-in
 import { RegisterVolunteerSuccessComponent } from './register-volunteer-success/register-volunteer-success.component';
 import { RegisterVolunteerComponent } from './register-volunteer/register-volunteer.component';
 import { SharedModule } from './shared/shared.module';
+import { RegisterInstitutionSuccessComponent } from './register-institution-success/register-institution-success.component';
 
 @NgModule({
   declarations: [
@@ -33,7 +34,8 @@ import { SharedModule } from './shared/shared.module';
     HeaderComponent,
     ImprintComponent,
     PrivacyComponent,
-    RegisterVolunteerSuccessComponent
+    RegisterVolunteerSuccessComponent,
+    RegisterInstitutionSuccessComponent
   ],
   imports: [
     BrowserModule,
