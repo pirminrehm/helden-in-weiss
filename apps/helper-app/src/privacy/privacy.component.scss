@@ -1,18 +1,1 @@
 @import 'variables';
-
-.container {
-  display: flex;
-  justify-content: center;
-  padding: 4 * $basic-spacer;
-
-  .content-area {
-    width: 100%;
-    max-width: $breakpoint-lg;
-    margin-top: 4 * $basic-spacer;
-
-    @media (max-width: $breakpoint-md) {
-      flex-direction: column;
-      margin-top: $basic-spacer;
-    }
-  }
-}
