@@ -28,3 +28,22 @@ button {
   line-height: 1.14;
   letter-spacing: 1.25px;
 }
+
+.mat-checkbox-inner-container {
+  margin: 0 1rem 0 0 !important;
+}
+
+.mat-checkbox-layout {
+  white-space: normal !important;
+  margin-bottom: 1rem;
+}
+
+.mat-checkbox-background,
+.mat-checkbox-frame {
+  top: 5px !important;
+  bottom: -5px !important;
+}
+
+.mat-checkbox .mat-checkbox-ripple {
+  top: calc(50% - 15px) !important;
+}

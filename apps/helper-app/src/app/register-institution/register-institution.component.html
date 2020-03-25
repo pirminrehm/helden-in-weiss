@@ -109,6 +109,18 @@
       anschließend automatisch entfernt
     </wir-vs-virus-info-box>
 
+    <mat-checkbox color="primary" formControlName="agreePrivacy"
+      >Mit Betätigung des "Anfrage Online stellen" Knopfes erkläre ich meine
+      Einwilligung in die Verarbeitung meiner Daten gemäß der
+      datenschutzrechtlichen Einwilligungserklärung. Ich erkläre mich
+      einverstanden, per E-Mail kontaktiert zu werden. Mit der Kontaktaufnahme
+      nehme ich die Datenschutzerklärung zur Kenntnis.</mat-checkbox
+    >
+
+    <mat-error *ngIf="showPrivacyError"
+      >Sie müssen der Datenschutzerklärung zustimmen</mat-error
+    >
+
     <button
       class="submit-button"
       type="submit"

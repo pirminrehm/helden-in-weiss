@@ -1,10 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
-
-import { InstitutionService } from '../../services/institution.service';
-
-import { zipCodeRegExp, phoneRegExp } from '../common/utils';
+import { Router } from '@angular/router';
 import { customErrorCodes, Institution } from '@wir-vs-virus/api-interfaces';
+import { InstitutionService } from '../../services/institution.service';
+import { phoneRegExp, zipCodeRegExp } from '../common/utils';
 
 @Component({
   selector: 'wir-vs-virus-register-institution',
@@ -12,6 +11,7 @@ import { customErrorCodes, Institution } from '@wir-vs-virus/api-interfaces';
   styleUrls: ['./register-institution.component.scss']
 })
 export class RegisterInstitutionComponent implements OnInit {
+  showPrivacyError = false;
   institutionForm = new FormGroup({
     institutionName: new FormControl('', [
       Validators.required,
@@ -37,22 +37,18 @@ export class RegisterInstitutionComponent implements OnInit {
       Validators.required,
       Validators.email,
       Validators.maxLength(70)
-    ])
+    ]),
+    agreePrivacy: new FormControl(false, Validators.requiredTrue)
   });
-  constructor(private institutionService: InstitutionService) {}
+  constructor(
+    private institutionService: InstitutionService,
+    private router: Router
+  ) {}
 
-  ngOnInit(): void {
-    // this.institutionForm.setValue({
-    //   institutionName: 'tessdt',
-    //   zipCode: 12345,
-    //   description: 'test',
-    //   contactName: 'test',
-    //   contactPhone: '123213123',
-    //   contactMail: 'test@sdafasdf'
-    // });
-  }
+  ngOnInit(): void {}
 
   onSubmit() {
+    this.showPrivacyError = !!this.institutionForm.get('agreePrivacy').errors;
     if (!this.institutionForm.valid) {
       return;
     }
@@ -75,7 +71,7 @@ export class RegisterInstitutionComponent implements OnInit {
     this.institutionService.create(institution).subscribe(
       res => {
         console.log(res);
-        alert('success');
+        this.router.navigate(['/register-institution/success']);
       },
       err => {
         console.error(err);
