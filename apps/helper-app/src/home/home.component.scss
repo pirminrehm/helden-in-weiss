@@ -246,7 +246,8 @@ input[type='number'] {
         }
       }
 
-      .color-red {
+      a.color-red {
+        cursor: pointer;
         color: $accent;
       }
     }
@@ -283,19 +284,12 @@ input[type='number'] {
     flex-grow: 1;
     font-weight: 500;
     display: inline-block;
-    // height: 28px;
-    // margin: $basic-spacer 0;
     box-shadow: $shadow-1;
     background-color: white;
 
     &:first-child {
       text-align: right;
     }
-
-    // alles passt
-    // alles passt
-    // alles passt
-    // alles passt
 
     &.bg-blue {
       background-color: $primary;
@@ -307,4 +301,8 @@ input[type='number'] {
       color: white;
     }
   }
+}
+
+.mat-dialog-actions {
+  justify-content: flex-end;
 }

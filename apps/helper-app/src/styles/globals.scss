@@ -22,3 +22,11 @@
 a:hover {
   color: $primary;
 }
+
+.qualifications-dialog {
+  width: 480px;
+
+  @media(max-width: $breakpoint-md) {
+    width: 100%;
+  }
+}
