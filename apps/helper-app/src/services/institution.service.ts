@@ -39,7 +39,7 @@ export class InstitutionService {
   // }
 
   public create(institution: Institution) {
-    return this.http.post<Institution[]>('/api/volunteer', institution);
+    return this.http.post<Institution[]>('/api/institution', institution);
   }
 
   private getMockData() {
