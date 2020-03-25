@@ -6,7 +6,9 @@ import {
   Logger,
   Query,
   HttpException,
-  HttpStatus
+  HttpStatus,
+  UsePipes,
+  ValidationPipe
 } from '@nestjs/common';
 import { Volunteer } from '@wir-vs-virus/api-interfaces';
 import { DatabaseService } from '../services/database.service';
@@ -54,6 +56,7 @@ export class VolunteerController {
   }
 
   @Post()
+  @UsePipes(new ValidationPipe({ transform: true }))
   async createVolunteer(@Body() volunteer: Volunteer) {
     const zipcode = volunteer.zipcode;
     let locationData: Location;

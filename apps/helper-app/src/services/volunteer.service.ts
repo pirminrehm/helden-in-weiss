@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Volunteer } from '@wir-vs-virus/api-interfaces';
+import { Volunteer, CreateVolunteerDto } from '@wir-vs-virus/api-interfaces';
 import { Observable, of } from 'rxjs';
 import { delay } from 'rxjs/operators';
 import { HttpClient } from '@angular/common/http';
@@ -18,15 +18,15 @@ export class VolunteerService {
     radius: number
   ): Observable<Volunteer[]> {
     if (this.useMockData) {
-      return this.getMockData();
+      // return this.getMockData();
     }
     return this.http.get<Volunteer[]>(
       `/api/volunteer?searchTerm=${searchTerm}&zipcode=${zipCode}&radius=${radius}`
     );
   }
 
-  public create(volunteer: Volunteer) {
-    return this.http.post<Volunteer[]>('/api/volunteer', volunteer);
+  public create(volunteer: CreateVolunteerDto) {
+    return this.http.post<CreateVolunteerDto[]>('/api/volunteer', volunteer);
   }
 
   private getMockData() {
