@@ -64,7 +64,7 @@ export class HomeComponent implements OnInit {
 @Component({
   selector: 'wir-vs-virus-qualifications-dialog',
   template: `
-    <h1 mat-dialog-title>Welche Fähigkeiten werden benötigt?</h1>
+    <h1 tabindex="0" mat-dialog-title>Welche Fähigkeiten werden benötigt?</h1>
     <div mat-dialog-content>
       <p>
         HELDEN IN WEISS konzentriert sich auf die Vermittlung von medizinisch

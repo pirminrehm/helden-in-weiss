@@ -29,4 +29,9 @@ a:hover {
   @media(max-width: $breakpoint-md) {
     width: 100%;
   }
+
+  button {
+    text-transform: uppercase;
+    color: $primary;
+  }
 }
