@@ -1,18 +1,18 @@
-import { Module, HttpModule } from '@nestjs/common';
-import { MongooseModule } from '@nestjs/mongoose';
+import { HttpModule, Module } from '@nestjs/common';
 import { ConfigModule } from '@nestjs/config';
+import { MongooseModule } from '@nestjs/mongoose';
 import { ServeStaticModule } from '@nestjs/serve-static';
 import { join } from 'path';
-
-import { AppController } from './app.controller';
-import { VolunteerController } from '../volunteer/volunteer.controller';
+import { ContactController } from '../contact/contact.controller';
 import { InstitutionController } from '../institution/institution.controller';
+import { InstitutionSchema } from '../institution/institution.schema';
 import { DatabaseService } from '../services/database.service';
 import { LocationService } from '../services/location/location.service';
-import { VolunteerSchema } from '../volunteer/volunteer.schema';
-import { InstitutionSchema } from '../institution/institution.schema';
 import { MailService } from '../services/mail/mail.service';
-import { ContactController } from '../contact/contact.controller';
+import { RecaptchaService } from '../services/recaptcha/recaptcha.service';
+import { VolunteerController } from '../volunteer/volunteer.controller';
+import { VolunteerSchema } from '../volunteer/volunteer.schema';
+import { AppController } from './app.controller';
 
 @Module({
   imports: [
@@ -29,12 +29,7 @@ import { ContactController } from '../contact/contact.controller';
       rootPath: join(__dirname, '..', 'helper-app')
     })
   ],
-  controllers: [
-    AppController,
-    VolunteerController,
-    InstitutionController,
-    ContactController
-  ],
-  providers: [DatabaseService, LocationService, MailService]
+  controllers: [AppController, VolunteerController, InstitutionController, ContactController],
+  providers: [DatabaseService, LocationService, RecaptchaService, MailService]
 })
 export class AppModule {}

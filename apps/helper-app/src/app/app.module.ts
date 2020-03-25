@@ -3,6 +3,7 @@ import { NgModule } from '@angular/core';
 import { ReactiveFormsModule } from '@angular/forms';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { RecaptchaFormsModule, RecaptchaModule, RecaptchaSettings, RECAPTCHA_SETTINGS } from 'ng-recaptcha';
 import { FaqComponent } from '../faq/faq.component';
 import { HeaderComponent } from '../header/header.component';
 import { HomeComponent, QualificationsDialogComponent } from '../home/home.component';
@@ -14,11 +15,11 @@ import { MaterialModule } from '../material/material.module';
 import { PrivacyComponent } from '../privacy/privacy.component';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
+import { RegisterInstitutionSuccessComponent } from './register-institution-success/register-institution-success.component';
 import { RegisterInstitutionComponent } from './register-institution/register-institution.component';
 import { RegisterVolunteerSuccessComponent } from './register-volunteer-success/register-volunteer-success.component';
 import { RegisterVolunteerComponent } from './register-volunteer/register-volunteer.component';
 import { SharedModule } from './shared/shared.module';
-import { RegisterInstitutionSuccessComponent } from './register-institution-success/register-institution-success.component';
 
 @NgModule({
   declarations: [
@@ -45,9 +46,18 @@ import { RegisterInstitutionSuccessComponent } from './register-institution-succ
     BrowserAnimationsModule,
     MaterialModule,
     AppRoutingModule,
+    RecaptchaModule,
+    RecaptchaFormsModule,
     SharedModule,
   ],
-  providers: [],
+  providers: [
+    {
+      provide: RECAPTCHA_SETTINGS,
+      useValue: {
+        siteKey: '6Le92eMUAAAAAEDD70XEc2agv0OVTwWEFzJYkkDm'
+      } as RecaptchaSettings
+    }
+  ],
   bootstrap: [AppComponent],
   entryComponents: [HomeComponent, QualificationsDialogComponent]
 })
