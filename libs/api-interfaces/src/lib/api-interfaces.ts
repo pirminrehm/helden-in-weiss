@@ -15,6 +15,7 @@ export interface Volunteer {
   };
   active?: Boolean;
   registeredAt?: string;
+  recaptcha: string;
 }
 
 export interface Institution {
