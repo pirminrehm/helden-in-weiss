@@ -47,3 +47,14 @@ button {
 .mat-checkbox .mat-checkbox-ripple {
   top: calc(50% - 15px) !important;
 }
+
+span.mat-checkbox-label {
+  font-family: Roboto;
+  font-size: 14px;
+  font-weight: normal;
+  font-stretch: normal;
+  font-style: normal;
+  line-height: 1.43;
+  letter-spacing: 0.25px;
+  color: #757575;
+}
