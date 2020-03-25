@@ -8,7 +8,9 @@
   <h1 class="title">Suchen Sie Hilfe für Ihre Einrichtung</h1>
 
   <p class="description">
-    Um eine Anzeige online zu stellen, füllen Sie bitte folgende Felder aus. Beschreiben Sie für Helfer möglichst genau, bei welchen Tätigkeiten Sie Unterstützung suchen.
+    Um eine Anzeige online zu stellen, füllen Sie bitte folgende Felder aus.
+    Beschreiben Sie für Helfer möglichst genau, bei welchen Tätigkeiten Sie
+    Unterstützung suchen.
   </p>
 
   <form [formGroup]="institutionForm" (ngSubmit)="onSubmit()">
@@ -102,13 +104,10 @@
         >E-Mail Adresse ist erforderlich</mat-error
       >
     </mat-form-field>
-    <div class="alert">
-      <img src="/assets/info-24px.svg" />
-      <div>
-        Ihre Anzeige ist für 30 Tage gültig und wird aus Datenschutzgründen
-        anschließend automatisch entfernt
-      </div>
-    </div>
+    <wir-vs-virus-info-box>
+      Ihre Anzeige ist für 30 Tage gültig und wird aus Datenschutzgründen
+      anschließend automatisch entfernt
+    </wir-vs-virus-info-box>
 
     <button
       class="submit-button"
