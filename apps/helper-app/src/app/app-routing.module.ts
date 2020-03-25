@@ -8,6 +8,7 @@ import { RegisterVolunteerComponent } from './register-volunteer/register-volunt
 import { FaqComponent } from '../faq/faq.component';
 import { ImprintComponent } from '../imprint/imprint.component';
 import { PrivacyComponent } from '../privacy/privacy.component';
+import { RegisterVolunteerSuccessComponent } from './register-volunteer-success/register-volunteer-success.component';
 
 const routes: Routes = [
   // use this as default route for demo
@@ -24,6 +25,8 @@ const routes: Routes = [
   { path: 'faq', component: FaqComponent, data: { title: 'FAQ' } },
   { path: 'register-volunteer', component: RegisterVolunteerComponent, data: { title: 'Helfer registrieren' } },
   { path: 'register-institution', component: RegisterInstitutionComponent, data: { title: 'Institution registrieren' } },
+  { path: 'register-volunteer/success', component: RegisterVolunteerSuccessComponent, data: { title: 'Helfer registrieren' } },
+  { path: 'register-institution/success', component: RegisterVolunteerSuccessComponent, data: { title: 'Institution registrieren' } },
   { path: 'imprint', component: ImprintComponent, data: { title: 'Impressum' } },
   { path: 'privacy', component: PrivacyComponent, data: { title: 'Datenschutz' } }
 ];
