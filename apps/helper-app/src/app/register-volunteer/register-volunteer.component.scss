@@ -81,6 +81,6 @@ input[type='submit'] {
 }
 
 re-captcha {
-  margin: 1rem 0;
+  margin: 2*$basic-spacer 0;
   display: block;
 }
