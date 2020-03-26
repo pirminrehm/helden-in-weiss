@@ -5,17 +5,15 @@
 
 trigger: [master, develop]
 
+pr:
+  autoCancel: true # additional pushes to a PR cancel in-progress runs
+  branches:
+    include:
+    - feature/*
+    
 variables:
-
   # Azure Resource Manager connection created during pipeline creation
   azureSubscription: 'df6cb254-c8ee-472f-853a-dfaae5783270'
-  
-  # Web app name
-  webAppName: 'helden-in-weiss-test'
-  
-  # Environment name
-  environmentName: 'helden-in-weiss-test'
-
   # Agent VM image name
   vmImageName: 'ubuntu-latest'
 
