@@ -3,6 +3,7 @@
 mat-card {
   margin-bottom: 20px;
   border-radius: 8px;
+  padding: 24px 20px 20px 20px;
 
   .card-header {
     display: flex;
@@ -26,6 +27,8 @@ mat-card {
         text-align: right;
         margin-left: auto;
         min-width: 70px;
+        font-size: 14px;
+        color: rgba(0, 0, 0, 0.54);
       }
     }
   }
@@ -64,6 +67,7 @@ mat-card {
             transition: none !important;
             white-space: nowrap;
             overflow: hidden;
+            text-overflow: ellipsis;
           }
           // disable hover effect on chip
           .mat-standard-chip {
@@ -79,6 +83,12 @@ mat-card {
   }
 }
 
+.mat-chip.mat-standard-chip.mat-chip-disabled {
+  opacity: 1;
+  text-overflow: ellipsis;
+  min-height: 28px;
+}
+
 .mat-standard-chip {
   border-radius: 4px;
   padding: 2px 12px;
@@ -91,7 +101,7 @@ mat-expansion-panel {
   padding-top: 8px;
 
   mat-expansion-panel-header {
-    padding: 0 !important;
+    padding: 0 8px 0 0 !important;
     font-size: 14px;
     font-weight: 500;
 
