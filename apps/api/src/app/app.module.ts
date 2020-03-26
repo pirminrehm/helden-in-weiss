@@ -29,7 +29,12 @@ import { AppController } from './app.controller';
       rootPath: join(__dirname, '..', 'helper-app')
     })
   ],
-  controllers: [AppController, VolunteerController, InstitutionController, ContactController],
+  controllers: [
+    AppController,
+    VolunteerController,
+    InstitutionController,
+    ContactController
+  ],
   providers: [DatabaseService, LocationService, RecaptchaService, MailService]
 })
 export class AppModule {}

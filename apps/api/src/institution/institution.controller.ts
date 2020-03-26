@@ -1,19 +1,18 @@
 import {
+  Body,
   Controller,
   Get,
-  Post,
-  Body,
-  Logger,
-  Query,
-  HttpService,
   HttpException,
-  HttpStatus
+  HttpStatus,
+  Logger,
+  Post,
+  Query
 } from '@nestjs/common';
-import { Institution, customErrorCodes } from '@wir-vs-virus/api-interfaces';
-import { DatabaseService } from '../services/database.service';
-import { LocationService } from '../services/location/location.service';
-import { Location } from '../services/location/location.interface';
+import { customErrorCodes, Institution } from '@wir-vs-virus/api-interfaces';
 import { removeMongoIdFromArray } from '../common/utils';
+import { DatabaseService } from '../services/database.service';
+import { Location } from '../services/location/location.interface';
+import { LocationService } from '../services/location/location.service';
 import { RecaptchaService } from '../services/recaptcha/recaptcha.service';
 
 @Controller('institution')
@@ -21,8 +20,7 @@ export class InstitutionController {
   constructor(
     private readonly databaseService: DatabaseService,
     private readonly locationService: LocationService,
-    private readonly recaptchaService: RecaptchaService,
-    private readonly httpservice: HttpService
+    private readonly recaptchaService: RecaptchaService
   ) {}
 
   @Get()

@@ -9,6 +9,7 @@ import { Observable } from 'rxjs';
 import { first, map, startWith } from 'rxjs/operators';
 import { VolunteerService } from '../../services/volunteer.service';
 import { phoneRegExp, zipCodeRegExp } from '../common/utils';
+import { RecaptchaComponent } from 'ng-recaptcha';
 
 @Component({
   selector: 'wir-vs-virus-register-volunteer',
@@ -39,7 +40,11 @@ export class RegisterVolunteerComponent implements OnInit {
     ]),
     qualifications: new FormControl(''),
     agreePrivacy: new FormControl(false, Validators.requiredTrue),
+    recaptcha: new FormControl(null, [Validators.required]),
   });
+
+  @ViewChild(RecaptchaComponent)
+  captchaRef: RecaptchaComponent;
 
   @ViewChild('qualificationInput') qualificationInput: ElementRef<
     HTMLInputElement
@@ -68,23 +73,10 @@ export class RegisterVolunteerComponent implements OnInit {
           qualification ? this._filter(qualification) : this.allQualifications.slice()
         )
       );
-
-    // this.volunteerForm.setValue({
-    //   name: 'test name',
-    //   zipCode: 70569,
-    //   knowledge: 'asdfsfadsdfdsaf',
-    //   phone: 3231231213,
-    //   mail: 'mail@mail',
-    //   qualifications: ['Quali1', 'Qali2']
-    // });
   }
 
   onSubmit() {
-    // if () {
-    //   this.volunteerForm.get('qualifications').setErrors({ required: true });
-    // } else {
-    //   this.volunteerForm.get('qualifications').();
-    // }
+    this.volunteerForm.get('recaptcha').markAllAsTouched();
     this.showPrivacyError = !!this.volunteerForm.get('agreePrivacy').errors;
     if (!this.volunteerForm.valid || this.qualifications.length === 0) {
       return;
@@ -105,7 +97,8 @@ export class RegisterVolunteerComponent implements OnInit {
       title: '--',
       zipcode: val.zipCode,
       active: true,
-      registeredAt: new Date().toISOString()
+      registeredAt: new Date().toISOString(),
+      recaptcha: val.recaptcha,
     };
 
     this.volunteerService.create(volunteer).pipe(first()).subscribe(
@@ -114,14 +107,22 @@ export class RegisterVolunteerComponent implements OnInit {
         this.router.navigate(['/register-volunteer/success']);
       },
       err => {
-        console.error(err);
-        if (err.error.message === customErrorCodes.ZIP_NOT_FOUND) {
-          // this.institutionForm.get('zipCode').setErrors({ incorrect: true });
-          this.volunteerForm.get('zipCode').setErrors({
-            notExists: true
-          });
-        } else {
-          alert('Etwas ist schief gelaufen');
+        console.error(err.error.message);
+        this.captchaRef.reset();
+
+        switch (err.error.message) {
+          case customErrorCodes.ZIP_NOT_FOUND:
+            this.volunteerForm.get('zipCode').setErrors({
+              notExists: true
+            });
+            break;
+
+          case customErrorCodes.CAPTCHA_NOT_FOUND:
+            break;
+
+          default:
+            alert('Etwas ist schief gelaufen, versuchs später nochmal.');
+            break;
         }
       }
     );

@@ -139,6 +139,16 @@
       ></mat-checkbox
     >
 
+    <re-captcha resolved="" formControlName="recaptcha" #captchaRef="reCaptcha">
+    </re-captcha>
+    <mat-error
+      *ngIf="
+        volunteerForm.get('recaptcha').errors &&
+        volunteerForm.get('recaptcha').touched
+      "
+      >Bitte bestätigen Sie, dass Sie kein Roboter sind</mat-error
+    >
+
     <button
       class="submit-button"
       type="submit"

@@ -40,8 +40,8 @@ export class RegisterInstitutionComponent implements OnInit {
       Validators.email,
       Validators.maxLength(70)
     ]),
+    agreePrivacy: new FormControl(false, Validators.requiredTrue),
     recaptcha: new FormControl(null, [Validators.required]),
-    agreePrivacy: new FormControl(false, Validators.requiredTrue)
   });
 
   @ViewChild(RecaptchaComponent)

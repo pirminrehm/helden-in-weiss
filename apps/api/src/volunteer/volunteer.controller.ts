@@ -1,25 +1,26 @@
 import {
+  Body,
   Controller,
   Get,
-  Post,
-  Body,
-  Logger,
-  Query,
   HttpException,
-  HttpStatus
+  HttpStatus,
+  Logger,
+  Post,
+  Query
 } from '@nestjs/common';
-import { Volunteer } from '@wir-vs-virus/api-interfaces';
-import { DatabaseService } from '../services/database.service';
-
+import { customErrorCodes, Volunteer } from '@wir-vs-virus/api-interfaces';
 import { removeMongoIdFromArray } from '../common/utils';
-import { LocationService } from '../services/location/location.service';
+import { DatabaseService } from '../services/database.service';
 import { Location } from '../services/location/location.interface';
+import { LocationService } from '../services/location/location.service';
+import { RecaptchaService } from '../services/recaptcha/recaptcha.service';
 
 @Controller('volunteer')
 export class VolunteerController {
   constructor(
     private readonly databaseService: DatabaseService,
-    private readonly locationService: LocationService
+    private readonly locationService: LocationService,
+    private readonly recaptchaService: RecaptchaService
   ) {}
 
   @Get()
@@ -57,6 +58,9 @@ export class VolunteerController {
   async createVolunteer(@Body() volunteer: Volunteer) {
     const zipcode = volunteer.zipcode;
     let locationData: Location;
+
+    await this.validateCaptcha(volunteer.recaptcha);
+
     try {
       locationData = await this.locationService.getLocationInfoByZipcode(
         zipcode
@@ -72,5 +76,16 @@ export class VolunteerController {
     volunteer.city = locationData.city;
     Logger.log(volunteer);
     return await this.databaseService.saveVolunteer(volunteer);
+  }
+
+  async validateCaptcha(captcha) {
+    const validation = await this.recaptchaService.validate(captcha);
+    if (!validation.success) {
+      Logger.warn(validation.message);
+      throw new HttpException(
+        customErrorCodes.CAPTCHA_NOT_FOUND,
+        HttpStatus.BAD_REQUEST
+      );
+    }
   }
 }
