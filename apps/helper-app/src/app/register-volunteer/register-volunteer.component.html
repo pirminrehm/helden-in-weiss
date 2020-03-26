@@ -154,7 +154,9 @@
       type="submit"
       mat-raised-button
       color="primary"
+      [disabled]="sendingRequest"
     >
+      <mat-icon *ngIf="sendingRequest"><mat-spinner diameter="20" color="primary"> </mat-spinner></mat-icon>
       Hilfsangebot online stellen
     </button>
   </form>
