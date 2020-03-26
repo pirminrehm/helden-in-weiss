@@ -126,7 +126,7 @@ input[type='number'] {
       font-size: 18px;
       letter-spacing: 0.1px;
       font-family: Roboto;
-      color: #1f1f1f;
+      color: #212121;
 
       strong {
         font-weight: 700;
@@ -160,7 +160,7 @@ input[type='number'] {
 .container {
   display: flex;
   justify-content: center;
-  padding: 4 * $basic-spacer;
+  padding: 2 * $basic-spacer;
 
   .content-area {
     width: 100%;

@@ -19,33 +19,12 @@ mat-card {
       // font-weight: 500;
 
       .title {
-        width: 50%;
         padding-right: 2 * $basic-spacer;
       }
 
-      .zipcode {
-        width: 35%;
-        padding-right: 8px;
-        overflow: hidden;
-        white-space: nowrap;
-        text-overflow: ellipsis;
-
-        .city {
-          // text-overflow: ellipsis;
-          overflow: hidden;
-          position: relative;
-        }
-
-        .zip {
-          font-size: 12px;
-          letter-spacing: 0.4px;
-          color: $text-subdude;
-        }
-      }
-
       .date {
-        width: 15%;
         text-align: right;
+        margin-left: auto;
         min-width: 70px;
       }
     }
@@ -100,6 +79,12 @@ mat-card {
   }
 }
 
+.mat-standard-chip {
+  border-radius: 4px;
+  padding: 2px 12px;
+  background-color: #e8eaed;
+}
+
 mat-expansion-panel {
   margin-top: 1rem;
   border-top: 1px solid #eee;
@@ -107,13 +92,20 @@ mat-expansion-panel {
 
   mat-expansion-panel-header {
     padding: 0rem 1rem 0 0;
-    font-size: 16px;
+    font-size: 14px;
+    font-weight: 500;
 
     mat-icon.mat-icon {
       color: $primary;
       margin-right: 1rem;
       line-height: 19px;
     }
+  }
+}
+
+@media (max-width: $breakpoint-xs) {
+  ::ng-deep .mat-expansion-panel-body {
+    padding: 0 0px 16px 0px !important;
   }
 }
 
@@ -124,4 +116,8 @@ mat-form-field.mat-form-field {
 
 .send-mail-button {
   text-transform: uppercase;
+}
+
+.muted {
+  color: #757575
 }
