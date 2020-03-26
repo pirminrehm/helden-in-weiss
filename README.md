@@ -68,7 +68,3 @@ What's next for Helden in Weiß
   1. `nx serve helper-app` (frontend)
   2. `nx serve api` (backend)
 - go to http://localhost:4200/
-
-##### Status
-
-<img src="https://dev.azure.com/pirminrehm/helden-in-weiss/_apis/build/status/pirminrehm.helden-in-weiss?branchName=master" />
