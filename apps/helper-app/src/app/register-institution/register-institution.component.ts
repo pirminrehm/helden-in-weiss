@@ -48,6 +48,7 @@ export class RegisterInstitutionComponent implements OnInit {
   captchaRef: RecaptchaComponent;
 
   sendingRequest = false;
+  errorMessages: { target; value; property; children; constraints }[] = [];
 
   constructor(
     private institutionService: InstitutionService,
@@ -66,16 +67,13 @@ export class RegisterInstitutionComponent implements OnInit {
     console.log(this.institutionForm.value);
     const val = this.institutionForm.value;
     const institution: Institution = {
-      city: '--',
       contact: {
-        email: val.contactMail,
-        firstname: '--',
         name: val.contactName,
-        phone: val.contactPhone
+        email: val.contactMail,
+        phone: val.contactPhone,
       },
       description: val.description,
       name: val.institutionName,
-      title: '--',
       zipcode: val.zipCode,
       recaptcha: val.recaptcha,
       privacyAccepted: val.agreePrivacy,
@@ -93,6 +91,7 @@ export class RegisterInstitutionComponent implements OnInit {
         err => {
           this.sendingRequest = false;
           console.error(err.error.message);
+          this.errorMessages = err.error.message;
           this.captchaRef.reset();
 
           switch (err.error.message) {
@@ -106,7 +105,6 @@ export class RegisterInstitutionComponent implements OnInit {
               break;
 
             default:
-              alert('Etwas ist schief gelaufen, versuchs später nochmal.');
               break;
           }
         }

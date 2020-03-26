@@ -8,12 +8,13 @@ import {
   Post,
   Query
 } from '@nestjs/common';
-import { customErrorCodes, Institution } from '@wir-vs-virus/api-interfaces';
 import { removeMongoIdFromArray } from '../common/utils';
 import { DatabaseService } from '../services/database.service';
 import { Location } from '../services/location/location.interface';
 import { LocationService } from '../services/location/location.service';
 import { RecaptchaService } from '../services/recaptcha/recaptcha.service';
+import { Institution } from './institution.dto';
+import { customErrorCodes } from '@wir-vs-virus/api-interfaces';
 
 @Controller('institution')
 export class InstitutionController {

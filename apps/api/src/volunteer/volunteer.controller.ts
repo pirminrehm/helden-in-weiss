@@ -8,12 +8,13 @@ import {
   Post,
   Query
 } from '@nestjs/common';
-import { customErrorCodes, Volunteer } from '@wir-vs-virus/api-interfaces';
+import { customErrorCodes } from '@wir-vs-virus/api-interfaces';
 import { removeMongoIdFromArray } from '../common/utils';
 import { DatabaseService } from '../services/database.service';
 import { Location } from '../services/location/location.interface';
 import { LocationService } from '../services/location/location.service';
 import { RecaptchaService } from '../services/recaptcha/recaptcha.service';
+import { Volunteer } from './volunteer.dto';
 
 @Controller('volunteer')
 export class VolunteerController {
