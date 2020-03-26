@@ -39,7 +39,7 @@ mat-card {
     }
 
     .description {
-      margin: 8px 0 16px;
+      margin: 16px 0 16px;
     }
 
     .details {
@@ -101,6 +101,10 @@ mat-expansion-panel {
       line-height: 19px;
     }
   }
+}
+
+.mat-expansion-panel-header:hover {
+  background: none !important;
 }
 
 @media (max-width: $breakpoint-xs) {

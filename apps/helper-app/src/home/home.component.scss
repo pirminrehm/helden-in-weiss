@@ -208,7 +208,7 @@ input[type='number'] {
         height: 80px;
         margin: 16px 0;
         border-radius: $border-radius;
-        padding: $basic-spacer * 2;
+        padding: 16px 0 16px 16px;
         background-color: $primary;
         display: flex;
         flex-direction: row;
