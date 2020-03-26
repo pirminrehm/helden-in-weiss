@@ -9,7 +9,7 @@ import {
   Query
 } from '@nestjs/common';
 import { customErrorCodes, Volunteer } from '@wir-vs-virus/api-interfaces';
-import { removeMongoIdFromArray } from '../common/utils';
+import { removeMongoIdFromArray, createUuid } from '../common/utils';
 import { DatabaseService } from '../services/database.service';
 import { Location } from '../services/location/location.interface';
 import { LocationService } from '../services/location/location.service';
@@ -74,6 +74,8 @@ export class VolunteerController {
       coordinates: locationData.coordinates
     };
     volunteer.city = locationData.city;
+    volunteer.privateUuid = createUuid();
+    volunteer.publicUuid = createUuid();
     Logger.log(volunteer);
     return await this.databaseService.saveVolunteer(volunteer);
   }

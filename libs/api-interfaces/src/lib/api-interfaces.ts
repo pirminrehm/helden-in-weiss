@@ -1,4 +1,6 @@
 export interface Volunteer {
+  privateUuid?: string;
+  publicUuid?: string;
   title: string;
   name: string;
   firstname: string;
@@ -20,6 +22,8 @@ export interface Volunteer {
 }
 
 export interface Institution {
+  privateUuid?: string;
+  publicUuid?: string;
   name: string;
   zipcode: number;
   city: string;

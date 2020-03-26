@@ -9,7 +9,7 @@ import {
   Query
 } from '@nestjs/common';
 import { customErrorCodes, Institution } from '@wir-vs-virus/api-interfaces';
-import { removeMongoIdFromArray } from '../common/utils';
+import { removeMongoIdFromArray, createUuid } from '../common/utils';
 import { DatabaseService } from '../services/database.service';
 import { Location } from '../services/location/location.interface';
 import { LocationService } from '../services/location/location.service';
@@ -75,6 +75,8 @@ export class InstitutionController {
       coordinates: locationData.coordinates
     };
     institution.city = locationData.city;
+    institution.privateUuid = createUuid();
+    institution.publicUuid = createUuid();
     Logger.log(institution);
     return await this.databaseService.saveInstitution(institution);
   }
