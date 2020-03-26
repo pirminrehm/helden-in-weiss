@@ -15,11 +15,10 @@ input[type='number'] {
 .header {
   width: 100%;
   position: relative;
-  height: 400px;
+  height: 500px;
   background-image: url('/assets/hero.png');
   background-position: center;
   background-repeat: no-repeat;
-  background-color: #373737;
   display: flex;
   justify-content: center;
 
@@ -30,7 +29,7 @@ input[type='number'] {
     width: 100%;
 
     img.app-logo {
-      height: 2rem;
+      height: 2.5rem;
       cursor: pointer;
       outline: 0;
     }
@@ -59,8 +58,8 @@ input[type='number'] {
   .title {
     color: white;
     font-size: 34px;
-    line-height: 47px;
-    margin-top: 4rem;
+    line-height: 46px;
+    margin-top: 5rem;
 
     @media (max-width: $breakpoint-md) {
       font-size: 24px;
