@@ -1,6 +1,8 @@
 import * as mongoose from 'mongoose';
 
 export const InstitutionSchema = new mongoose.Schema({
+  privateUuid: { type: String, required: true },
+  publicUuid: { type: String, required: true },
   name: { type: String, required: true },
   zipcode: { type: Number, required: true },
   city: { type: String, required: true },

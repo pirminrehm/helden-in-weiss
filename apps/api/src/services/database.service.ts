@@ -1,6 +1,7 @@
-import { Injectable } from '@nestjs/common';
+import { Injectable, Logger } from '@nestjs/common';
 import { Volunteer, Institution } from '@wir-vs-virus/api-interfaces';
 import { InjectModel } from '@nestjs/mongoose';
+import * as mongoose from 'mongoose';
 import { Model } from 'mongoose';
 
 @Injectable()
@@ -9,6 +10,7 @@ export class DatabaseService {
     @InjectModel('Volunteer') private volunteerModel: Model<Volunteer>,
     @InjectModel('Institution') private institutionModel: Model<Institution>
   ) {}
+
   async getAllVolunteers(): Promise<Volunteer[]> {
     return this.volunteerModel.find().exec();
   }
