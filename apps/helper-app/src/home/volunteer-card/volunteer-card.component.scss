@@ -87,11 +87,11 @@ mat-card {
 
 mat-expansion-panel {
   margin-top: 1rem;
-  border-top: 1px solid #eee;
-  padding-top: 15px;
+  border-top: 1px solid rgba(0, 0, 0, 0.12);
+  padding-top: 8px;
 
   mat-expansion-panel-header {
-    padding: 0rem 1rem 0 0;
+    padding: 0 !important;
     font-size: 14px;
     font-weight: 500;
 
@@ -107,9 +107,13 @@ mat-expansion-panel {
   background: none !important;
 }
 
+::ng-deep .mat-expansion-panel-body {
+  padding: 0 !important;
+}
+
 @media (max-width: $breakpoint-xs) {
   ::ng-deep .mat-expansion-panel-body {
-    padding: 0 0px 16px 0px !important;
+    padding: 0 !important;
   }
 }
 
