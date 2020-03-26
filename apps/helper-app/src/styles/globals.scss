@@ -75,3 +75,7 @@ span.mat-checkbox-label {
     color: $primary;
   }
 }
+
+mat-chip.mat-chip {
+  height: auto !important;
+}

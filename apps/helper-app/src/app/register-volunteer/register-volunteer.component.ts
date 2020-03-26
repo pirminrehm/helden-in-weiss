@@ -57,6 +57,7 @@ export class RegisterVolunteerComponent implements OnInit {
   filteredQualifications: Observable<string[]>;
   qualifications: string[] = [];
   allQualifications: string[] = this.getQualifications();
+  sendingRequest = false;
 
   constructor(
     private router: Router,
@@ -99,14 +100,17 @@ export class RegisterVolunteerComponent implements OnInit {
       active: true,
       registeredAt: new Date().toISOString(),
       recaptcha: val.recaptcha,
+      privacyAccepted: val.agreePrivacy,
     };
 
+    this.sendingRequest = true;
     this.volunteerService.create(volunteer).pipe(first()).subscribe(
       res => {
         console.log(res);
         this.router.navigate(['/register-volunteer/success']);
       },
       err => {
+        this.sendingRequest = false;
         console.error(err.error.message);
         this.captchaRef.reset();
 

@@ -47,6 +47,8 @@ export class RegisterInstitutionComponent implements OnInit {
   @ViewChild(RecaptchaComponent)
   captchaRef: RecaptchaComponent;
 
+  sendingRequest = false;
+
   constructor(
     private institutionService: InstitutionService,
     private router: Router
@@ -75,9 +77,11 @@ export class RegisterInstitutionComponent implements OnInit {
       name: val.institutionName,
       title: '--',
       zipcode: val.zipCode,
-      recaptcha: val.recaptcha
+      recaptcha: val.recaptcha,
+      privacyAccepted: val.agreePrivacy,
     };
 
+    this.sendingRequest = true;
     this.institutionService
       .create(institution)
       .pipe(first())
@@ -87,6 +91,7 @@ export class RegisterInstitutionComponent implements OnInit {
           this.router.navigate(['/register-institution/success']);
         },
         err => {
+          this.sendingRequest = false;
           console.error(err.error.message);
           this.captchaRef.reset();
 

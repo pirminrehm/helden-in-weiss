@@ -23,5 +23,6 @@ export const VolunteerSchema = new mongoose.Schema({
       type: [Number],
       required: true
     }
-  }
+  },
+  privacyAccepted: { type: Boolean, required: true }
 });
