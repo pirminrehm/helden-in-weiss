@@ -52,6 +52,7 @@
     "@types/request": "^2.48.4",
     "core-js": "^2.5.4",
     "express-rate-limit": "^5.1.1",
+    "helmet": "^3.22.0",
     "mongoose": "^5.9.5",
     "ng-recaptcha": "^5.0.0",
     "reflect-metadata": "^0.1.13",
