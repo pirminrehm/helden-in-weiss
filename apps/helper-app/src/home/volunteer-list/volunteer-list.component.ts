@@ -1,6 +1,6 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { Volunteer, customErrorCodes } from '@wir-vs-virus/api-interfaces';
+import { GetVolunteer, customErrorCodes } from '@wir-vs-virus/api-interfaces';
 import { Observable, Subject } from 'rxjs';
 import { map, takeUntil, tap } from 'rxjs/operators';
 import { VolunteerService } from '../../services/volunteer.service';
@@ -11,8 +11,8 @@ import { VolunteerService } from '../../services/volunteer.service';
   styleUrls: ['./volunteer-list.component.scss']
 })
 export class VolunteerListComponent implements OnInit, OnDestroy {
-  volunteers$: Observable<Volunteer[]>;
-  volunteers: Volunteer[];
+  volunteers$: Observable<GetVolunteer[]>;
+  volunteers: GetVolunteer[];
   loading = true;
   destroyed$ = new Subject();
   errorMessage: string;

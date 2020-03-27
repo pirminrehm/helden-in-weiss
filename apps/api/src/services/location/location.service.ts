@@ -1,7 +1,7 @@
 import { Injectable, Logger } from '@nestjs/common';
 import { customErrorCodes } from '@wir-vs-virus/api-interfaces';
 
-import { Location } from './location.interface';
+import { LocationInfo } from './location.interface';
 import { zipcodeInfos } from './zipcodes-germany';
 
 @Injectable()
@@ -10,7 +10,7 @@ export class LocationService {
 
   private zipInfoMap: string[] = zipcodeInfos.map(zi => zi.fields.plz);
 
-  async getLocationInfoByZipcode(zipcode: number): Promise<Location> {
+  async getLocationInfoByZipcode(zipcode: number): Promise<LocationInfo> {
     const zipInfoIndex = this.zipInfoMap.indexOf(zipcode.toString());
 
     if (zipInfoIndex === -1) {

@@ -41,13 +41,14 @@ export class RegisterInstitutionComponent implements OnInit {
       Validators.maxLength(70)
     ]),
     agreePrivacy: new FormControl(false, Validators.requiredTrue),
-    recaptcha: new FormControl(null, [Validators.required]),
+    recaptcha: new FormControl(null, [Validators.required])
   });
 
   @ViewChild(RecaptchaComponent)
   captchaRef: RecaptchaComponent;
 
   sendingRequest = false;
+  errorMessages: { target; value; property; children; constraints }[] = [];
 
   constructor(
     private institutionService: InstitutionService,
@@ -66,19 +67,16 @@ export class RegisterInstitutionComponent implements OnInit {
     console.log(this.institutionForm.value);
     const val = this.institutionForm.value;
     const institution: Institution = {
-      city: '--',
       contact: {
-        email: val.contactMail,
-        firstname: '--',
         name: val.contactName,
+        email: val.contactMail,
         phone: val.contactPhone
       },
       description: val.description,
       name: val.institutionName,
-      title: '--',
       zipcode: val.zipCode,
       recaptcha: val.recaptcha,
-      privacyAccepted: val.agreePrivacy,
+      privacyAccepted: val.agreePrivacy
     };
 
     this.sendingRequest = true;
@@ -93,6 +91,7 @@ export class RegisterInstitutionComponent implements OnInit {
         err => {
           this.sendingRequest = false;
           console.error(err.error.message);
+          this.errorMessages = err.error.message;
           this.captchaRef.reset();
 
           switch (err.error.message) {
@@ -101,12 +100,13 @@ export class RegisterInstitutionComponent implements OnInit {
                 notExists: true
               });
               break;
-
             case customErrorCodes.CAPTCHA_NOT_FOUND:
               break;
-
             default:
-              alert('Etwas ist schief gelaufen, versuchs später nochmal.');
+              // if an unknow error appears, show user a fallback message
+              alert(
+                'Etwas ist schief gelaufen, versuchen Sie es später nochmal.'
+              );
               break;
           }
         }

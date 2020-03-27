@@ -1,13 +1,12 @@
 import * as mongoose from 'mongoose';
 
 export const VolunteerSchema = new mongoose.Schema({
-  title: { type: String, required: true },
+  privateUuid: { type: String, required: true },
+  publicUuid: { type: String, required: true },
   name: { type: String, required: true },
-  firstname: { type: String, required: true },
   email: { type: String, required: true },
   zipcode: { type: Number, required: true },
   city: { type: String, required: true },
-  age: { type: Number, required: true },
   phone: { type: String, required: true },
   description: String,
   qualification: { type: [String], required: true },

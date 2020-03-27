@@ -6,13 +6,14 @@ import { join } from 'path';
 import { ContactController } from '../contact/contact.controller';
 import { InstitutionController } from '../institution/institution.controller';
 import { InstitutionSchema } from '../institution/institution.schema';
-import { DatabaseService } from '../services/database.service';
+import { InstitutionService } from '../institution/institution.service';
 import { LocationService } from '../services/location/location.service';
 import { MailService } from '../services/mail/mail.service';
 import { RecaptchaService } from '../services/recaptcha/recaptcha.service';
 import { VolunteerController } from '../volunteer/volunteer.controller';
 import { VolunteerSchema } from '../volunteer/volunteer.schema';
 import { AppController } from './app.controller';
+import { VolunteerService } from '../volunteer/volunteer.service';
 
 @Module({
   imports: [
@@ -35,6 +36,12 @@ import { AppController } from './app.controller';
     InstitutionController,
     ContactController
   ],
-  providers: [DatabaseService, LocationService, RecaptchaService, MailService]
+  providers: [
+    InstitutionService,
+    LocationService,
+    RecaptchaService,
+    MailService,
+    VolunteerService
+  ]
 })
 export class AppModule {}
