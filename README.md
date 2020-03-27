@@ -71,3 +71,11 @@ What's next for Helden in Weiß
   1. `nx serve helper-app` (frontend)
   2. `nx serve api` (backend)
 - go to http://localhost:4200/
+
+# Licence:
+
+This Project is liceced under [MIT licence](https://github.com/pirminrehm/helden-in-weiss/blob/master/LICENSE),
+except the file `zipcodes-germany.ts`, which is bascially provide by OpenStreetMap under
+[Open Data Commons Open Database License (ODbL)](https://opendatacommons.org/licenses/odbl/1.0/) and adapted for the software.
+
+© OpenStreetMap-Mitwirkende
