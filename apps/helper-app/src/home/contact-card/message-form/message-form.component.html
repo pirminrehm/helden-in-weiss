@@ -1,0 +1,38 @@
+<form [formGroup]="sendMessageForm" (ngSubmit)="onSubmit()">
+  <mat-form-field appearance="fill">
+    <mat-label>Was möchten Sie dem Helfer mitteilen</mat-label>
+    <textarea
+      matInput
+      placeholder="Was möchten Sie dem Helfer mitteilen"
+      formControlName="message"
+      maxlength="1000"
+    ></textarea>
+    <mat-hint align="end">
+      {{ sendMessageForm.get('message').value?.length || 0 }}/1000
+    </mat-hint>
+  </mat-form-field>
+  <mat-error
+    *ngIf="
+      sendMessageForm.get('message').touched &&
+      sendMessageForm.get('message').errors
+    "
+    >Nachricht ist erforderlich</mat-error
+  >
+  <re-captcha resolved="" formControlName="recaptcha" #captchaRef="reCaptcha">
+  </re-captcha>
+  <mat-error
+    *ngIf="
+      sendMessageForm.get('recaptcha').errors &&
+      sendMessageForm.get('recaptcha').touched
+    "
+    >Bitte bestätigen Sie, dass Sie kein Roboter sind</mat-error
+  >
+  <button
+    class="send-mail-button"
+    type="submit"
+    mat-raised-button
+    color="primary"
+  >
+    E-Mail senden
+  </button>
+</form>

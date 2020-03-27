@@ -14,7 +14,9 @@
         Ihre Fähigkeiten machen den Unterschied.
       </div>
       <div class="sub-title">
-        Der Coronavirus stellt die Menscheit vor eine Mammutaufgabe. Speziell im medizinischen Sektor mangelt es an fachkundigem Personal. Ihre Solidarität und Ihr Engagement sorgen für Entlastung und retten Leben.
+        Der Coronavirus stellt die Menscheit vor eine Mammutaufgabe. Speziell im
+        medizinischen Sektor mangelt es an fachkundigem Personal. Ihre
+        Solidarität und Ihr Engagement sorgen für Entlastung und retten Leben.
       </div>
     </div>
     <div class="search-help-toggle">
@@ -42,11 +44,6 @@
   <div class="content-area">
     <div class="actions">
       <h3>Hilfe anbieten oder suchen</h3>
-      <!-- <wir-vs-virus-action-card
-        icon="assets/medical_staff.svg"
-        *ngFor="let volunteer of volunteers$ | async"
-      > -->
-
       <a
         class="action-card bg-blue"
         routerLink="/register-institution"
@@ -87,7 +84,6 @@
     </div>
 
     <div class="card-list">
-      <!-- <div class="filter-controls"> -->
       <form [formGroup]="searchForm" (keydown.enter)="onChangeSearch()">
         <mat-form-field appearance="outline">
           <mat-icon matPrefix>search</mat-icon>
@@ -113,7 +109,6 @@
           </mat-select>
         </mat-form-field>
       </form>
-      <!-- </div> -->
       <router-outlet></router-outlet>
     </div>
   </div>

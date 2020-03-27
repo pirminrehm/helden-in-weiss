@@ -117,25 +117,26 @@ mat-expansion-panel {
   background: none !important;
 }
 
-::ng-deep .mat-expansion-panel-body {
-  padding: 0 !important;
-}
+.expand-card {
+  .expand-card-header {
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+    border-top: solid 1px #f5f5f5;
+    padding-top: 1rem;
 
-@media (max-width: $breakpoint-xs) {
-  ::ng-deep .mat-expansion-panel-body {
-    padding: 0 !important;
+    mat-icon:first-child {
+      margin-right: 1rem;
+    }
+
+    .card-spacer {
+      flex: 1 1 auto;
+    }
   }
-}
 
-mat-form-field.mat-form-field {
-  width: 100%;
-  left: 0;
-}
-
-.send-mail-button {
-  text-transform: uppercase;
-}
-
-.muted {
-  color: #757575
+  .expand-card-body {
+    &.expanded {
+      margin-top: 1rem;
+    }
+  }
 }
