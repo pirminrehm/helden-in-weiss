@@ -27,7 +27,7 @@
 
     <mat-form-field appearance="fill">
       <mat-label>Postleitzahl</mat-label>
-      <input matInput placeholder="12345" formControlName="zipCode" required />
+      <input matInput type="number" placeholder="12345" formControlName="zipCode" required />
       <mat-error
         *ngIf="
           volunteerForm.get('zipCode').errors &&
@@ -119,9 +119,9 @@
         </mat-option>
       </mat-autocomplete>
     </mat-form-field>
-    <!-- <mat-error *ngIf="volunteerForm.get('qualifications').errors"
+    <mat-error *ngIf="this.volunteerForm.get('qualifications').touched && this.qualifications.length === 0"
       >Angabe von Qualifikationen erforderlich
-    </mat-error> -->
+    </mat-error>
 
     <wir-vs-virus-info-box>
       Ihre Anzeige ist für 30 Tage gültig und wird aus Datenschutzgründen
@@ -148,6 +148,12 @@
       "
       >Bitte bestätigen Sie, dass Sie kein Roboter sind</mat-error
     >
+
+    <div *ngFor="let error of errorMessages" class="error-message">
+      <mat-error *ngFor="let constraint of error.constraints | keyvalue">
+        {{constraint.value}}
+      </mat-error>
+    </div>
 
     <button
       class="submit-button"

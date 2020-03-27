@@ -14,6 +14,7 @@ import { DatabaseService } from '../services/database.service';
 import { Location } from '../services/location/location.interface';
 import { LocationService } from '../services/location/location.service';
 import { RecaptchaService } from '../services/recaptcha/recaptcha.service';
+import { VolunteerDTO } from './volunteer.dto';
 
 @Controller('volunteer')
 export class VolunteerController {
@@ -50,12 +51,12 @@ export class VolunteerController {
       );
     }
     return removeMongoIdFromArray(
-      await this.databaseService.getVolunteers(searchTerm, zipcode.toString())
+      await this.databaseService.getVolunteers(searchTerm, zipcode?.toString())
     );
   }
 
   @Post()
-  async createVolunteer(@Body() volunteer: Volunteer) {
+  async createVolunteer(@Body() volunteer: VolunteerDTO) {
     const zipcode = volunteer.zipcode;
     let locationData: Location;
 
