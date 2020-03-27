@@ -21,6 +21,7 @@ mat-card {
 
       .title {
         padding-right: 2 * $basic-spacer;
+        min-width: 50%;
       }
 
       .date {

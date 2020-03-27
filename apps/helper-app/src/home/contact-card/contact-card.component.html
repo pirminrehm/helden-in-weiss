@@ -1,8 +1,22 @@
 <mat-card class="example-card">
   <div class="card-header">
-    <div class="title-container">
+    <div class="title-container" *ngIf="!data.name">
       <div class="title">
-        {{ data.zipcode }} <span class="muted">· {{ data.city }}</span>
+        {{ data.zipcode }}
+        <span class="muted">· {{ data.city }}</span>
+      </div>
+      <div class="date">
+        {{ data.registeredAt | date: 'dd.MM.yy' }}
+      </div>
+    </div>
+
+    <div class="title-container" *ngIf="data.name">
+      <div class="title">
+        {{ data.name }}
+      </div>
+      <div class="zipcode">
+        {{ data.zipcode }}
+        <span class="muted">· {{ data.city }}</span>
       </div>
       <div class="date">
         {{ data.registeredAt | date: 'dd.MM.yy' }}
@@ -39,9 +53,13 @@
       <div class="expand-card-body" [class.expanded]="expandedCard">
         <wir-vs-virus-message-form
           *ngIf="expandedCard && !successfullySendMessage"
-          (sendMessage)="successfullySendMessage = true" [data]="data"
+          (sendMessage)="successfullySendMessage = true"
+          [data]="data"
         ></wir-vs-virus-message-form>
-        <wir-vs-virus-info-box *ngIf="successfullySendMessage" [type]="'success'">
+        <wir-vs-virus-info-box
+          *ngIf="successfullySendMessage"
+          [type]="'success'"
+        >
           Dem Helfer wurde eine Email mit Ihrer Nachricht geschickt. #WirVsVirus
         </wir-vs-virus-info-box>
       </div>
