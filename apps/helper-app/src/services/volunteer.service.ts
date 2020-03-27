@@ -1,8 +1,7 @@
-import { Injectable } from '@angular/core';
-import { PostVolunteer, GetVolunteer } from '@wir-vs-virus/api-interfaces';
-import { Observable, of } from 'rxjs';
-import { delay } from 'rxjs/operators';
 import { HttpClient } from '@angular/common/http';
+import { Injectable } from '@angular/core';
+import { GetVolunteer, PostVolunteer } from '@wir-vs-virus/api-interfaces';
+import { Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'

@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Institution } from '@wir-vs-virus/api-interfaces';
+import { GetInstitution, PostInstitution } from '@wir-vs-virus/api-interfaces';
 import { Observable } from 'rxjs';
 
 @Injectable({
@@ -13,13 +13,13 @@ export class InstitutionService {
     searchTerm: string,
     zipCode: string,
     radius: number
-  ): Observable<Institution[]> {
-    return this.http.get<Institution[]>(
+  ): Observable<GetInstitution[]> {
+    return this.http.get<GetInstitution[]>(
       `/api/institution?searchTerm=${searchTerm}&zipcode=${zipCode}&radius=${radius}`
     );
   }
 
-  public create(institution: Institution) {
-    return this.http.post<Institution[]>('/api/institution', institution);
+  public create(institution: PostInstitution) {
+    return this.http.post<PostInstitution[]>('/api/institution', institution);
   }
 }

@@ -39,7 +39,7 @@
       <div class="expand-card-body" [class.expanded]="expandedCard">
         <wir-vs-virus-message-form
           *ngIf="expandedCard && !successfullySendMessage"
-          (sendMessage)="successfullySendMessage = true"
+          (sendMessage)="successfullySendMessage = true" [data]="data"
         ></wir-vs-virus-message-form>
         <wir-vs-virus-info-box *ngIf="successfullySendMessage" [type]="'success'">
           Dem Helfer wurde eine Email mit Ihrer Nachricht geschickt. #WirVsVirus

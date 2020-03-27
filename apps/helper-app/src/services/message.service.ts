@@ -1,5 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { ContactMessage } from '@wir-vs-virus/api-interfaces';
 import { Observable } from 'rxjs';
 
 @Injectable({
@@ -8,7 +9,8 @@ import { Observable } from 'rxjs';
 export class MessageService {
   constructor(private http: HttpClient) {}
 
-  send(data: { message: any }): Observable<any> {
-    throw new Error('Method not implemented.');
+  send(contactMessage: ContactMessage, isVolunteer: boolean): Observable<any> {
+    const url = `/api/contact/${isVolunteer ? 'volunteer' : 'institution'}`;
+    return this.http.post<ContactMessage>(url, contactMessage);
   }
 }
