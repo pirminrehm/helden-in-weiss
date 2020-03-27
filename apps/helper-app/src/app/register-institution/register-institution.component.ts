@@ -41,7 +41,7 @@ export class RegisterInstitutionComponent implements OnInit {
       Validators.maxLength(70)
     ]),
     agreePrivacy: new FormControl(false, Validators.requiredTrue),
-    recaptcha: new FormControl(null, [Validators.required]),
+    recaptcha: new FormControl(null, [Validators.required])
   });
 
   @ViewChild(RecaptchaComponent)
@@ -70,13 +70,13 @@ export class RegisterInstitutionComponent implements OnInit {
       contact: {
         name: val.contactName,
         email: val.contactMail,
-        phone: val.contactPhone,
+        phone: val.contactPhone
       },
       description: val.description,
       name: val.institutionName,
       zipcode: val.zipCode,
       recaptcha: val.recaptcha,
-      privacyAccepted: val.agreePrivacy,
+      privacyAccepted: val.agreePrivacy
     };
 
     this.sendingRequest = true;
@@ -100,11 +100,13 @@ export class RegisterInstitutionComponent implements OnInit {
                 notExists: true
               });
               break;
-
             case customErrorCodes.CAPTCHA_NOT_FOUND:
               break;
-
             default:
+              // if an unknow error appears, show user a fallback message
+              alert(
+                'Etwas ist schief gelaufen, versuchen Sie es später nochmal.'
+              );
               break;
           }
         }

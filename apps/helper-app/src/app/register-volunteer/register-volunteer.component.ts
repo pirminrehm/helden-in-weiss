@@ -127,11 +127,13 @@ export class RegisterVolunteerComponent implements OnInit {
                 notExists: true
               });
               break;
-
             case customErrorCodes.CAPTCHA_NOT_FOUND:
               break;
-
             default:
+              // if an unknow error appears, show user a fallback message
+              alert(
+                'Etwas ist schief gelaufen, versuchen Sie es später nochmal.'
+              );
               break;
           }
         }
