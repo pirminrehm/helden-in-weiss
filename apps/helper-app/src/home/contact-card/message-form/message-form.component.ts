@@ -23,11 +23,10 @@ export class MessageFormComponent implements OnInit {
       Validators.required,
       Validators.maxLength(1000)
     ]),
-    senderEmailAddr: new FormControl('', [
-      Validators.required,
-      Validators.email,
-      Validators.maxLength(70)
-    ]),
+    senderEmailAddr: new FormControl(
+      sessionStorage?.getItem('heldeninweiss.senderEmailAddr') || '',
+      [Validators.required, Validators.email, Validators.maxLength(70)]
+    ),
     recaptcha: new FormControl(null, [Validators.required])
   });
 
@@ -73,6 +72,12 @@ export class MessageFormComponent implements OnInit {
         res => {
           console.log(res);
           this.sendMessage.emit();
+
+          // store current email address in session storage
+          sessionStorage.setItem(
+            'heldeninweiss.senderEmailAddr',
+            val.senderEmailAddr
+          );
         },
         err => {
           console.error(err.error.message);
