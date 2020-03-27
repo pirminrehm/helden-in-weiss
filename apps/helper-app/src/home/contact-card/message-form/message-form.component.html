@@ -18,6 +18,19 @@
     "
     >Nachricht ist erforderlich</mat-error
   >
+  <mat-form-field appearance="fill">
+    <mat-label>E-Mail</mat-label>
+    <input
+      matInput
+      type="email"
+      placeholder="maxim.muster@example.com"
+      formControlName="senderEmailAddr"
+      required
+    />
+    <mat-error *ngIf="sendMessageForm.get('senderEmailAddr').errors"
+      >E-Mail Adresse ist erforderlich</mat-error
+    >
+  </mat-form-field>
   <re-captcha resolved="" formControlName="recaptcha" #captchaRef="reCaptcha">
   </re-captcha>
   <mat-error
@@ -32,7 +45,11 @@
     type="submit"
     mat-raised-button
     color="primary"
+    [disabled]="sendingMessage"
   >
+    <mat-icon *ngIf="sendingMessage"
+      ><mat-spinner diameter="20" color="primary"> </mat-spinner
+    ></mat-icon>
     E-Mail senden
   </button>
 </form>

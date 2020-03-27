@@ -23,6 +23,11 @@ export class MessageFormComponent implements OnInit {
       Validators.required,
       Validators.maxLength(1000)
     ]),
+    senderEmailAddr: new FormControl('', [
+      Validators.required,
+      Validators.email,
+      Validators.maxLength(70)
+    ]),
     recaptcha: new FormControl(null, [Validators.required])
   });
 
@@ -33,6 +38,7 @@ export class MessageFormComponent implements OnInit {
   captchaRef: RecaptchaComponent;
 
   @Output() sendMessage = new EventEmitter();
+  sendingMessage = false;
 
   constructor(private messageService: MessageService) {}
 
@@ -56,9 +62,10 @@ export class MessageFormComponent implements OnInit {
       recieverId: this.data.publicUuid,
       message: val.message,
       recaptcha: val.recaptcha,
-      senderEmailAddr: 'jon.doe@test.de'
+      senderEmailAddr: val.senderEmailAddr
     };
 
+    this.sendingMessage = true;
     this.messageService
       .send(contactMessage, isVolunteer)
       .pipe(first())
@@ -70,6 +77,7 @@ export class MessageFormComponent implements OnInit {
         err => {
           console.error(err.error.message);
           this.captchaRef.reset();
+          this.sendingMessage = false;
 
           switch (err.error.message) {
             case customErrorCodes.CAPTCHA_NOT_FOUND:
