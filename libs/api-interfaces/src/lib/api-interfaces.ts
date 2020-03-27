@@ -41,6 +41,9 @@ export interface PostVolunteer {
   recaptcha: string;
 }
 
+/**
+ * @deprecated use GetInstitution, PostInstitution or InstitutionModel instead
+ */
 export interface Institution {
   privateUuid?: string;
   publicUuid?: string;
@@ -63,10 +66,32 @@ export interface Institution {
   privacyAccepted: boolean;
 }
 
+export interface PostInstitution {
+  name: string;
+  zipcode: number;
+  description: string;
+  contact: {
+    name: string;
+    phone: string;
+    email: string;
+  };
+  privacyAccepted: boolean;
+  recaptcha: string;
+}
+
+export interface GetInstitution {
+  publicUuid: string;
+  name: string;
+  zipcode: number;
+  city: string;
+  description: string;
+}
+
 export interface ContactMessage {
   recieverId: string;
   senderEmailAddr: string;
   message: string;
+  recaptcha: string;
 }
 
 export const customErrorCodes = {

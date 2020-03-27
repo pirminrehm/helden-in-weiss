@@ -8,7 +8,11 @@ import {
   Post,
   Query
 } from '@nestjs/common';
-import { customErrorCodes, Institution } from '@wir-vs-virus/api-interfaces';
+import {
+  customErrorCodes,
+  GetInstitution,
+  PostInstitution
+} from '@wir-vs-virus/api-interfaces';
 import { removeMongoIdFromArray, createUuid } from '../common/utils';
 import { DatabaseService } from '../services/database.service';
 import { Location } from '../services/location/location.interface';
@@ -29,7 +33,7 @@ export class InstitutionController {
     @Query('searchTerm') searchTerm: string,
     @Query('zipcode') zipcode: number,
     @Query('radius') radius: number
-  ): Promise<Institution[]> {
+  ): Promise<GetInstitution[]> {
     if (zipcode && radius) {
       try {
         const locationData = await this.locationService.getLocationInfoByZipcode(
