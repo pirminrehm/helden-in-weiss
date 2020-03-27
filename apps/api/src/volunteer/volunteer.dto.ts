@@ -9,7 +9,6 @@ import {
   IsString,
   Length,
   MaxLength,
-  ValidateNested,
   Min,
   Max
 } from 'class-validator';
@@ -43,15 +42,10 @@ export class CreateVolunteerDTO implements PostVolunteer {
   })
   qualification: string[];
 
-  @IsBoolean()
-  active?: boolean;
-
   @IsString()
   @Length(0, 500)
   recaptcha: string;
 
   @IsBoolean()
   privacyAccepted: boolean;
-
-  asfa: boolean;
 }
