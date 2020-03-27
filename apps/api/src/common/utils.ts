@@ -26,3 +26,7 @@ export const createUuid = () => {
     // tslint:enable
   });
 };
+
+export const uuidRegExp = new RegExp(
+  '[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}'
+);

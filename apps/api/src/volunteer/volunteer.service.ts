@@ -20,7 +20,7 @@ export class VolunteerService {
     searchTerm: string
   ): Promise<VolunteerModel[]> {
     const radiusNormalized: number = radius / 6371;
-    const searchTermCleaned = searchTerm.replace(/[ \t]+$/, '');
+    const searchTermCleaned = searchTerm?.replace(/[ \t]+$/, '');
 
     let query: any = {
       $and: []
@@ -57,6 +57,10 @@ export class VolunteerService {
       .sort({ registeredAt: -1 })
       .limit(this.maxReturnDocuments)
       .exec();
+  }
+
+  async getVolunteerByPublicUuid(publicUuid: string): Promise<VolunteerModel> {
+    return this.volunteerModel.findOne({ publicUuid: publicUuid });
   }
 
   async saveVolunteer(volunteer: VolunteerModel): Promise<VolunteerModel> {

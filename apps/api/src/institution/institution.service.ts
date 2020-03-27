@@ -1,5 +1,5 @@
-import { Injectable, Logger } from '@nestjs/common';
-import { Institution, GetInstitution } from '@wir-vs-virus/api-interfaces';
+import { Injectable } from '@nestjs/common';
+import { GetInstitution } from '@wir-vs-virus/api-interfaces';
 import { InjectModel } from '@nestjs/mongoose';
 import { Model } from 'mongoose';
 import { InstitutionModel } from './institution.model';
@@ -21,7 +21,7 @@ export class InstitutionService {
     searchTerm: string
   ): Promise<InstitutionModel[]> {
     const radiusNormalized: number = radius / 6371;
-    const searchTermCleaned = searchTerm.replace(/[ \t]+$/, '');
+    const searchTermCleaned = searchTerm?.replace(/[ \t]+$/, '');
     const searchTermRegExp = new RegExp(searchTermCleaned, 'i');
     let query: any = {
       $and: []
@@ -58,6 +58,12 @@ export class InstitutionService {
       .sort({ registeredAt: -1 })
       .limit(this.maxReturnDocuments)
       .exec();
+  }
+
+  async getInstitutionByPublicUuid(
+    publicUuid: string
+  ): Promise<InstitutionModel> {
+    return this.institutionModel.findOne({ publicUuid: publicUuid });
   }
 
   async saveInstitution(
