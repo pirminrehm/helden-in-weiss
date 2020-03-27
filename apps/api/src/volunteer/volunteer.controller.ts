@@ -8,19 +8,14 @@ import {
   Post,
   Query
 } from '@nestjs/common';
-import {
-  customErrorCodes,
-  GetVolunteer,
-  Volunteer,
-  PostVolunteer
-} from '@wir-vs-virus/api-interfaces';
+import { customErrorCodes, GetVolunteer } from '@wir-vs-virus/api-interfaces';
 import { createUuid } from '../common/utils';
 import { Location } from '../services/location/location.interface';
 import { LocationService } from '../services/location/location.service';
 import { RecaptchaService } from '../services/recaptcha/recaptcha.service';
 import { VolunteerService } from './volunteer.service';
 import { VolunteerModel } from './volunteer.model';
-import { VolunteerDTO } from './volunteer.dto';
+import { CreateVolunteerDTO } from './volunteer.dto';
 
 @Controller('volunteer')
 export class VolunteerController {
@@ -58,7 +53,7 @@ export class VolunteerController {
   }
 
   @Post()
-  async createVolunteer(@Body() volunteer: VolunteerDTO) {
+  async createVolunteer(@Body() volunteer: CreateVolunteerDTO) {
     const zipcode = volunteer.zipcode;
     let locationData: Location;
 

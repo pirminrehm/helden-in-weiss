@@ -13,8 +13,9 @@ import {
   Min,
   Max
 } from 'class-validator';
+import { PostVolunteer } from '@wir-vs-virus/api-interfaces';
 
-export class VolunteerDTO {
+export class CreateVolunteerDTO implements PostVolunteer {
   @IsString()
   @IsNotEmpty()
   @Length(3, 70)
@@ -51,4 +52,6 @@ export class VolunteerDTO {
 
   @IsBoolean()
   privacyAccepted: boolean;
+
+  asfa: boolean;
 }

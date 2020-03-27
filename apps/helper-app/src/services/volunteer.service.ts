@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { PostVolunteer } from '@wir-vs-virus/api-interfaces';
+import { PostVolunteer, GetVolunteer } from '@wir-vs-virus/api-interfaces';
 import { Observable, of } from 'rxjs';
 import { delay } from 'rxjs/operators';
 import { HttpClient } from '@angular/common/http';
@@ -13,8 +13,8 @@ export class VolunteerService {
     searchTerm: string,
     zipCode: string,
     radius: number
-  ): Observable<PostVolunteer[]> {
-    return this.http.get<PostVolunteer[]>(
+  ): Observable<GetVolunteer[]> {
+    return this.http.get<GetVolunteer[]>(
       `/api/volunteer?searchTerm=${searchTerm}&zipcode=${zipCode}&radius=${radius}`
     );
   }
