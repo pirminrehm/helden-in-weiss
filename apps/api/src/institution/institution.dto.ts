@@ -4,7 +4,6 @@ import {
   IsEmail,
   IsNotEmpty,
   IsNumber,
-  IsOptional,
   IsPhoneNumber,
   IsString,
   Length,
@@ -13,6 +12,7 @@ import {
   Min,
   ValidateNested
 } from 'class-validator';
+import { PostInstitution } from '@wir-vs-virus/api-interfaces';
 
 export class Contact {
   @IsString()
@@ -39,7 +39,7 @@ export class Location {
   coordinates: number[];
 }
 
-export class CreateInstitutionDTO {
+export class CreateInstitutionDTO implements PostInstitution {
   @IsString()
   @IsNotEmpty()
   @Length(3, 70)
@@ -53,22 +53,14 @@ export class CreateInstitutionDTO {
   @Length(0, 300)
   description: string;
 
-  @IsString()
-  @Length(0, 500)
-  recaptcha: string;
-
   @ValidateNested()
   @Type(() => Contact)
   contact: Contact;
-
-  @ValidateNested()
-  @Type(() => Location)
-  location?: Location;
 
   @IsBoolean()
   privacyAccepted: boolean;
 
   @IsString()
-  @IsOptional()
-  city?: string;
+  @Length(0, 500)
+  recaptcha: string;
 }
