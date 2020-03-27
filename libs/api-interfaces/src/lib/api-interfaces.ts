@@ -6,11 +6,9 @@ export interface Volunteer {
   publicUuid?: string;
   title: string;
   name: string;
-  firstname: string;
   email: string;
   zipcode: number;
   city: string;
-  age: number;
   phone: string;
   description: string;
   qualification: string[];
@@ -48,13 +46,11 @@ export interface Institution {
   publicUuid?: string;
   name: string;
   zipcode: number;
-  city: string;
-  title: string;
+  city?: string;
   description: string;
   recaptcha: string;
   contact: {
     name: string;
-    firstname: string;
     phone: string;
     email: string;
   };

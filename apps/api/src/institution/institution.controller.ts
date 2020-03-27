@@ -14,6 +14,7 @@ import { DatabaseService } from '../services/database.service';
 import { Location } from '../services/location/location.interface';
 import { LocationService } from '../services/location/location.service';
 import { RecaptchaService } from '../services/recaptcha/recaptcha.service';
+import { CreateInstitutionDTO } from './institution.dto';
 
 @Controller('institution')
 export class InstitutionController {
@@ -55,7 +56,9 @@ export class InstitutionController {
   }
 
   @Post()
-  async createInstitution(@Body() institution: Institution) {
+  async createInstitution(@Body() institutionDTO: CreateInstitutionDTO) {
+    // TODO: temporary fix to solve merge conflicts
+    const institution: any = institutionDTO;
     const zipcode = institution.zipcode;
     let locationData: Location;
 

@@ -38,7 +38,7 @@ export class HomeComponent implements OnInit {
     });
   }
 
-  //todo on destroy
+  //TODO: on destroy
 
   onChangeSearch() {
     const queryParams: Params = {};
@@ -81,10 +81,12 @@ export class HomeComponent implements OnInit {
       </p>
     </div>
     <div mat-dialog-actions>
-      <button mat-button class="dialog-close-button" (click)="onClose()">Schließen</button>
+      <button mat-button class="dialog-close-button" (click)="onClose()">
+        Schließen
+      </button>
     </div>
   `,
-  styleUrls: ['home.component.scss'],
+  styleUrls: ['home.component.scss']
 })
 export class QualificationsDialogComponent {
   constructor(public dialogRef: MatDialogRef<QualificationsDialogComponent>) {}

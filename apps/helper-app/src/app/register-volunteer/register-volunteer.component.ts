@@ -1,15 +1,18 @@
 import { COMMA, ENTER } from '@angular/cdk/keycodes';
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
-import { MatAutocomplete, MatAutocompleteSelectedEvent } from '@angular/material/autocomplete';
+import {
+  MatAutocomplete,
+  MatAutocompleteSelectedEvent
+} from '@angular/material/autocomplete';
 import { MatChipInputEvent } from '@angular/material/chips';
 import { Router } from '@angular/router';
 import { customErrorCodes, Volunteer } from '@wir-vs-virus/api-interfaces';
+import { RecaptchaComponent } from 'ng-recaptcha';
 import { Observable } from 'rxjs';
 import { first, map, startWith } from 'rxjs/operators';
 import { VolunteerService } from '../../services/volunteer.service';
 import { phoneRegExp, zipCodeRegExp } from '../common/utils';
-import { RecaptchaComponent } from 'ng-recaptcha';
 
 @Component({
   selector: 'wir-vs-virus-register-volunteer',
@@ -40,7 +43,7 @@ export class RegisterVolunteerComponent implements OnInit {
     ]),
     qualifications: new FormControl(''),
     agreePrivacy: new FormControl(false, Validators.requiredTrue),
-    recaptcha: new FormControl(null, [Validators.required]),
+    recaptcha: new FormControl(null, [Validators.required])
   });
 
   @ViewChild(RecaptchaComponent)
@@ -58,6 +61,7 @@ export class RegisterVolunteerComponent implements OnInit {
   qualifications: string[] = [];
   allQualifications: string[] = this.getQualifications();
   sendingRequest = false;
+  errorMessages: { target; value; property; children; constraints }[] = [];
 
   constructor(
     private router: Router,
@@ -71,7 +75,9 @@ export class RegisterVolunteerComponent implements OnInit {
         // tslint:disable-next-line: deprecation
         startWith(null),
         map((qualification: string | null) =>
-          qualification ? this._filter(qualification) : this.allQualifications.slice()
+          qualification
+            ? this._filter(qualification)
+            : this.allQualifications.slice()
         )
       );
   }
@@ -84,52 +90,54 @@ export class RegisterVolunteerComponent implements OnInit {
     }
 
     const val = this.volunteerForm.value;
-    console.log(val);
 
     const volunteer: Volunteer = {
-      age: -1,
       city: '',
       description: val.knowledge,
       email: val.mail,
-      firstname: '--',
       qualification: this.qualifications,
       name: val.name,
       phone: val.phone,
-      title: '--',
-      zipcode: val.zipCode,
+      zipcode: Number(val.zipCode),
       active: true,
       registeredAt: new Date().toISOString(),
       recaptcha: val.recaptcha,
-      privacyAccepted: val.agreePrivacy,
+      privacyAccepted: val.agreePrivacy
     };
+    console.log(volunteer);
 
     this.sendingRequest = true;
-    this.volunteerService.create(volunteer).pipe(first()).subscribe(
-      res => {
-        console.log(res);
-        this.router.navigate(['/register-volunteer/success']);
-      },
-      err => {
-        this.sendingRequest = false;
-        console.error(err.error.message);
-        this.captchaRef.reset();
+    this.volunteerService
+      .create(volunteer)
+      .pipe(first())
+      .subscribe(
+        res => {
+          console.log(res);
+          this.router.navigate(['/register-volunteer/success']);
+        },
+        err => {
+          this.sendingRequest = false;
+          console.error(err.error.message);
+          this.errorMessages = err.error.message;
+          this.captchaRef.reset();
 
-        switch (err.error.message) {
-          case customErrorCodes.ZIP_NOT_FOUND:
-            this.volunteerForm.get('zipCode').setErrors({
-              notExists: true
-            });
-            break;
-
-          case customErrorCodes.CAPTCHA_NOT_FOUND:
-            break;
-
-          default:
-            alert('Etwas ist schief gelaufen, versuchs später nochmal.');
-            break;
+          switch (err.error.message) {
+            case customErrorCodes.ZIP_NOT_FOUND:
+              this.volunteerForm.get('zipCode').setErrors({
+                notExists: true
+              });
+              break;
+            case customErrorCodes.CAPTCHA_NOT_FOUND:
+              break;
+            default:
+              // if an unknow error appears, show user a fallback message
+              alert(
+                'Etwas ist schief gelaufen, versuchen Sie es später nochmal.'
+              );
+              break;
+          }
         }
-      }
-    );
+      );
   }
 
   add(event: MatChipInputEvent): void {

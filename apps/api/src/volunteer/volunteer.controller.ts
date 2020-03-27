@@ -20,6 +20,7 @@ import { LocationService } from '../services/location/location.service';
 import { RecaptchaService } from '../services/recaptcha/recaptcha.service';
 import { VolunteerService } from './volunteer.service';
 import { VolunteerModel } from './volunteer.model';
+import { VolunteerDTO } from './volunteer.dto';
 
 @Controller('volunteer')
 export class VolunteerController {
@@ -57,7 +58,7 @@ export class VolunteerController {
   }
 
   @Post()
-  async createVolunteer(@Body() volunteer: PostVolunteer) {
+  async createVolunteer(@Body() volunteer: VolunteerDTO) {
     const zipcode = volunteer.zipcode;
     let locationData: Location;
 
