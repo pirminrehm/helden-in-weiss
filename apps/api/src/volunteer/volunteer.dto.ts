@@ -14,17 +14,7 @@ import {
   Max
 } from 'class-validator';
 
-export class Location {
-  @Length(0, 300)
-  type: string;
-
-  @MaxLength(2, {
-    each: true
-  })
-  coordinates: number[];
-}
-
-export class Volunteer {
+export class VolunteerDTO {
   @IsString()
   @IsNotEmpty()
   @Length(3, 70)
@@ -51,9 +41,6 @@ export class Volunteer {
     each: true
   })
   qualification: string[];
-
-  @ValidateNested()
-  location?: Location;
 
   @IsBoolean()
   active?: boolean;
