@@ -1,27 +1,28 @@
 import { Injectable, Logger } from '@nestjs/common';
-import { GetVolunteer } from '@wir-vs-virus/api-interfaces';
+import { Institution, GetInstitution } from '@wir-vs-virus/api-interfaces';
 import { InjectModel } from '@nestjs/mongoose';
 import { Model } from 'mongoose';
-import { VolunteerModel } from '../volunteer/volunteer.model';
+import { InstitutionModel } from './institution.model';
 import { LocationInfo } from '../services/location/location.interface';
 
 @Injectable()
-export class VolunteerService {
+export class InstitutionService {
   constructor(
-    @InjectModel('Volunteer') private volunteerModel: Model<VolunteerModel>
+    @InjectModel('Institution')
+    private institutionModel: Model<InstitutionModel>
   ) {}
 
   private maxReturnDocuments = process.env.MAX_RETURN_DOCS || 100;
 
-  async getVolunteers(
+  async getInstitutions(
     zipcode: number,
     locatinData: LocationInfo,
     radius: number,
     searchTerm: string
-  ): Promise<VolunteerModel[]> {
+  ): Promise<InstitutionModel[]> {
     const radiusNormalized: number = radius / 6371;
     const searchTermCleaned = searchTerm.replace(/[ \t]+$/, '');
-
+    const searchTermRegExp = new RegExp(searchTermCleaned, 'i');
     let query: any = {
       $and: []
     };
@@ -42,9 +43,9 @@ export class VolunteerService {
     if (searchTerm) {
       query.$and.push({
         $or: [
-          { city: new RegExp(searchTermCleaned, 'i') },
-          { qualification: new RegExp(searchTermCleaned, 'i') },
-          { description: new RegExp(searchTermCleaned, 'i') }
+          { city: searchTermRegExp },
+          { name: searchTermRegExp },
+          { description: searchTermRegExp }
         ]
       });
     }
@@ -52,30 +53,32 @@ export class VolunteerService {
     // remove and if not needed -> no filters
     query = query.$and.length ? query : null;
 
-    return this.volunteerModel
+    return this.institutionModel
       .find(query)
       .sort({ registeredAt: -1 })
       .limit(this.maxReturnDocuments)
       .exec();
   }
 
-  async saveVolunteer(volunteer: VolunteerModel): Promise<VolunteerModel> {
-    const createdVolunteer = new this.volunteerModel(volunteer);
-    return createdVolunteer.save();
+  async saveInstitution(
+    institution: InstitutionModel
+  ): Promise<InstitutionModel> {
+    const createdInstitution = new this.institutionModel(institution);
+    return createdInstitution.save();
   }
 
-  mapModelToInterfaceArary(volunteers: VolunteerModel[]): GetVolunteer[] {
-    return volunteers.map(v => this.mapModelToInterface(v));
+  mapModelToInterfaceArary(institutions: InstitutionModel[]): GetInstitution[] {
+    return institutions.map(i => this.mapModelToInterface(i));
   }
 
-  mapModelToInterface(volunteer: VolunteerModel): GetVolunteer {
+  mapModelToInterface(institution: InstitutionModel): GetInstitution {
     return {
-      city: volunteer.city,
-      description: volunteer.description,
-      publicUuid: volunteer.publicUuid,
-      qualification: volunteer.qualification,
-      zipcode: volunteer.zipcode,
-      registeredAt: volunteer.registeredAt.toISOString()
+      city: institution.city,
+      description: institution.description,
+      publicUuid: institution.publicUuid,
+      zipcode: institution.zipcode,
+      name: institution.name,
+      registeredAt: institution.registeredAt.toISOString()
     };
   }
 }

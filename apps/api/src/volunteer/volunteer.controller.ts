@@ -10,7 +10,7 @@ import {
 } from '@nestjs/common';
 import { customErrorCodes, GetVolunteer } from '@wir-vs-virus/api-interfaces';
 import { createUuid } from '../common/utils';
-import { Location } from '../services/location/location.interface';
+import { LocationInfo } from '../services/location/location.interface';
 import { LocationService } from '../services/location/location.service';
 import { RecaptchaService } from '../services/recaptcha/recaptcha.service';
 import { VolunteerService } from './volunteer.service';
@@ -31,7 +31,7 @@ export class VolunteerController {
     @Query('zipcode') zipcode: number,
     @Query('radius') radius: number
   ): Promise<GetVolunteer[]> {
-    let locationData: Location;
+    let locationData: LocationInfo;
     if (zipcode) {
       try {
         locationData = await this.locationService.getLocationInfoByZipcode(
@@ -55,7 +55,7 @@ export class VolunteerController {
   @Post()
   async createVolunteer(@Body() volunteer: CreateVolunteerDTO) {
     const zipcode = volunteer.zipcode;
-    let locationData: Location;
+    let locationData: LocationInfo;
 
     await this.validateCaptcha(volunteer.recaptcha);
 
@@ -66,7 +66,6 @@ export class VolunteerController {
     } catch (e) {
       throw new HttpException(e.message, HttpStatus.NOT_FOUND);
     }
-    Logger.log('coordinates', locationData.coordinates.toString());
 
     const volunteerToSave: VolunteerModel = {
       ...volunteer,
@@ -78,7 +77,10 @@ export class VolunteerController {
       privateUuid: createUuid(),
       publicUuid: createUuid()
     };
-    Logger.log(volunteer);
+    Logger.log(
+      'Sucessfully created volunteer with publicUuid: ' +
+        volunteerToSave.publicUuid
+    );
     return await this.volunteerService.saveVolunteer(volunteerToSave);
   }
 

@@ -28,6 +28,7 @@ export interface GetVolunteer {
   city: string;
   description: string;
   qualification: string[];
+  registeredAt: string;
 }
 
 export interface PostVolunteer {
@@ -85,6 +86,7 @@ export interface GetInstitution {
   zipcode: number;
   city: string;
   description: string;
+  registeredAt: string;
 }
 
 export interface ContactMessage {

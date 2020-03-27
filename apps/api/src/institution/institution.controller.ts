@@ -8,22 +8,19 @@ import {
   Post,
   Query
 } from '@nestjs/common';
-import {
-  customErrorCodes,
-  GetInstitution,
-  PostInstitution
-} from '@wir-vs-virus/api-interfaces';
-import { removeMongoIdFromArray, createUuid } from '../common/utils';
-import { DatabaseService } from '../services/database.service';
-import { Location } from '../services/location/location.interface';
+import { customErrorCodes, GetInstitution } from '@wir-vs-virus/api-interfaces';
+import { createUuid } from '../common/utils';
+import { InstitutionService } from './institution.service';
+import { LocationInfo } from '../services/location/location.interface';
 import { LocationService } from '../services/location/location.service';
 import { RecaptchaService } from '../services/recaptcha/recaptcha.service';
 import { CreateInstitutionDTO } from './institution.dto';
+import { InstitutionModel } from './institution.model';
 
 @Controller('institution')
 export class InstitutionController {
   constructor(
-    private readonly databaseService: DatabaseService,
+    private readonly institutionService: InstitutionService,
     private readonly locationService: LocationService,
     private readonly recaptchaService: RecaptchaService
   ) {}
@@ -34,37 +31,31 @@ export class InstitutionController {
     @Query('zipcode') zipcode: number,
     @Query('radius') radius: number
   ): Promise<GetInstitution[]> {
-    if (zipcode && radius) {
+    let locationData: LocationInfo;
+    if (zipcode) {
       try {
-        const locationData = await this.locationService.getLocationInfoByZipcode(
+        locationData = await this.locationService.getLocationInfoByZipcode(
           zipcode
-        );
-        return removeMongoIdFromArray(
-          await this.databaseService.getAllInstitutionsWithinRadius(
-            locationData.coordinates,
-            radius
-          )
         );
       } catch (e) {
         throw new HttpException(e.message, HttpStatus.NOT_FOUND);
       }
     }
-    if (zipcode) {
-      return removeMongoIdFromArray(
-        await this.databaseService.getAllInstitutionsByZipCode(zipcode)
-      );
-    }
-    return removeMongoIdFromArray(
-      await this.databaseService.getInstitutions(searchTerm, zipcode)
-    );
+
+    return (
+      await this.institutionService.getInstitutions(
+        zipcode,
+        locationData,
+        radius,
+        searchTerm
+      )
+    ).map(this.institutionService.mapModelToInterface);
   }
 
   @Post()
-  async createInstitution(@Body() institutionDTO: CreateInstitutionDTO) {
-    // TODO: temporary fix to solve merge conflicts
-    const institution: any = institutionDTO;
+  async createInstitution(@Body() institution: CreateInstitutionDTO) {
     const zipcode = institution.zipcode;
-    let locationData: Location;
+    let locationData: LocationInfo;
 
     await this.validateCaptcha(institution.recaptcha);
 
@@ -76,16 +67,22 @@ export class InstitutionController {
       throw new HttpException(e.message, HttpStatus.NOT_FOUND);
     }
 
-    console.log('coordinates', locationData.coordinates);
-    institution.location = {
-      type: 'Point',
-      coordinates: locationData.coordinates
+    const institutionToSave: InstitutionModel = {
+      ...institution,
+      location: {
+        type: 'Point',
+        coordinates: locationData.coordinates
+      },
+      city: locationData.city,
+      privateUuid: createUuid(),
+      publicUuid: createUuid()
     };
-    institution.city = locationData.city;
-    institution.privateUuid = createUuid();
-    institution.publicUuid = createUuid();
-    Logger.log(institution);
-    return await this.databaseService.saveInstitution(institution);
+
+    Logger.log(
+      'Sucessfully created institution with publicUuid: ' +
+        institutionToSave.publicUuid
+    );
+    return await this.institutionService.saveInstitution(institutionToSave);
   }
 
   async validateCaptcha(captcha) {

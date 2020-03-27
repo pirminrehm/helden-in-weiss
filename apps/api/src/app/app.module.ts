@@ -6,7 +6,7 @@ import { join } from 'path';
 import { ContactController } from '../contact/contact.controller';
 import { InstitutionController } from '../institution/institution.controller';
 import { InstitutionSchema } from '../institution/institution.schema';
-import { DatabaseService } from '../services/database.service';
+import { InstitutionService } from '../institution/institution.service';
 import { LocationService } from '../services/location/location.service';
 import { MailService } from '../services/mail/mail.service';
 import { RecaptchaService } from '../services/recaptcha/recaptcha.service';
@@ -37,7 +37,7 @@ import { VolunteerService } from '../volunteer/volunteer.service';
     ContactController
   ],
   providers: [
-    DatabaseService,
+    InstitutionService,
     LocationService,
     RecaptchaService,
     MailService,
