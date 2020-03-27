@@ -36,7 +36,7 @@
         <span class="card-spacer"></span>
         <mat-icon>{{ expandedCard ? 'expand_less' : 'expand_more' }}</mat-icon>
       </div>
-      <div class="expand-card-body" [ngClass]="{ expanded: expandedCard }">
+      <div class="expand-card-body" [class.expanded]="expandedCard == true">
         <wir-vs-virus-message-form
           *ngIf="expandedCard"
         ></wir-vs-virus-message-form>
