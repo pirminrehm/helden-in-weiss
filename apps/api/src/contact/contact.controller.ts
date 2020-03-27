@@ -16,7 +16,7 @@ export class ContactController {
       recieverAddr,
       msg.message
     );
-    console.log(res[0].statusCode);
+    Logger.debug(res[0].statusCode);
 
     return { success: res[0].statusCode === 202 };
   }

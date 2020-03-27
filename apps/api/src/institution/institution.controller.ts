@@ -69,13 +69,13 @@ export class InstitutionController {
       throw new HttpException(e.message, HttpStatus.NOT_FOUND);
     }
 
-    console.log('coordinates', locationData.coordinates);
+    Logger.debug('coordinates: ' + locationData.coordinates);
     institution.location = {
       type: 'Point',
       coordinates: locationData.coordinates
     };
     institution.city = locationData.city;
-    Logger.log(institution);
+    Logger.debug(institution);
     return await this.databaseService.saveInstitution(institution);
   }
 
