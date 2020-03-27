@@ -6,6 +6,7 @@ import { environment } from './environments/environment';
 
 if (environment.production) {
   enableProdMode();
+  window.console.log = function() {}; // disable any console.log debugging statements in production mode
 }
 
 platformBrowserDynamic()
