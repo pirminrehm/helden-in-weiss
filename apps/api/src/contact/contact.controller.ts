@@ -9,7 +9,7 @@ export class ContactController {
   @Post()
   async sendmail(@Body() msg: ContactMessage) {
     Logger.log(msg);
-    // todo add id to each volunteer and search for id in mongo
+    // TODO: add id to each volunteer and search for id in mongo
     const recieverAddr = msg.recieverId;
     const res = await this.mailService.sendContactMail(
       msg.senderEmailAddr,

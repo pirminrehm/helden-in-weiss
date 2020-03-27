@@ -8,54 +8,56 @@ import {
   Post,
   Query
 } from '@nestjs/common';
-import { customErrorCodes, Volunteer } from '@wir-vs-virus/api-interfaces';
-import { removeMongoIdFromArray, createUuid } from '../common/utils';
-import { DatabaseService } from '../services/database.service';
+import {
+  customErrorCodes,
+  GetVolunteer,
+  Volunteer,
+  PostVolunteer
+} from '@wir-vs-virus/api-interfaces';
+import { createUuid } from '../common/utils';
 import { Location } from '../services/location/location.interface';
 import { LocationService } from '../services/location/location.service';
 import { RecaptchaService } from '../services/recaptcha/recaptcha.service';
+import { VolunteerService } from './volunteer.service';
+import { VolunteerModel } from './volunteer.model';
 
 @Controller('volunteer')
 export class VolunteerController {
   constructor(
-    private readonly databaseService: DatabaseService,
+    private readonly volunteerService: VolunteerService,
     private readonly locationService: LocationService,
     private readonly recaptchaService: RecaptchaService
   ) {}
 
   @Get()
-  async getAllVolunteer(
+  async getVolunteer(
     @Query('searchTerm') searchTerm: string,
     @Query('zipcode') zipcode: number,
     @Query('radius') radius: number
-  ): Promise<Volunteer[]> {
-    if (zipcode && radius) {
+  ): Promise<GetVolunteer[]> {
+    let locationData: Location;
+    if (zipcode) {
       try {
-        const locationData = await this.locationService.getLocationInfoByZipcode(
+        locationData = await this.locationService.getLocationInfoByZipcode(
           zipcode
-        );
-        return removeMongoIdFromArray(
-          await this.databaseService.getAllVolunteersWithinRadius(
-            locationData.coordinates,
-            radius
-          )
         );
       } catch (e) {
         throw new HttpException(e.message, HttpStatus.NOT_FOUND);
       }
     }
-    if (zipcode) {
-      return removeMongoIdFromArray(
-        await this.databaseService.getAllVolunteersByZipCode(zipcode)
-      );
-    }
-    return removeMongoIdFromArray(
-      await this.databaseService.getVolunteers(searchTerm, zipcode.toString())
+
+    return this.volunteerService.mapModelToInterfaceArary(
+      await this.volunteerService.getVolunteers(
+        zipcode,
+        locationData,
+        radius,
+        searchTerm
+      )
     );
   }
 
   @Post()
-  async createVolunteer(@Body() volunteer: Volunteer) {
+  async createVolunteer(@Body() volunteer: PostVolunteer) {
     const zipcode = volunteer.zipcode;
     let locationData: Location;
 
@@ -69,15 +71,19 @@ export class VolunteerController {
       throw new HttpException(e.message, HttpStatus.NOT_FOUND);
     }
     Logger.log('coordinates', locationData.coordinates.toString());
-    volunteer.location = {
-      type: 'Point',
-      coordinates: locationData.coordinates
+
+    const volunteerToSave: VolunteerModel = {
+      ...volunteer,
+      location: {
+        type: 'Point',
+        coordinates: locationData.coordinates
+      },
+      city: locationData.city,
+      privateUuid: createUuid(),
+      publicUuid: createUuid()
     };
-    volunteer.city = locationData.city;
-    volunteer.privateUuid = createUuid();
-    volunteer.publicUuid = createUuid();
     Logger.log(volunteer);
-    return await this.databaseService.saveVolunteer(volunteer);
+    return await this.volunteerService.saveVolunteer(volunteerToSave);
   }
 
   async validateCaptcha(captcha) {

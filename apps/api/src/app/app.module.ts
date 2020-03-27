@@ -13,6 +13,7 @@ import { RecaptchaService } from '../services/recaptcha/recaptcha.service';
 import { VolunteerController } from '../volunteer/volunteer.controller';
 import { VolunteerSchema } from '../volunteer/volunteer.schema';
 import { AppController } from './app.controller';
+import { VolunteerService } from '../volunteer/volunteer.service';
 
 @Module({
   imports: [
@@ -35,6 +36,12 @@ import { AppController } from './app.controller';
     InstitutionController,
     ContactController
   ],
-  providers: [DatabaseService, LocationService, RecaptchaService, MailService]
+  providers: [
+    DatabaseService,
+    LocationService,
+    RecaptchaService,
+    MailService,
+    VolunteerService
+  ]
 })
 export class AppModule {}

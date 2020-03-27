@@ -1,3 +1,6 @@
+/**
+ * @deprecated use GetVolunteer, PostVolunteer or VolunteerModel instead
+ */
 export interface Volunteer {
   privateUuid?: string;
   publicUuid?: string;
@@ -15,10 +18,29 @@ export interface Volunteer {
     type: string;
     coordinates: number[];
   };
-  active?: Boolean;
+  active?: boolean;
   registeredAt?: string;
   recaptcha: string;
   privacyAccepted: boolean;
+}
+
+export interface GetVolunteer {
+  publicUuid: string;
+  zipcode: number;
+  city: string;
+  description: string;
+  qualification: string[];
+}
+
+export interface PostVolunteer {
+  name: string;
+  email: string;
+  zipcode: number;
+  phone: string;
+  description: string;
+  qualification: string[];
+  privacyAccepted: boolean;
+  recaptcha: string;
 }
 
 export interface Institution {
@@ -40,6 +62,8 @@ export interface Institution {
     type: string;
     coordinates: number[];
   };
+  active?: Boolean;
+  registeredAt?: string;
   privacyAccepted: boolean;
 }
 

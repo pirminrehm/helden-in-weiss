@@ -14,6 +14,8 @@ export const InstitutionSchema = new mongoose.Schema({
     phone: { type: String, required: true },
     email: { type: String, required: true }
   },
+  active: { type: Boolean, default: true },
+  registeredAt: { type: Date, default: Date.now },
   location: {
     type: {
       type: String,
