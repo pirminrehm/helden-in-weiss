@@ -1,4 +1,10 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import {
+  Component,
+  EventEmitter,
+  OnInit,
+  Output,
+  ViewChild
+} from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { customErrorCodes } from '@wir-vs-virus/api-interfaces';
 import { RecaptchaComponent } from 'ng-recaptcha';
@@ -16,11 +22,13 @@ export class MessageFormComponent implements OnInit {
       Validators.required,
       Validators.maxLength(1000)
     ]),
-    recaptcha: new FormControl(null, [Validators.required]),
+    recaptcha: new FormControl(null, [Validators.required])
   });
 
   @ViewChild(RecaptchaComponent)
   captchaRef: RecaptchaComponent;
+
+  @Output() sendMessage = new EventEmitter();
 
   constructor(private messageService: MessageService) {}
 
@@ -37,7 +45,7 @@ export class MessageFormComponent implements OnInit {
 
     const data = {
       message: val.message,
-      recaptcha: val.recaptcha,
+      recaptcha: val.recaptcha
     };
 
     this.messageService
@@ -46,7 +54,7 @@ export class MessageFormComponent implements OnInit {
       .subscribe(
         res => {
           console.log(res);
-          // this.router.navigate(['/register-institution/success']);
+          this.sendMessage.emit();
         },
         err => {
           console.error(err.error.message);

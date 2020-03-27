@@ -7,6 +7,8 @@ import { Component, Input, OnInit } from '@angular/core';
 })
 export class ContactCardComponent implements OnInit {
   expandedCard = false;
+  successfullySendMessage = false;
+
   constructor() {}
 
   @Input()

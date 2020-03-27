@@ -36,10 +36,14 @@
         <span class="card-spacer"></span>
         <mat-icon>{{ expandedCard ? 'expand_less' : 'expand_more' }}</mat-icon>
       </div>
-      <div class="expand-card-body" [class.expanded]="expandedCard == true">
+      <div class="expand-card-body" [class.expanded]="expandedCard">
         <wir-vs-virus-message-form
-          *ngIf="expandedCard"
+          *ngIf="expandedCard && !successfullySendMessage"
+          (sendMessage)="successfullySendMessage = true"
         ></wir-vs-virus-message-form>
+        <wir-vs-virus-info-box [type]="'success'">
+          Dem Helfer wurde eine Email mit Ihrer Nachricht geschickt. #WirVsVirus
+        </wir-vs-virus-info-box>
       </div>
     </div>
   </mat-card-content>
