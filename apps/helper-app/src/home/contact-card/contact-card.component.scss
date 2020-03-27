@@ -136,7 +136,11 @@ mat-expansion-panel {
   }
 
   .expand-card-body {
+    height: 0;
+    overflow: hidden;
+
     &.expanded {
+      height: auto;
       margin-top: 1rem;
     }
   }
