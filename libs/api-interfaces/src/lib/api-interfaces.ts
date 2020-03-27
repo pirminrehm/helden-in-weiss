@@ -16,6 +16,7 @@ export interface Volunteer {
   active?: Boolean;
   registeredAt?: string;
   recaptcha: string;
+  privacyAccepted: boolean;
 }
 
 export interface Institution {
@@ -35,6 +36,7 @@ export interface Institution {
     type: string;
     coordinates: number[];
   };
+  privacyAccepted: boolean;
 }
 
 export interface ContactMessage {

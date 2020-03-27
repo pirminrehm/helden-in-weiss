@@ -62,9 +62,20 @@ What's next for Helden in Weiß
 - clone the project and go into project folder `cd helden-in-weiss`
 - `npm install`
 - `npm install -g @nrwl/cli`
-- add in `/apps/api/.env/` a mongodb connection string
-  - e.g. `MONGO_CONNECTION=mongodb+srv://user:passwd@mongo.example.com/test?retryWrites=true&w=majority`
+- add in `/apps/api/src/app/.env/` connection variables
+  - `MONGO_CONNECTION=<MONGO_CONNECTION_URL>`
+  - `MONGOPASSWORD=<MONGO_PASSWORD>`
+  - `SENDGRID_API_KEY=<SENDGRID_API_KEY>`
+  - `RECAPTCHA_KEY=<RECAPTCHA_KEY>`
 - open two consoles
   1. `nx serve helper-app` (frontend)
   2. `nx serve api` (backend)
 - go to http://localhost:4200/
+
+# Licence:
+
+This Project is liceced under [MIT licence](https://github.com/pirminrehm/helden-in-weiss/blob/master/LICENSE),
+except the file `zipcodes-germany.ts`, which is bascially provide by OpenStreetMap under
+[Open Data Commons Open Database License (ODbL)](https://opendatacommons.org/licenses/odbl/1.0/) and adapted for the software.
+
+© OpenStreetMap-Mitwirkende
