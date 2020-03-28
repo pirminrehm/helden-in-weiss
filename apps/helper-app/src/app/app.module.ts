@@ -21,6 +21,7 @@ import { RegisterVolunteerSuccessComponent } from './register-volunteer-success/
 import { RegisterVolunteerComponent } from './register-volunteer/register-volunteer.component';
 import { SharedModule } from './shared/shared.module';
 import { MessageFormComponent } from '../home/contact-card/message-form/message-form.component';
+import { ValidateComponent } from '../validate/validate.component';
 
 @NgModule({
   declarations: [
@@ -40,6 +41,7 @@ import { MessageFormComponent } from '../home/contact-card/message-form/message-
     RegisterInstitutionSuccessComponent,
     QualificationsDialogComponent,
     MessageFormComponent,
+    ValidateComponent,
   ],
   imports: [
     BrowserModule,

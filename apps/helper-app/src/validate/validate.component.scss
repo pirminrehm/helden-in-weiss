@@ -1,0 +1,53 @@
+@import 'variables';
+
+main {
+  width: 456px;
+  margin: 6 * $basic-spacer auto;
+
+  @media (max-width: 530px) {
+    width: 100%;
+    padding: 0 2rem;
+  }
+}
+
+h1.title {
+  color: #212121;
+  padding-top: 1rem;
+  font-size: 34px;
+  font-weight: 400;
+  font-family: Roboto;
+  line-height: 44px;
+
+  @media (max-width: $breakpoint-md) {
+    font-size: 25px;
+    line-height: 34px;
+  }
+}
+
+p.description {
+  color: #757575;
+  font-size: 18px;
+  font-weight: 400;
+  letter-spacing: 0.1px;
+  font-family: Roboto;
+  line-height: 26px;
+
+  @media (max-width: $breakpoint-xs) {
+    font-size: 14px;
+    line-height: 21px;
+  }
+}
+
+button {
+  margin-bottom: 4 * $basic-spacer;
+
+  @media (max-width: $breakpoint-xs) {
+    width: 100%;
+  }
+}
+
+.spinner-container {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}

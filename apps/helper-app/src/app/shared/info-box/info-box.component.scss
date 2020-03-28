@@ -21,6 +21,9 @@
   mat-icon {
     margin-right: 16px;
     color: $primary;
+    &.error {
+      color: $accent;
+    }
   }
 
   span {
