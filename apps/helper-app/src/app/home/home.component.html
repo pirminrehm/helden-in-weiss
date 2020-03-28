@@ -84,7 +84,7 @@
     </div>
 
     <div class="card-list">
-      <form [formGroup]="searchForm" (keydown.enter)="onChangeSearch()">
+      <form [formGroup]="searchForm" (keydown.enter)="startSearch()">
         <mat-form-field appearance="outline">
           <mat-icon matPrefix>search</mat-icon>
           <mat-label>Suche</mat-label>
@@ -93,6 +93,7 @@
             mat-button
             *ngIf="searchForm.get('term').value"
             matSuffix
+            type="button"
             mat-icon-button
             aria-label="Clear"
             (click)="this.searchForm.get('term').reset()"
@@ -107,6 +108,7 @@
             mat-button
             *ngIf="searchForm.get('plz').value"
             matSuffix
+            type="button"
             mat-icon-button
             aria-label="Clear"
             (click)="this.searchForm.get('plz').reset()"
@@ -118,7 +120,7 @@
           <mat-label>Radius</mat-label>
           <mat-select
             formControlName="radius"
-            (selectionChange)="onChangeSearch()"
+            (selectionChange)="startSearch()"
           >
             <mat-option value="5">5 km</mat-option>
             <mat-option value="10">10 km</mat-option>

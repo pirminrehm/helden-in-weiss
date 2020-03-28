@@ -2,8 +2,8 @@ import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
 import { MatDialog, MatDialogRef } from '@angular/material/dialog';
 import { ActivatedRoute, Params, Router } from '@angular/router';
-import { Subject } from 'rxjs';
-import { takeUntil } from 'rxjs/operators';
+import { Subject, merge } from 'rxjs';
+import { takeUntil, distinctUntilChanged, debounceTime } from 'rxjs/operators';
 
 @Component({
   selector: 'wir-vs-virus-home',
@@ -33,11 +33,23 @@ export class HomeComponent implements OnInit, OnDestroy {
         this.searchForm.get('plz').setValue(queryParams.searchPLZ);
         this.searchForm.get('radius').setValue(queryParams.radius || '50');
       });
+
+    // trigger search if one of the form values has changed
+    merge(
+      this.searchForm.get('term').valueChanges,
+      this.searchForm.get('plz').valueChanges
+    )
+      .pipe(
+        takeUntil(this.destroyed),
+        distinctUntilChanged(),
+        debounceTime(500)
+      )
+      .subscribe(() => {
+        this.startSearch();
+      });
   }
 
-  //TODO: on destroy
-
-  onChangeSearch() {
+  startSearch() {
     const queryParams: Params = {};
 
     queryParams.searchTerm = this.searchForm.value.term;
