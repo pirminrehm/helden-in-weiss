@@ -99,5 +99,6 @@ export interface ContactMessage {
 export const customErrorCodes = {
   ZIP_NOT_FOUND: 'ZIP_NOT_FOUND',
   CONTACT_NOT_FOUND: 'CONTACT_NOT_FOUND',
+  HTML_NOT_ALLOWED: 'HTML_NOT_ALLOWED',
   CAPTCHA_NOT_FOUND: 'CAPTCHA_NOT_FOUND'
 };

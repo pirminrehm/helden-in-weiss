@@ -30,3 +30,5 @@ export const createUuid = () => {
 export const uuidRegExp = new RegExp(
   '[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}'
 );
+
+export const notHtmlRegExp = /^(?!(.{0,300}<[\s\w\W]{1,20}>)).{0,300}$/gm;
