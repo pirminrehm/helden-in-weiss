@@ -89,16 +89,22 @@ export interface GetInstitution {
   registeredAt: string;
 }
 
-export interface ContactMessage {
+export interface PostContactMessage {
   recieverId: string;
   senderEmailAddr: string;
   message: string;
   recaptcha: string;
 }
 
+export interface PostEmailValidation {
+  privateUuid: string;
+  type: 'volunteer' | 'institution';
+}
+
 export const customErrorCodes = {
   ZIP_NOT_FOUND: 'ZIP_NOT_FOUND',
   CONTACT_NOT_FOUND: 'CONTACT_NOT_FOUND',
   HTML_NOT_ALLOWED: 'HTML_NOT_ALLOWED',
+  USER_NOT_FOUND: 'USER_NOT_FOUND',
   CAPTCHA_NOT_FOUND: 'CAPTCHA_NOT_FOUND'
 };

@@ -7,7 +7,10 @@ import {
   ViewChild
 } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
-import { ContactMessage, customErrorCodes } from '@wir-vs-virus/api-interfaces';
+import {
+  PostContactMessage,
+  customErrorCodes
+} from '@wir-vs-virus/api-interfaces';
 import { RecaptchaComponent } from 'ng-recaptcha';
 import { first } from 'rxjs/operators';
 import { MessageService } from '../../../services/message.service';
@@ -57,7 +60,7 @@ export class MessageFormComponent implements OnInit {
     // check whether the data object is a volunteer or institution
     const isVolunteer = this.data.hasOwnProperty('qualification');
 
-    const contactMessage: ContactMessage = {
+    const contactMessage: PostContactMessage = {
       recieverId: this.data.publicUuid,
       message: val.message,
       recaptcha: val.recaptcha,

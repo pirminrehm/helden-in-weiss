@@ -13,7 +13,7 @@ export class VolunteerService {
 
   private maxReturnDocuments = process.env.MAX_RETURN_DOCS || 100;
 
-  async getVolunteers(
+  async getMany(
     zipcode: number,
     locatinData: LocationInfo,
     radius: number,
@@ -22,8 +22,8 @@ export class VolunteerService {
     const radiusNormalized: number = radius / 6371;
     const searchTermCleaned = searchTerm?.replace(/[ \t]+$/, '');
 
-    let query: any = {
-      $and: []
+    const query: any = {
+      $and: [{ active: true }]
     };
     if (zipcode && radius && locatinData?.coordinates) {
       query.$and.push({
@@ -49,9 +49,6 @@ export class VolunteerService {
       });
     }
 
-    // remove and if not needed -> no filters
-    query = query.$and.length ? query : null;
-
     return this.volunteerModel
       .find(query)
       .sort({ registeredAt: -1 })
@@ -59,17 +56,20 @@ export class VolunteerService {
       .exec();
   }
 
-  async getVolunteerByPublicUuid(publicUuid: string): Promise<VolunteerModel> {
+  async getOneByPublicUuid(publicUuid: string): Promise<VolunteerModel> {
     return this.volunteerModel.findOne({ publicUuid: publicUuid });
   }
 
-  async saveVolunteer(volunteer: VolunteerModel): Promise<VolunteerModel> {
-    const createdVolunteer = new this.volunteerModel(volunteer);
-    return createdVolunteer.save();
+  async activatByPrivateUuid(privateUuid: string): Promise<VolunteerModel> {
+    return this.volunteerModel.findOneAndUpdate(
+      { privateUuid: privateUuid },
+      { $set: { active: true } }
+    );
   }
 
-  mapModelToInterfaceArary(volunteers: VolunteerModel[]): GetVolunteer[] {
-    return volunteers.map(v => this.mapModelToInterface(v));
+  async save(volunteer: VolunteerModel): Promise<VolunteerModel> {
+    const createdVolunteer = new this.volunteerModel(volunteer);
+    return createdVolunteer.save();
   }
 
   mapModelToInterface(volunteer: VolunteerModel): GetVolunteer {

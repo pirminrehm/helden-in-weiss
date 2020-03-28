@@ -6,10 +6,13 @@ import {
   IsEmail,
   IsUUID
 } from 'class-validator';
-import { ContactMessage, customErrorCodes } from '@wir-vs-virus/api-interfaces';
-import { uuidRegExp, notHtmlRegExp } from '../common/utils';
+import {
+  PostContactMessage,
+  customErrorCodes
+} from '@wir-vs-virus/api-interfaces';
+import { notHtmlRegExp } from '../common/utils';
 
-export class CreateContactMessageDTO implements ContactMessage {
+export class CreateContactMessageDTO implements PostContactMessage {
   @IsNotEmpty()
   @IsUUID('4')
   recieverId: string;

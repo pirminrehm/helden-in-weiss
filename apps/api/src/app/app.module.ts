@@ -14,6 +14,7 @@ import { VolunteerController } from '../volunteer/volunteer.controller';
 import { VolunteerSchema } from '../volunteer/volunteer.schema';
 import { AppController } from './app.controller';
 import { VolunteerService } from '../volunteer/volunteer.service';
+import { EmailValidationController } from '../email-validation/email-validation.controller';
 
 @Module({
   imports: [
@@ -34,7 +35,8 @@ import { VolunteerService } from '../volunteer/volunteer.service';
     AppController,
     VolunteerController,
     InstitutionController,
-    ContactController
+    ContactController,
+    EmailValidationController
   ],
   providers: [
     InstitutionService,

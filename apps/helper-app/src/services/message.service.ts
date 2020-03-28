@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { ContactMessage } from '@wir-vs-virus/api-interfaces';
+import { PostContactMessage } from '@wir-vs-virus/api-interfaces';
 import { Observable } from 'rxjs';
 
 @Injectable({
@@ -9,8 +9,11 @@ import { Observable } from 'rxjs';
 export class MessageService {
   constructor(private http: HttpClient) {}
 
-  send(contactMessage: ContactMessage, isVolunteer: boolean): Observable<any> {
+  send(
+    contactMessage: PostContactMessage,
+    isVolunteer: boolean
+  ): Observable<any> {
     const url = `/api/contact/${isVolunteer ? 'volunteer' : 'institution'}`;
-    return this.http.post<ContactMessage>(url, contactMessage);
+    return this.http.post<PostContactMessage>(url, contactMessage);
   }
 }
