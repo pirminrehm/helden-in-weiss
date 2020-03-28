@@ -11,7 +11,7 @@ import { customErrorCodes, PostVolunteer } from '@wir-vs-virus/api-interfaces';
 import { RecaptchaComponent } from 'ng-recaptcha';
 import { Observable } from 'rxjs';
 import { first, map, startWith } from 'rxjs/operators';
-import { VolunteerService } from '../../services/volunteer.service';
+import { VolunteerService } from '../services/volunteer.service';
 import { phoneRegExp, zipCodeRegExp } from '../common/utils';
 
 @Component({

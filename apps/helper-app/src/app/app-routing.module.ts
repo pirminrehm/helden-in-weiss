@@ -6,10 +6,10 @@ import { InstitutionListComponent } from '../home/institution-list/institution-l
 import { VolunteerListComponent } from '../home/volunteer-list/volunteer-list.component';
 import { ImprintComponent } from '../imprint/imprint.component';
 import { PrivacyComponent } from '../privacy/privacy.component';
-import { RegisterInstitutionSuccessComponent } from './register-institution-success/register-institution-success.component';
-import { RegisterInstitutionComponent } from './register-institution/register-institution.component';
-import { RegisterVolunteerSuccessComponent } from './register-volunteer-success/register-volunteer-success.component';
-import { RegisterVolunteerComponent } from './register-volunteer/register-volunteer.component';
+import { RegisterInstitutionSuccessComponent } from '../register-institution-success/register-institution-success.component';
+import { RegisterInstitutionComponent } from '../register-institution/register-institution.component';
+import { RegisterVolunteerSuccessComponent } from '../register-volunteer-success/register-volunteer-success.component';
+import { RegisterVolunteerComponent } from '../register-volunteer/register-volunteer.component';
 import { ValidateComponent } from '../validate/validate.component';
 
 const routes: Routes = [
