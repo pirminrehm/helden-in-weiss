@@ -10,6 +10,7 @@ import { RegisterInstitutionSuccessComponent } from './register-institution-succ
 import { RegisterInstitutionComponent } from './register-institution/register-institution.component';
 import { RegisterVolunteerSuccessComponent } from './register-volunteer-success/register-volunteer-success.component';
 import { RegisterVolunteerComponent } from './register-volunteer/register-volunteer.component';
+import { ValidateComponent } from '../validate/validate.component';
 
 const routes: Routes = [
   // use this as default route for demo
@@ -53,6 +54,11 @@ const routes: Routes = [
     path: 'privacy',
     component: PrivacyComponent,
     data: { title: 'Datenschutz' }
+  },
+  {
+    path: 'validate',
+    component: ValidateComponent,
+    data: { title: 'Registrierung' }
   }
 ];
 

@@ -1,0 +1,34 @@
+<wir-vs-virus-header></wir-vs-virus-header>
+
+<main>
+  <span *ngIf="success">
+    <h1 class="title">Registrierung Erfolgreich</h1>
+
+    <p class="description">
+      Ihre Anzeige wurde angenommen und ist nun live. Sie können nun gefunden
+      und über unser Kontaktforumlar kontaktiert werden.
+    </p>
+
+    <wir-vs-virus-info-box [type]="'warn'">
+      Um Ihre Anzeige zu löschen, verwenden Sie bitte den Link, den wir an Ihre
+      Email gesendet haben.
+    </wir-vs-virus-info-box>
+
+    <button mat-raised-button color="primary" routerLink="/home/institutions">
+      Einrichtungen durchsuchen
+    </button>
+
+    <button mat-raised-button color="accent" routerLink="/home/institutions">
+      Helferliste durchsuchen
+    </button>
+  </span>
+  <span *ngIf="!success && errorMessage">
+    <wir-vs-virus-info-box [type]="'error'">
+      {{ errorMessage }}
+    </wir-vs-virus-info-box>
+  </span>
+
+  <div class="spinner-container" *ngIf="!success && !errorMessage">
+    <mat-spinner diameter="32" color="primary"></mat-spinner>
+  </div>
+</main>

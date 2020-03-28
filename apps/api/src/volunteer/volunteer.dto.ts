@@ -43,7 +43,7 @@ export class CreateVolunteerDTO implements PostVolunteer {
   qualification: string[];
 
   @IsString()
-  @Length(0, 500)
+  @Length(0, 1000)
   recaptcha: string;
 
   @IsBoolean()

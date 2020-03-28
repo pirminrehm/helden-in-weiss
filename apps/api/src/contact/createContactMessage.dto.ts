@@ -31,6 +31,6 @@ export class CreateContactMessageDTO implements PostContactMessage {
 
   @IsNotEmpty()
   @IsString()
-  @Length(0, 500)
+  @Length(0, 1000)
   recaptcha: string;
 }

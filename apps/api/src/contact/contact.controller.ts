@@ -52,14 +52,18 @@ export class ContactController {
     await this.checkIfVoid(reciever);
 
     Logger.log('Send mail to volunteer: ' + message.recieverId);
-    const res = await this.mailService.sendContactMail(
+    const success = await this.mailService.sendContactMail(
       message.senderEmailAddr,
       reciever.email,
       message.message
     );
-    Logger.log('Send mail status: ' + res[0].statusCode);
 
-    return { success: res[0].statusCode === 202 };
+    if (!success) {
+      throw new HttpException(
+        customErrorCodes.SEND_MAIL_ERROR,
+        HttpStatus.SERVICE_UNAVAILABLE
+      );
+    }
   }
 
   async checkIfVoid(response: any) {

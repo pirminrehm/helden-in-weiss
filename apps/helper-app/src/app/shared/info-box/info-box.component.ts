@@ -16,4 +16,5 @@ export class InfoBoxComponent implements OnInit {
 enum InfoBoxType {
   success = 'success',
   warn = 'warn',
+  error = 'error'
 }
