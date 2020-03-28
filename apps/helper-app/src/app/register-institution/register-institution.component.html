@@ -31,7 +31,13 @@
 
     <mat-form-field appearance="fill">
       <mat-label>Postleitzahl</mat-label>
-      <input matInput type="number" placeholder="12345" formControlName="zipCode" required />
+      <input
+        matInput
+        type="number"
+        placeholder="12345"
+        formControlName="zipCode"
+        required
+      />
       <mat-error
         *ngIf="
           institutionForm.get('zipCode').errors &&
@@ -114,8 +120,9 @@
       Einwilligung in die Verarbeitung meiner Daten gemäß der
       datenschutzrechtlichen Einwilligungserklärung. Ich erkläre mich
       einverstanden, per E-Mail kontaktiert zu werden. Mit der Kontaktaufnahme
-      nehme ich die Datenschutzerklärung zur Kenntnis.<mat-error
-        *ngIf="showPrivacyError"
+      nehme ich die
+      <a target="_blanc" href="/privacy">Datenschutzerklärung</a> zur
+      Kenntnis.<mat-error *ngIf="showPrivacyError"
         >Sie müssen der Datenschutzerklärung zustimmen</mat-error
       ></mat-checkbox
     >
