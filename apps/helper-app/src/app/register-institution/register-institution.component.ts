@@ -5,7 +5,7 @@ import { customErrorCodes, Institution } from '@wir-vs-virus/api-interfaces';
 import { RecaptchaComponent } from 'ng-recaptcha';
 import { first } from 'rxjs/operators';
 import { InstitutionService } from '../services/institution.service';
-import { phoneRegExp, zipCodeRegExp } from '../common/utils';
+import { phoneRegExp, zipCodeRegExp } from '../../common/utils';
 
 @Component({
   selector: 'wir-vs-virus-register-institution',

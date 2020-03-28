@@ -1,16 +1,16 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { FaqComponent } from '../faq/faq.component';
-import { HomeComponent } from '../home/home.component';
-import { InstitutionListComponent } from '../home/institution-list/institution-list.component';
-import { VolunteerListComponent } from '../home/volunteer-list/volunteer-list.component';
-import { ImprintComponent } from '../imprint/imprint.component';
-import { PrivacyComponent } from '../privacy/privacy.component';
-import { RegisterInstitutionSuccessComponent } from '../register-institution-success/register-institution-success.component';
-import { RegisterInstitutionComponent } from '../register-institution/register-institution.component';
-import { RegisterVolunteerSuccessComponent } from '../register-volunteer-success/register-volunteer-success.component';
-import { RegisterVolunteerComponent } from '../register-volunteer/register-volunteer.component';
-import { ValidateComponent } from '../validate/validate.component';
+import { FaqComponent } from './faq/faq.component';
+import { HomeComponent } from './home/home.component';
+import { InstitutionListComponent } from './home/institution-list/institution-list.component';
+import { VolunteerListComponent } from './home/volunteer-list/volunteer-list.component';
+import { ImprintComponent } from './imprint/imprint.component';
+import { PrivacyComponent } from './privacy/privacy.component';
+import { RegisterInstitutionSuccessComponent } from './register-institution-success/register-institution-success.component';
+import { RegisterInstitutionComponent } from './register-institution/register-institution.component';
+import { RegisterVolunteerSuccessComponent } from './register-volunteer-success/register-volunteer-success.component';
+import { RegisterVolunteerComponent } from './register-volunteer/register-volunteer.component';
+import { ValidateComponent } from './validate/validate.component';
 
 const routes: Routes = [
   // use this as default route for demo

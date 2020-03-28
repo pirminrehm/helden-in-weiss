@@ -12,7 +12,7 @@ import { RecaptchaComponent } from 'ng-recaptcha';
 import { Observable } from 'rxjs';
 import { first, map, startWith } from 'rxjs/operators';
 import { VolunteerService } from '../services/volunteer.service';
-import { phoneRegExp, zipCodeRegExp } from '../common/utils';
+import { phoneRegExp, zipCodeRegExp } from '../../common/utils';
 
 @Component({
   selector: 'wir-vs-virus-register-volunteer',

@@ -9,27 +9,27 @@ import {
   RecaptchaSettings,
   RECAPTCHA_SETTINGS
 } from 'ng-recaptcha';
-import { FaqComponent } from '../faq/faq.component';
-import { HeaderComponent } from '../header/header.component';
-import { ContactCardComponent } from '../home/contact-card/contact-card.component';
-import { MessageFormComponent } from '../home/contact-card/message-form/message-form.component';
+import { AppRoutingModule } from './app-routing.module';
+import { AppComponent } from './app.component';
+import { FaqComponent } from './faq/faq.component';
+import { HeaderComponent } from './header/header.component';
+import { ContactCardComponent } from './home/contact-card/contact-card.component';
+import { MessageFormComponent } from './home/contact-card/message-form/message-form.component';
 import {
   HomeComponent,
   QualificationsDialogComponent
-} from '../home/home.component';
-import { InstitutionListComponent } from '../home/institution-list/institution-list.component';
-import { VolunteerListComponent } from '../home/volunteer-list/volunteer-list.component';
-import { ImprintComponent } from '../imprint/imprint.component';
-import { MaterialModule } from '../material/material.module';
-import { PrivacyComponent } from '../privacy/privacy.component';
-import { RegisterInstitutionSuccessComponent } from '../register-institution-success/register-institution-success.component';
-import { RegisterInstitutionComponent } from '../register-institution/register-institution.component';
-import { RegisterVolunteerSuccessComponent } from '../register-volunteer-success/register-volunteer-success.component';
-import { RegisterVolunteerComponent } from '../register-volunteer/register-volunteer.component';
-import { SharedModule } from '../shared/shared.module';
-import { ValidateComponent } from '../validate/validate.component';
-import { AppRoutingModule } from './app-routing.module';
-import { AppComponent } from './app.component';
+} from './home/home.component';
+import { InstitutionListComponent } from './home/institution-list/institution-list.component';
+import { VolunteerListComponent } from './home/volunteer-list/volunteer-list.component';
+import { ImprintComponent } from './imprint/imprint.component';
+import { MaterialModule } from './shared/material/material.module';
+import { PrivacyComponent } from './privacy/privacy.component';
+import { RegisterInstitutionSuccessComponent } from './register-institution-success/register-institution-success.component';
+import { RegisterInstitutionComponent } from './register-institution/register-institution.component';
+import { RegisterVolunteerSuccessComponent } from './register-volunteer-success/register-volunteer-success.component';
+import { RegisterVolunteerComponent } from './register-volunteer/register-volunteer.component';
+import { SharedModule } from './shared/shared.module';
+import { ValidateComponent } from './validate/validate.component';
 
 @NgModule({
   declarations: [
