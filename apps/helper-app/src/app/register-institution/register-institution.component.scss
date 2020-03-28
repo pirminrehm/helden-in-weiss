@@ -22,7 +22,7 @@ a.back-navigation {
 }
 
 h1.title {
-  color: #212121;
+  color: $gray-800;
   padding-top: 1rem;
   font-size: 34px;
   font-weight: 400;
@@ -66,7 +66,7 @@ mat-form-field {
 
 .alert {
   border: solid 1px rgba(0, 0, 0, 0.12);
-  border-radius: 5px;
+  border-radius: 16px;
   display: flex;
   padding: 1rem;
   align-items: center;

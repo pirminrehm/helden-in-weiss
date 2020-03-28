@@ -10,10 +10,30 @@ $breakpoint-xl: 1140px;
 
 $grid-col-width: 80px;
 
-$border-radius: 8px;
+$border-radius: 16px;
 $basic-spacer: 8px;
 
-$primary: #42a5f5;
+$primary-lightest: #eaf6f9;
+$primary-lighter: #b5e2f9;
+$primary: #196fbb;
+$primary-darker: #104f88;
+$primary-darkest: #031e3a;
+
+$secondary-lightest: #e1f4f4;
+$secondary-lighter: #b8ecec;
+$secondary: #48c2c0;
+$secondary-darker: #18848e;
+$secondary-darkest: #052f35;
+
+$gray-800: #212b36;
+$gray-700: #454f5b;
+$gray-600: #637381;
+$gray-500: #919eab;
+$gray-400: #c4cdd5;
+$gray-300: #dfe3e8;
+$gray-200: #f4f6f8;
+$gray-100: #f9fafb;
+
 $accent: #ef5350;
 $warn: #f4511e;
 $success: #e8f5e9;

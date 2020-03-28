@@ -56,7 +56,7 @@ span.mat-checkbox-label {
   font-style: normal;
   line-height: 1.43;
   letter-spacing: 0.25px;
-  color: #757575;
+  color: $gray-600;
 }
 
 .qualifications-dialog {
@@ -78,4 +78,8 @@ span.mat-checkbox-label {
 
 mat-chip.mat-chip {
   height: auto !important;
+}
+
+.mat-dialog-container {
+  border-radius: 16px !important;
 }
