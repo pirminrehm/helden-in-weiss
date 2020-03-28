@@ -62,9 +62,14 @@ export class InstitutionService {
     return this.institutionModel.findOne({ publicUuid: publicUuid });
   }
 
-  async saveInstitution(
-    institution: InstitutionModel
-  ): Promise<InstitutionModel> {
+  async activatByPrivateUuid(privateUuid: string): Promise<InstitutionModel> {
+    return this.institutionModel.findOneAndUpdate(
+      { privateUuid: privateUuid },
+      { $set: { active: true } }
+    );
+  }
+
+  async save(institution: InstitutionModel): Promise<InstitutionModel> {
     const createdInstitution = new this.institutionModel(institution);
     return createdInstitution.save();
   }

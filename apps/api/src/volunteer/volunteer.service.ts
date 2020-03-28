@@ -60,6 +60,13 @@ export class VolunteerService {
     return this.volunteerModel.findOne({ publicUuid: publicUuid });
   }
 
+  async activatByPrivateUuid(privateUuid: string): Promise<VolunteerModel> {
+    return this.volunteerModel.findOneAndUpdate(
+      { privateUuid: privateUuid },
+      { $set: { active: true } }
+    );
+  }
+
   async save(volunteer: VolunteerModel): Promise<VolunteerModel> {
     const createdVolunteer = new this.volunteerModel(volunteer);
     return createdVolunteer.save();

@@ -46,7 +46,7 @@ export class ContactController {
   async sendMessageToVolunteer(@Body() message: CreateContactMessageDTO) {
     await this.validateCaptcha(message.recaptcha);
 
-    const reciever = await this.volunteerService.getVolunteerByPublicUuid(
+    const reciever = await this.volunteerService.getOneByPublicUuid(
       message.recieverId
     );
     await this.checkIfVoid(reciever);
