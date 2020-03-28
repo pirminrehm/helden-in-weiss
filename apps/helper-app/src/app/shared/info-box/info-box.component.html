@@ -1,4 +1,5 @@
-<div class="info-box">
-  <mat-icon fontSet="material-icons-outlined">error_outline</mat-icon>
+<div class="info-box" [ngClass]="type">
+  <mat-icon *ngIf="type === 'success'">check</mat-icon>
+  <mat-icon *ngIf="type === 'warn'" fontSet="material-icons-outlined">error_outline</mat-icon>
   <span><ng-content></ng-content></span>
 </div>

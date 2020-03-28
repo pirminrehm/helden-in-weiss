@@ -1,25 +1,21 @@
 import { Test } from '@nestjs/testing';
 
-import { DatabaseService } from '../services/database.service';
+import { InstitutionService } from '../institution/institution.service';
 
 describe('DatabaseService', () => {
-  let service: DatabaseService;
+  let service: InstitutionService;
 
   beforeAll(async () => {
     const app = await Test.createTestingModule({
-      providers: [DatabaseService]
+      providers: [InstitutionService]
     }).compile();
 
-    service = app.get<DatabaseService>(DatabaseService);
+    service = app.get<InstitutionService>(InstitutionService);
   });
 
   describe('getData', () => {
-    it('should return "Welcome to api!"', () => {
-      expect(service.getAllVolunteers()).toEqual([{
-          name: 'Peter Pan',
-          email: 'peter.pan@example.com',
-          plz: 70569
-      }]);
+    it('should return load the service', () => {
+      expect(service).toBeTruthy();
     });
   });
 });

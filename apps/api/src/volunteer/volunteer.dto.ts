@@ -9,12 +9,12 @@ import {
   IsString,
   Length,
   MaxLength,
-  ValidateNested,
   Min,
   Max
 } from 'class-validator';
+import { PostVolunteer } from '@wir-vs-virus/api-interfaces';
 
-export class VolunteerDTO {
+export class CreateVolunteerDTO implements PostVolunteer {
   @IsString()
   @IsNotEmpty()
   @Length(3, 70)
@@ -41,12 +41,6 @@ export class VolunteerDTO {
     each: true
   })
   qualification: string[];
-
-  @IsBoolean()
-  active?: boolean;
-
-  @IsDateString()
-  registeredAt?: string;
 
   @IsString()
   @Length(0, 500)

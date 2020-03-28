@@ -7,7 +7,7 @@ import {
 } from '@angular/material/autocomplete';
 import { MatChipInputEvent } from '@angular/material/chips';
 import { Router } from '@angular/router';
-import { customErrorCodes, Volunteer } from '@wir-vs-virus/api-interfaces';
+import { customErrorCodes, PostVolunteer } from '@wir-vs-virus/api-interfaces';
 import { RecaptchaComponent } from 'ng-recaptcha';
 import { Observable } from 'rxjs';
 import { first, map, startWith } from 'rxjs/operators';
@@ -91,16 +91,13 @@ export class RegisterVolunteerComponent implements OnInit {
 
     const val = this.volunteerForm.value;
 
-    const volunteer: Volunteer = {
-      city: '',
+    const volunteer: PostVolunteer = {
       description: val.knowledge,
       email: val.mail,
       qualification: this.qualifications,
       name: val.name,
       phone: val.phone,
       zipcode: Number(val.zipCode),
-      active: true,
-      registeredAt: new Date().toISOString(),
       recaptcha: val.recaptcha,
       privacyAccepted: val.agreePrivacy
     };

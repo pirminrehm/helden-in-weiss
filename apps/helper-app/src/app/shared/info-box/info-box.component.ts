@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 
 @Component({
   selector: 'wir-vs-virus-info-box',
@@ -6,10 +6,14 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./info-box.component.scss']
 })
 export class InfoBoxComponent implements OnInit {
+  @Input() type: InfoBoxType;
 
-  constructor() { }
+  constructor() {}
 
-  ngOnInit(): void {
-  }
+  ngOnInit(): void {}
+}
 
+enum InfoBoxType {
+  success = 'success',
+  warn = 'warn',
 }

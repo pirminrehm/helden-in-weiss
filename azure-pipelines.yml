@@ -3,14 +3,10 @@
 # Add steps that analyze code, save build artifacts, deploy, and more:
 # https://docs.microsoft.com/azure/devops/pipelines/languages/javascript
 
+name: $(SourceBranchName)-$(Date:yyyyMMdd)$(Rev:.r)
+
 trigger: [master, develop]
 
-pr:
-  autoCancel: true # additional pushes to a PR cancel in-progress runs
-  branches:
-    include:
-    - feature/*
-    
 variables:
   # Azure Resource Manager connection created during pipeline creation
   azureSubscription: 'df6cb254-c8ee-472f-853a-dfaae5783270'
@@ -20,12 +16,12 @@ variables:
 stages:
 - stage: Build
   displayName: Build stage
-  jobs:  
+  jobs:
   - job: Build
     displayName: Build
     pool:
       vmImage: $(vmImageName)
-      
+
     steps:
     - task: NodeTool@0
       inputs:
@@ -43,7 +39,7 @@ stages:
     - script: |
         npm run build:backend:prod
       displayName: 'npm build backend'
-      
+
     - task: ArchiveFiles@2
       displayName: 'Archive files'
       inputs:

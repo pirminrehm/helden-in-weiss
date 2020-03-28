@@ -6,9 +6,9 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { RecaptchaFormsModule, RecaptchaModule, RecaptchaSettings, RECAPTCHA_SETTINGS } from 'ng-recaptcha';
 import { FaqComponent } from '../faq/faq.component';
 import { HeaderComponent } from '../header/header.component';
+import { ContactCardComponent } from '../home/contact-card/contact-card.component';
 import { HomeComponent, QualificationsDialogComponent } from '../home/home.component';
 import { InstitutionListComponent } from '../home/institution-list/institution-list.component';
-import { VolunteerCardComponent } from '../home/volunteer-card/volunteer-card.component';
 import { VolunteerListComponent } from '../home/volunteer-list/volunteer-list.component';
 import { ImprintComponent } from '../imprint/imprint.component';
 import { MaterialModule } from '../material/material.module';
@@ -20,11 +20,12 @@ import { RegisterInstitutionComponent } from './register-institution/register-in
 import { RegisterVolunteerSuccessComponent } from './register-volunteer-success/register-volunteer-success.component';
 import { RegisterVolunteerComponent } from './register-volunteer/register-volunteer.component';
 import { SharedModule } from './shared/shared.module';
+import { MessageFormComponent } from '../home/contact-card/message-form/message-form.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    VolunteerCardComponent,
+    ContactCardComponent,
     HomeComponent,
     RegisterVolunteerComponent,
     VolunteerListComponent,
@@ -38,6 +39,7 @@ import { SharedModule } from './shared/shared.module';
     RegisterVolunteerSuccessComponent,
     RegisterInstitutionSuccessComponent,
     QualificationsDialogComponent,
+    MessageFormComponent,
   ],
   imports: [
     BrowserModule,

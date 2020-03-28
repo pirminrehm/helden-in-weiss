@@ -12,11 +12,13 @@ export class MailService {
     recieverAddr: string,
     messageText: string
   ) {
-    const msgText = `Folgende Nachricht wird dir von ${senderAddr} geschickt: <br><br>${messageText}`;
+    const msgText = `Folgende Nachricht wird dir von ${senderAddr} geschickt:
+      <br><br>${messageText.replace(/[\n]/g, '<br>')}`;
     const msg = {
       to: recieverAddr,
-      from: senderAddr,
-      subject: 'Kontaktaufnahme über Helden in Weiß',
+      from: '"Helden in Weiss" <noreply@helden-in-weiss.de>',
+      replyTo: senderAddr,
+      subject: 'Kontaktaufnahme über Helden in Weiss',
       text: msgText.replace(/\<br\>/g, ''),
       html: msgText
     };

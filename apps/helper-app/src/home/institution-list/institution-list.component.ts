@@ -1,9 +1,9 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { Observable, Subject } from 'rxjs';
+import { customErrorCodes, GetInstitution } from '@wir-vs-virus/api-interfaces';
+import { Subject } from 'rxjs';
 import { map, takeUntil, tap } from 'rxjs/operators';
 import { InstitutionService } from '../../services/institution.service';
-import { customErrorCodes, Institution } from '@wir-vs-virus/api-interfaces';
 
 @Component({
   selector: 'wir-vs-virus-institution-list',
@@ -11,8 +11,7 @@ import { customErrorCodes, Institution } from '@wir-vs-virus/api-interfaces';
   styleUrls: ['./institution-list.component.scss']
 })
 export class InstitutionListComponent implements OnInit, OnDestroy {
-  institutions$: Observable<Institution[]>;
-  institutions: Institution[];
+  institutions: GetInstitution[];
   loading = true;
   destroyed$ = new Subject();
   errorMessage: string;
@@ -40,7 +39,6 @@ export class InstitutionListComponent implements OnInit, OnDestroy {
   getInstitutions(searchTerm = '', searchPLZ = '', searchRadius = 10) {
     this.loading = true;
     this.errorMessage = '';
-    // this.institutions$ =
     this.institutionsService
       .getAll(searchTerm, searchPLZ, searchRadius)
       .pipe(
