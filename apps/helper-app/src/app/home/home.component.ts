@@ -1,20 +1,23 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
 import { MatDialog, MatDialogRef } from '@angular/material/dialog';
 import { ActivatedRoute, Params, Router } from '@angular/router';
-import { first } from 'rxjs/operators';
+import { Subject } from 'rxjs';
+import { takeUntil } from 'rxjs/operators';
 
 @Component({
   selector: 'wir-vs-virus-home',
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.scss']
 })
-export class HomeComponent implements OnInit {
+export class HomeComponent implements OnInit, OnDestroy {
   searchForm = new FormGroup({
     term: new FormControl(this.route.snapshot.queryParams.searchTerm || ''),
     plz: new FormControl(this.route.snapshot.queryParams.searchPLZ || ''),
     radius: new FormControl(this.route.snapshot.queryParams.radius || '50')
   });
+
+  destroyed = new Subject();
 
   constructor(
     private router: Router,
@@ -23,19 +26,13 @@ export class HomeComponent implements OnInit {
   ) {}
 
   ngOnInit() {
-    this.router.events.pipe(first()).subscribe(val => {
-      this.searchForm
-        .get('term')
-        .setValue(this.route.snapshot.queryParams.searchTerm);
-
-      this.searchForm
-        .get('plz')
-        .setValue(this.route.snapshot.queryParams.searchPLZ);
-
-      this.searchForm
-        .get('radius')
-        .setValue(this.route.snapshot.queryParams.radius || '50');
-    });
+    this.route.queryParams
+      .pipe(takeUntil(this.destroyed))
+      .subscribe(queryParams => {
+        this.searchForm.get('term').setValue(queryParams.searchTerm);
+        this.searchForm.get('plz').setValue(queryParams.searchPLZ);
+        this.searchForm.get('radius').setValue(queryParams.radius || '50');
+      });
   }
 
   //TODO: on destroy
@@ -59,6 +56,11 @@ export class HomeComponent implements OnInit {
     this.dialog.open(QualificationsDialogComponent, {
       panelClass: 'qualifications-dialog'
     });
+  }
+
+  ngOnDestroy() {
+    this.destroyed.next();
+    this.destroyed.complete();
   }
 }
 

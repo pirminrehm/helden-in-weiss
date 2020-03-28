@@ -35,6 +35,7 @@
             [selectable]="'false'"
             disabled
             *ngFor="let qualification of data.qualification"
+            (click)="searchQualification(qualification)"
           >
             {{ qualification }}
           </mat-chip>
