@@ -43,7 +43,7 @@ export class InstitutionController {
     }
 
     return (
-      await this.institutionService.getInstitutions(
+      await this.institutionService.getMany(
         zipcode,
         locationData,
         radius,
@@ -82,7 +82,7 @@ export class InstitutionController {
       'Sucessfully created institution with publicUuid: ' +
         institutionToSave.publicUuid
     );
-    return await this.institutionService.saveInstitution(institutionToSave);
+    return await this.institutionService.save(institutionToSave);
   }
 
   async validateCaptcha(captcha) {

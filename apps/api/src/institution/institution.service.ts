@@ -14,7 +14,7 @@ export class InstitutionService {
 
   private maxReturnDocuments = process.env.MAX_RETURN_DOCS || 100;
 
-  async getInstitutions(
+  async getMany(
     zipcode: number,
     locatinData: LocationInfo,
     radius: number,
@@ -58,9 +58,7 @@ export class InstitutionService {
       .exec();
   }
 
-  async getInstitutionByPublicUuid(
-    publicUuid: string
-  ): Promise<InstitutionModel> {
+  async getOneByPublicUuid(publicUuid: string): Promise<InstitutionModel> {
     return this.institutionModel.findOne({ publicUuid: publicUuid });
   }
 
