@@ -11,9 +11,13 @@ mat-form-field.mat-form-field {
 }
 
 .muted {
-  color: #757575
+  color: #757575;
 }
 
 mat-error {
   margin-bottom: 1rem;
+}
+
+textarea {
+  white-space: pre-line;
 }

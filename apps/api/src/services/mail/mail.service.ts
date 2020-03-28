@@ -12,7 +12,8 @@ export class MailService {
     recieverAddr: string,
     messageText: string
   ) {
-    const msgText = `Folgende Nachricht wird dir von ${senderAddr} geschickt: <br><br>${messageText}`;
+    const msgText = `Folgende Nachricht wird dir von ${senderAddr} geschickt:
+      <br><br>${messageText.replace(/[\n]/g, '<br>')}`;
     const msg = {
       to: recieverAddr,
       from: '"Helden in Weiss" <noreply@helden-in-weiss.de>',
