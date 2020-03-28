@@ -69,10 +69,6 @@ export class InstitutionService {
     return createdInstitution.save();
   }
 
-  mapModelToInterfaceArary(institutions: InstitutionModel[]): GetInstitution[] {
-    return institutions.map(i => this.mapModelToInterface(i));
-  }
-
   mapModelToInterface(institution: InstitutionModel): GetInstitution {
     return {
       city: institution.city,
