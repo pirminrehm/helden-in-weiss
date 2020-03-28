@@ -9,6 +9,15 @@
   padding: 1rem 1.5rem;
   margin: 2rem 0;
 
+  &.success {
+    background-color: $success;
+    border: 0;
+
+    mat-icon {
+      color: #1b5f20;
+    }
+  }
+
   mat-icon {
     margin-right: 16px;
     color: $primary;
@@ -22,7 +31,7 @@
     font-style: normal;
     line-height: 1.43;
     letter-spacing: 0.25px;
-    color: #1f1f1f;
+    color: #212121;
   }
 }
 

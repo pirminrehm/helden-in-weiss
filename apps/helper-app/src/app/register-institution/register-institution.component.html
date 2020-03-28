@@ -31,7 +31,13 @@
 
     <mat-form-field appearance="fill">
       <mat-label>Postleitzahl</mat-label>
-      <input matInput placeholder="12345" formControlName="zipCode" required />
+      <input
+        matInput
+        type="number"
+        placeholder="12345"
+        formControlName="zipCode"
+        required
+      />
       <mat-error
         *ngIf="
           institutionForm.get('zipCode').errors &&
@@ -104,7 +110,7 @@
         >E-Mail Adresse ist erforderlich</mat-error
       >
     </mat-form-field>
-    <wir-vs-virus-info-box>
+    <wir-vs-virus-info-box [type]="'warn'">
       Ihre Anzeige ist für 30 Tage gültig und wird aus Datenschutzgründen
       anschließend automatisch entfernt
     </wir-vs-virus-info-box>
@@ -114,8 +120,9 @@
       Einwilligung in die Verarbeitung meiner Daten gemäß der
       datenschutzrechtlichen Einwilligungserklärung. Ich erkläre mich
       einverstanden, per E-Mail kontaktiert zu werden. Mit der Kontaktaufnahme
-      nehme ich die Datenschutzerklärung zur Kenntnis.<mat-error
-        *ngIf="showPrivacyError"
+      nehme ich die
+      <a target="_blanc" href="/privacy">Datenschutzerklärung</a> zur
+      Kenntnis.<mat-error *ngIf="showPrivacyError"
         >Sie müssen der Datenschutzerklärung zustimmen</mat-error
       ></mat-checkbox
     >
@@ -130,15 +137,23 @@
       >Bitte bestätigen Sie, dass Sie kein Roboter sind</mat-error
     >
 
+    <div *ngFor="let error of errorMessages" class="error-message">
+      <mat-error *ngFor="let constraint of error.constraints | keyvalue">
+        {{ constraint.value }}
+      </mat-error>
+    </div>
+
     <button
-    class="submit-button"
-    type="submit"
-    mat-raised-button
-    color="primary"
-    [disabled]="sendingRequest"
-  >
-    <mat-icon *ngIf="sendingRequest"><mat-spinner diameter="20" color="primary"> </mat-spinner></mat-icon>
-    Anfrage online stellen
-  </button>
+      class="submit-button"
+      type="submit"
+      mat-raised-button
+      color="primary"
+      [disabled]="sendingRequest"
+    >
+      <mat-icon *ngIf="sendingRequest"
+        ><mat-spinner diameter="20" color="primary"> </mat-spinner
+      ></mat-icon>
+      Anfrage online stellen
+    </button>
   </form>
 </main>

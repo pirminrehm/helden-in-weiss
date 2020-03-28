@@ -1,4 +1,4 @@
-export interface Location {
+export interface LocationInfo {
   coordinates: number[];
   city: string;
 }

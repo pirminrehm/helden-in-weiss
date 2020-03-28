@@ -15,11 +15,10 @@ input[type='number'] {
 .header {
   width: 100%;
   position: relative;
-  height: 400px;
+  height: 500px;
   background-image: url('/assets/hero.png');
   background-position: center;
   background-repeat: no-repeat;
-  background-color: #373737;
   display: flex;
   justify-content: center;
 
@@ -30,7 +29,7 @@ input[type='number'] {
     width: 100%;
 
     img.app-logo {
-      height: 2rem;
+      height: 2.5rem;
       cursor: pointer;
       outline: 0;
     }
@@ -58,9 +57,9 @@ input[type='number'] {
 
   .title {
     color: white;
-    font-size: 34px;
-    line-height: 47px;
-    margin-top: 4rem;
+    font-size: 40px;
+    line-height: 52px;
+    margin-top: 5.5rem;
 
     @media (max-width: $breakpoint-md) {
       font-size: 24px;
@@ -79,7 +78,8 @@ input[type='number'] {
     margin-top: 1rem;
     font-size: 18px;
     line-height: 26px;
-    width: calc(100% - 10rem);
+    width: calc(100% - 16rem);
+    opacity: 0.6;
 
     @media (max-width: $breakpoint-md) {
       font-size: 16px;
@@ -96,12 +96,12 @@ input[type='number'] {
   .search-help-toggle {
     position: absolute;
     height: 56px;
-    width: 617px;
-    bottom: -27px;
+    width: 628px;
+    bottom: -22px;
     background: white;
     overflow: hidden;
     border-radius: 8px;
-    box-shadow: 0px 1px 2px 0px #bfbfbf;
+    box-shadow: 0 1px 3px rgba(60,64,67, 0.3), 0 4px 8px 3px rgba(60,64,67, 0.15);
     font-size: 18px;
     letter-spacing: 0.1px;
     display: flex;
@@ -127,7 +127,7 @@ input[type='number'] {
       font-size: 18px;
       letter-spacing: 0.1px;
       font-family: Roboto;
-      color: #1f1f1f;
+      color: #212121;
 
       strong {
         font-weight: 700;
@@ -161,7 +161,7 @@ input[type='number'] {
 .container {
   display: flex;
   justify-content: center;
-  padding: 4 * $basic-spacer;
+  padding: 2 * $basic-spacer;
 
   .content-area {
     width: 100%;
@@ -209,7 +209,7 @@ input[type='number'] {
         height: 80px;
         margin: 16px 0;
         border-radius: $border-radius;
-        padding: $basic-spacer * 2;
+        padding: 16px 0 16px 16px;
         background-color: $primary;
         display: flex;
         flex-direction: row;
@@ -219,7 +219,7 @@ input[type='number'] {
         color: #fff;
 
         .text {
-          padding: 2 * $basic-spacer 0 2 * $basic-spacer 2 * $basic-spacer;
+          padding: 16px 0 16px 12px;
         }
 
         &.bg-blue {
@@ -254,7 +254,7 @@ input[type='number'] {
     }
 
     h3 {
-      color: rgba(0, 0, 0, 0.87);
+      color: #212121;
       font-weight: 500;
       font-size: 20px;
       line-height: 24px;

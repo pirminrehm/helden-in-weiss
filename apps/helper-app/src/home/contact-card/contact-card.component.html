@@ -1,0 +1,68 @@
+<mat-card class="example-card">
+  <div class="card-header">
+    <div class="title-container" *ngIf="!data.name">
+      <div class="title">
+        {{ data.zipcode }}
+        <span class="muted">· {{ data.city }}</span>
+      </div>
+      <div class="date">
+        {{ data.registeredAt | date: 'dd.MM.yy' }}
+      </div>
+    </div>
+
+    <div class="title-container" *ngIf="data.name">
+      <div class="title">
+        {{ data.name }}
+      </div>
+      <div class="zipcode">
+        {{ data.zipcode }}
+        <span class="muted">· {{ data.city }}</span>
+      </div>
+      <div class="date">
+        {{ data.registeredAt | date: 'dd.MM.yy' }}
+      </div>
+    </div>
+  </div>
+  <mat-card-content>
+    <div class="description">
+      {{ data.description }}
+    </div>
+    <div class="details">
+      <div class="detail-content">
+        <mat-chip-list [selectable]="'false'">
+          <mat-chip
+            chipListSelectable="'false'"
+            [selectable]="'false'"
+            disabled
+            *ngFor="let qualification of data.qualification"
+          >
+            {{ qualification }}
+          </mat-chip>
+        </mat-chip-list>
+      </div>
+    </div>
+    <div class="expand-card">
+      <div class="expand-card-header" (click)="expandedCard = !expandedCard">
+        <mat-icon color="primary" fontSet="material-icons-outlined"
+          >mail</mat-icon
+        >
+        <span>Kontakt aufnehmen</span>
+        <span class="card-spacer"></span>
+        <mat-icon>{{ expandedCard ? 'expand_less' : 'expand_more' }}</mat-icon>
+      </div>
+      <div class="expand-card-body" [class.expanded]="expandedCard">
+        <wir-vs-virus-message-form
+          *ngIf="expandedCard && !successfullySendMessage"
+          (sendMessage)="successfullySendMessage = true"
+          [data]="data"
+        ></wir-vs-virus-message-form>
+        <wir-vs-virus-info-box
+          *ngIf="successfullySendMessage"
+          [type]="'success'"
+        >
+          Dem Helfer wurde eine Email mit Ihrer Nachricht geschickt. #WirVsVirus
+        </wir-vs-virus-info-box>
+      </div>
+    </div>
+  </mat-card-content>
+</mat-card>
