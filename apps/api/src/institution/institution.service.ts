@@ -23,8 +23,9 @@ export class InstitutionService {
     const radiusNormalized: number = radius / 6371;
     const searchTermCleaned = searchTerm?.replace(/[ \t]+$/, '');
     const searchTermRegExp = new RegExp(searchTermCleaned, 'i');
-    let query: any = {
-      $and: []
+
+    const query: any = {
+      $and: [{ active: true }]
     };
     if (zipcode && radius && locatinData?.coordinates) {
       query.$and.push({
@@ -49,9 +50,6 @@ export class InstitutionService {
         ]
       });
     }
-
-    // remove and if not needed -> no filters
-    query = query.$and.length ? query : null;
 
     return this.institutionModel
       .find(query)

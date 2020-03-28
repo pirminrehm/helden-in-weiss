@@ -22,8 +22,8 @@ export class VolunteerService {
     const radiusNormalized: number = radius / 6371;
     const searchTermCleaned = searchTerm?.replace(/[ \t]+$/, '');
 
-    let query: any = {
-      $and: []
+    const query: any = {
+      $and: [{ active: true }]
     };
     if (zipcode && radius && locatinData?.coordinates) {
       query.$and.push({
@@ -48,9 +48,6 @@ export class VolunteerService {
         ]
       });
     }
-
-    // remove and if not needed -> no filters
-    query = query.$and.length ? query : null;
 
     return this.volunteerModel
       .find(query)
