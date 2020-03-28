@@ -2,8 +2,15 @@ import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
 import { MatDialog, MatDialogRef } from '@angular/material/dialog';
 import { ActivatedRoute, Params, Router } from '@angular/router';
-import { Subject, merge } from 'rxjs';
-import { takeUntil, distinctUntilChanged, debounceTime } from 'rxjs/operators';
+import { merge, Subject } from 'rxjs';
+import {
+  debounceTime,
+  distinctUntilChanged,
+  filter,
+  takeUntil,
+  takeWhile,
+  tap
+} from 'rxjs/operators';
 
 @Component({
   selector: 'wir-vs-virus-home',
@@ -14,7 +21,10 @@ export class HomeComponent implements OnInit, OnDestroy {
   searchForm = new FormGroup({
     term: new FormControl(this.route.snapshot.queryParams.searchTerm || ''),
     plz: new FormControl(this.route.snapshot.queryParams.searchPLZ || ''),
-    radius: new FormControl(this.route.snapshot.queryParams.radius || '50')
+    radius: new FormControl({
+      value: this.route.snapshot.queryParams.radius || '50',
+      disabled: !this.route.snapshot.queryParams.radius
+    })
   });
 
   destroyed = new Subject();
@@ -42,7 +52,15 @@ export class HomeComponent implements OnInit, OnDestroy {
       .pipe(
         takeUntil(this.destroyed),
         distinctUntilChanged(),
-        debounceTime(500)
+        debounceTime(500),
+        tap(() => {
+          // disable radius form control if plz form control is empty
+          if (!this.searchForm.get('plz').value) {
+            this.searchForm.get('radius').disable();
+          } else {
+            this.searchForm.get('radius').enable();
+          }
+        })
       )
       .subscribe(() => {
         this.startSearch();

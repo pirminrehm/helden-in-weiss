@@ -96,6 +96,7 @@
             type="button"
             mat-icon-button
             aria-label="Clear"
+            tabindex="-1"
             (click)="this.searchForm.get('term').reset()"
           >
             <mat-icon>close</mat-icon>
@@ -103,7 +104,7 @@
         </mat-form-field>
         <mat-form-field appearance="outline">
           <mat-label>PLZ</mat-label>
-          <input type="number" matInput formControlName="plz" />
+          <input type="number" matInput formControlName="plz" max="5" min="5" />
           <button
             mat-button
             *ngIf="searchForm.get('plz').value"
@@ -111,6 +112,7 @@
             type="button"
             mat-icon-button
             aria-label="Clear"
+            tabindex="-1"
             (click)="this.searchForm.get('plz').reset()"
           >
             <mat-icon>close</mat-icon>
