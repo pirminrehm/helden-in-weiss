@@ -89,11 +89,16 @@ export interface GetInstitution {
   registeredAt: string;
 }
 
-export interface ContactMessage {
+export interface PostContactMessage {
   recieverId: string;
   senderEmailAddr: string;
   message: string;
   recaptcha: string;
+}
+
+export interface PostEmailValidation {
+  privateUuid: string;
+  type: 'volunteer' | 'institution';
 }
 
 export const customErrorCodes = {

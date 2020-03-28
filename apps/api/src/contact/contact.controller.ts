@@ -7,10 +7,9 @@ import {
   HttpStatus
 } from '@nestjs/common';
 import { MailService } from '../services/mail/mail.service';
-import { customErrorCodes, ContactMessage } from '@wir-vs-virus/api-interfaces';
+import { customErrorCodes } from '@wir-vs-virus/api-interfaces';
 import { RecaptchaService } from '../services/recaptcha/recaptcha.service';
 import { InstitutionService } from '../institution/institution.service';
-import { uuidRegExp } from '../common/utils';
 import { CreateContactMessageDTO } from './createContactMessage.dto';
 import { VolunteerService } from '../volunteer/volunteer.service';
 
@@ -27,7 +26,7 @@ export class ContactController {
   async sendMessageToInstitution(@Body() message: CreateContactMessageDTO) {
     await this.validateCaptcha(message.recaptcha);
 
-    const reciever = await this.institutionService.getInstitutionByPublicUuid(
+    const reciever = await this.institutionService.getOneByPublicUuid(
       message.recieverId
     );
     await this.checkIfVoid(reciever);
