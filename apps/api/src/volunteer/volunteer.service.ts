@@ -13,7 +13,7 @@ export class VolunteerService {
 
   private maxReturnDocuments = process.env.MAX_RETURN_DOCS || 100;
 
-  async getVolunteers(
+  async getMany(
     zipcode: number,
     locatinData: LocationInfo,
     radius: number,
@@ -56,17 +56,13 @@ export class VolunteerService {
       .exec();
   }
 
-  async getVolunteerByPublicUuid(publicUuid: string): Promise<VolunteerModel> {
+  async getOneByPublicUuid(publicUuid: string): Promise<VolunteerModel> {
     return this.volunteerModel.findOne({ publicUuid: publicUuid });
   }
 
-  async saveVolunteer(volunteer: VolunteerModel): Promise<VolunteerModel> {
+  async save(volunteer: VolunteerModel): Promise<VolunteerModel> {
     const createdVolunteer = new this.volunteerModel(volunteer);
     return createdVolunteer.save();
-  }
-
-  mapModelToInterfaceArary(volunteers: VolunteerModel[]): GetVolunteer[] {
-    return volunteers.map(v => this.mapModelToInterface(v));
   }
 
   mapModelToInterface(volunteer: VolunteerModel): GetVolunteer {

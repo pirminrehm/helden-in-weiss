@@ -42,14 +42,14 @@ export class VolunteerController {
       }
     }
 
-    return this.volunteerService.mapModelToInterfaceArary(
-      await this.volunteerService.getVolunteers(
+    return (
+      await this.volunteerService.getMany(
         zipcode,
         locationData,
         radius,
         searchTerm
       )
-    );
+    ).map(this.volunteerService.mapModelToInterface);
   }
 
   @Post()
@@ -81,7 +81,7 @@ export class VolunteerController {
       'Sucessfully created volunteer with publicUuid: ' +
         volunteerToSave.publicUuid
     );
-    return await this.volunteerService.saveVolunteer(volunteerToSave);
+    return await this.volunteerService.save(volunteerToSave);
   }
 
   async validateCaptcha(captcha) {
