@@ -6,14 +6,14 @@ import { Observable } from 'rxjs';
 @Injectable({
   providedIn: 'root'
 })
-export class MessageService {
+export class ValidateService {
   constructor(private http: HttpClient) {}
 
-  send(
-    contactMessage: PostContactMessage,
-    isVolunteer: boolean
-  ): Observable<any> {
-    const url = `/api/contact/${isVolunteer ? 'volunteer' : 'institution'}`;
-    return this.http.post<PostContactMessage>(url, contactMessage);
+  send(type: string, privateUuid: string): Observable<any> {
+    const url = `/api/email-validation`;
+    return this.http.post<PostContactMessage>(url, {
+      type,
+      privateUuid
+    });
   }
 }

@@ -63,10 +63,12 @@ What's next for Helden in Weiß
 - `npm install`
 - `npm install -g @nrwl/cli`
 - add in `/apps/api/src/app/.env/` connection variables
+
   - `MONGO_CONNECTION=<MONGO_CONNECTION_URL>`
-  - `MONGOPASSWORD=<MONGO_PASSWORD>`
   - `SENDGRID_API_KEY=<SENDGRID_API_KEY>`
   - `RECAPTCHA_KEY=<RECAPTCHA_KEY>`
+  - `HOST_URL=localhost:4200`
+
 - open two consoles
   1. `nx serve helper-app` (frontend)
   2. `nx serve api` (backend)

@@ -16,12 +16,14 @@ import { RecaptchaService } from '../services/recaptcha/recaptcha.service';
 import { VolunteerService } from './volunteer.service';
 import { VolunteerModel } from './volunteer.model';
 import { CreateVolunteerDTO } from './volunteer.dto';
+import { MailService } from '../services/mail/mail.service';
 
 @Controller('volunteer')
 export class VolunteerController {
   constructor(
     private readonly volunteerService: VolunteerService,
     private readonly locationService: LocationService,
+    private readonly mailService: MailService,
     private readonly recaptchaService: RecaptchaService
   ) {}
 
@@ -42,14 +44,14 @@ export class VolunteerController {
       }
     }
 
-    return this.volunteerService.mapModelToInterfaceArary(
-      await this.volunteerService.getVolunteers(
+    return (
+      await this.volunteerService.getMany(
         zipcode,
         locationData,
         radius,
         searchTerm
       )
-    );
+    ).map(this.volunteerService.mapModelToInterface);
   }
 
   @Post()
@@ -77,11 +79,20 @@ export class VolunteerController {
       privateUuid: createUuid(),
       publicUuid: createUuid()
     };
-    Logger.log(
-      'Sucessfully created volunteer with publicUuid: ' +
-        volunteerToSave.publicUuid
+
+    // optimistic async, don't wait for response
+    this.mailService.sendRegistrationMail(
+      volunteerToSave.name,
+      volunteerToSave.email,
+      'volunteer',
+      volunteerToSave.privateUuid
     );
-    return await this.volunteerService.saveVolunteer(volunteerToSave);
+
+    const saved = await this.volunteerService.save(volunteerToSave);
+    Logger.log(
+      'Sucessfully created volunteer with publicUuid: ' + saved?.publicUuid
+    );
+    return { success: !!saved };
   }
 
   async validateCaptcha(captcha) {

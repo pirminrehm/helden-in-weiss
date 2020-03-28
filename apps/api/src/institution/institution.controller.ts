@@ -16,12 +16,14 @@ import { LocationService } from '../services/location/location.service';
 import { RecaptchaService } from '../services/recaptcha/recaptcha.service';
 import { CreateInstitutionDTO } from './institution.dto';
 import { InstitutionModel } from './institution.model';
+import { MailService } from '../services/mail/mail.service';
 
 @Controller('institution')
 export class InstitutionController {
   constructor(
     private readonly institutionService: InstitutionService,
     private readonly locationService: LocationService,
+    private readonly mailService: MailService,
     private readonly recaptchaService: RecaptchaService
   ) {}
 
@@ -43,7 +45,7 @@ export class InstitutionController {
     }
 
     return (
-      await this.institutionService.getInstitutions(
+      await this.institutionService.getMany(
         zipcode,
         locationData,
         radius,
@@ -78,11 +80,19 @@ export class InstitutionController {
       publicUuid: createUuid()
     };
 
-    Logger.log(
-      'Sucessfully created institution with publicUuid: ' +
-        institutionToSave.publicUuid
+    // optimistic async, don't wait for response
+    this.mailService.sendRegistrationMail(
+      institutionToSave.contact.name,
+      institutionToSave.contact.email,
+      'institution',
+      institutionToSave.privateUuid
     );
-    return await this.institutionService.saveInstitution(institutionToSave);
+
+    const saved = await this.institutionService.save(institutionToSave);
+    Logger.log(
+      'Sucessfully created institution with publicUuid: ' + saved.publicUuid
+    );
+    return { success: !!saved };
   }
 
   async validateCaptcha(captcha) {

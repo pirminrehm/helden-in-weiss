@@ -14,7 +14,7 @@ export class InstitutionService {
 
   private maxReturnDocuments = process.env.MAX_RETURN_DOCS || 100;
 
-  async getInstitutions(
+  async getMany(
     zipcode: number,
     locatinData: LocationInfo,
     radius: number,
@@ -23,8 +23,9 @@ export class InstitutionService {
     const radiusNormalized: number = radius / 6371;
     const searchTermCleaned = searchTerm?.replace(/[ \t]+$/, '');
     const searchTermRegExp = new RegExp(searchTermCleaned, 'i');
-    let query: any = {
-      $and: []
+
+    const query: any = {
+      $and: [{ active: true }]
     };
     if (zipcode && radius && locatinData?.coordinates) {
       query.$and.push({
@@ -50,9 +51,6 @@ export class InstitutionService {
       });
     }
 
-    // remove and if not needed -> no filters
-    query = query.$and.length ? query : null;
-
     return this.institutionModel
       .find(query)
       .sort({ registeredAt: -1 })
@@ -60,21 +58,20 @@ export class InstitutionService {
       .exec();
   }
 
-  async getInstitutionByPublicUuid(
-    publicUuid: string
-  ): Promise<InstitutionModel> {
+  async getOneByPublicUuid(publicUuid: string): Promise<InstitutionModel> {
     return this.institutionModel.findOne({ publicUuid: publicUuid });
   }
 
-  async saveInstitution(
-    institution: InstitutionModel
-  ): Promise<InstitutionModel> {
-    const createdInstitution = new this.institutionModel(institution);
-    return createdInstitution.save();
+  async activatByPrivateUuid(privateUuid: string): Promise<InstitutionModel> {
+    return this.institutionModel.findOneAndUpdate(
+      { privateUuid: privateUuid },
+      { $set: { active: true } }
+    );
   }
 
-  mapModelToInterfaceArary(institutions: InstitutionModel[]): GetInstitution[] {
-    return institutions.map(i => this.mapModelToInterface(i));
+  async save(institution: InstitutionModel): Promise<InstitutionModel> {
+    const createdInstitution = new this.institutionModel(institution);
+    return createdInstitution.save();
   }
 
   mapModelToInterface(institution: InstitutionModel): GetInstitution {

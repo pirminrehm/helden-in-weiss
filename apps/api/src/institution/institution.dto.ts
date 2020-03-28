@@ -61,6 +61,6 @@ export class CreateInstitutionDTO implements PostInstitution {
   privacyAccepted: boolean;
 
   @IsString()
-  @Length(0, 500)
+  @Length(0, 1000)
   recaptcha: string;
 }

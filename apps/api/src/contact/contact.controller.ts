@@ -7,10 +7,9 @@ import {
   HttpStatus
 } from '@nestjs/common';
 import { MailService } from '../services/mail/mail.service';
-import { customErrorCodes, ContactMessage } from '@wir-vs-virus/api-interfaces';
+import { customErrorCodes } from '@wir-vs-virus/api-interfaces';
 import { RecaptchaService } from '../services/recaptcha/recaptcha.service';
 import { InstitutionService } from '../institution/institution.service';
-import { uuidRegExp } from '../common/utils';
 import { CreateContactMessageDTO } from './createContactMessage.dto';
 import { VolunteerService } from '../volunteer/volunteer.service';
 
@@ -27,7 +26,7 @@ export class ContactController {
   async sendMessageToInstitution(@Body() message: CreateContactMessageDTO) {
     await this.validateCaptcha(message.recaptcha);
 
-    const reciever = await this.institutionService.getInstitutionByPublicUuid(
+    const reciever = await this.institutionService.getOneByPublicUuid(
       message.recieverId
     );
     await this.checkIfVoid(reciever);
@@ -47,20 +46,24 @@ export class ContactController {
   async sendMessageToVolunteer(@Body() message: CreateContactMessageDTO) {
     await this.validateCaptcha(message.recaptcha);
 
-    const reciever = await this.volunteerService.getVolunteerByPublicUuid(
+    const reciever = await this.volunteerService.getOneByPublicUuid(
       message.recieverId
     );
     await this.checkIfVoid(reciever);
 
     Logger.log('Send mail to volunteer: ' + message.recieverId);
-    const res = await this.mailService.sendContactMail(
+    const success = await this.mailService.sendContactMail(
       message.senderEmailAddr,
       reciever.email,
       message.message
     );
-    Logger.log('Send mail status: ' + res[0].statusCode);
 
-    return { success: res[0].statusCode === 202 };
+    if (!success) {
+      throw new HttpException(
+        customErrorCodes.SEND_MAIL_ERROR,
+        HttpStatus.SERVICE_UNAVAILABLE
+      );
+    }
   }
 
   async checkIfVoid(response: any) {
