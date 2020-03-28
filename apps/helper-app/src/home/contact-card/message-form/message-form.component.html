@@ -6,6 +6,8 @@
       placeholder="Was möchten Sie dem Helfer mitteilen"
       formControlName="message"
       maxlength="1000"
+      cdkTextareaAutosize
+      cdkAutosizeMinRows="4"
     ></textarea>
     <mat-hint align="end">
       {{ sendMessageForm.get('message').value?.length || 0 }}/1000

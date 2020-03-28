@@ -54,6 +54,8 @@
         formControlName="knowledge"
         placeholder="Ich bin gelernte..."
         maxlength="300"
+        cdkTextareaAutosize
+        cdkAutosizeMinRows="4"
       ></textarea>
       <mat-hint align="end">
         {{ volunteerForm.get('knowledge').value?.length || 0 }}/300
