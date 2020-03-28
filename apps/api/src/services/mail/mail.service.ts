@@ -1,4 +1,4 @@
-import { Injectable } from '@nestjs/common';
+import { Injectable, Logger } from '@nestjs/common';
 import * as sgMail from '@sendgrid/mail';
 
 @Injectable()
@@ -7,11 +7,11 @@ export class MailService {
     sgMail.setApiKey(process.env.SENDGRID_API_KEY);
   }
 
-  sendContactMail(
+  async sendContactMail(
     senderAddr: string,
     recieverAddr: string,
     messageText: string
-  ) {
+  ): Promise<boolean> {
     const msgText = `Folgende Nachricht wird dir von ${senderAddr} geschickt:
       <br><br>${messageText.replace(/[\n]/g, '<br>')}`;
     const msg = {
@@ -22,6 +22,8 @@ export class MailService {
       text: msgText.replace(/\<br\>/g, ''),
       html: msgText
     };
-    return sgMail.send(msg);
+    const response = await sgMail.send(msg);
+    Logger.log('Send mail status: ' + response[0].statusCode);
+    return response[0].statusCode === 202;
   }
 }
