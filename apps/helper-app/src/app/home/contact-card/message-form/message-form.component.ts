@@ -57,9 +57,6 @@ export class MessageFormComponent implements OnInit {
       return;
     }
 
-    // check whether the data object is a volunteer or institution
-    const isVolunteer = this.data.hasOwnProperty('qualification');
-
     const contactMessage: PostContactMessage = {
       recieverId: this.data.publicUuid,
       message: val.message,
@@ -69,7 +66,7 @@ export class MessageFormComponent implements OnInit {
 
     this.sendingMessage = true;
     this.messageService
-      .send(contactMessage, isVolunteer)
+      .send(contactMessage, this.isVolunteer())
       .pipe(first())
       .subscribe(
         res => {
@@ -97,5 +94,12 @@ export class MessageFormComponent implements OnInit {
           }
         }
       );
+  }
+
+  /**
+   * check whether the data object is a volunteer or institution
+   */
+  isVolunteer() {
+    return this.data.hasOwnProperty('qualification');
   }
 }
