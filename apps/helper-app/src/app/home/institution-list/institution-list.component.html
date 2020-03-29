@@ -3,7 +3,7 @@
 </div>
 
 <div class="error-message" *ngIf="errorMessage">
-  <span>{{errorMessage}}</span>
+  <span>{{ errorMessage }}</span>
   <mat-icon>warning</mat-icon>
 </div>
 
@@ -12,3 +12,7 @@
   *ngFor="let institution of institutions"
 >
 </wir-vs-virus-contact-card>
+
+<wir-vs-virus-info-box [type]="'warn'" *ngIf="!institutions.length">
+  Wir haben keine Treffer für Ihre Suchanfrage gefunden.
+</wir-vs-virus-info-box>
