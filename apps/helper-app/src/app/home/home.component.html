@@ -21,17 +21,18 @@
     </div>
     <div class="search-help-toggle">
       <a
-        routerLinkActive="bg-blue"
+        [routerLinkActive]="'bg-blue'"
         matRipple
-        routerLink="institutions"
+        [routerLink]="['/']"
         queryParamsHandling="merge"
+        [routerLinkActiveOptions]="{ exact: true }"
       >
         Einrichtungen, die Hilfe suchen
       </a>
       <a
-        routerLinkActive="bg-red"
+        [routerLinkActive]="'bg-red'"
         matRipple
-        routerLink="volunteers"
+        [routerLink]="['/volunteers']"
         queryParamsHandling="merge"
       >
         Engagierte, die helfen wollen

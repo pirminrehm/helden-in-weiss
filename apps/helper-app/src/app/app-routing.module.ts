@@ -14,17 +14,16 @@ import { ValidateComponent } from './validate/validate.component';
 
 const routes: Routes = [
   // use this as default route for demo
-  { path: '', redirectTo: '/home/volunteers', pathMatch: 'full' },
-  { path: '*', redirectTo: '/home/volunteers' },
   {
-    path: 'home',
+    path: '',
     component: HomeComponent,
     children: [
-      { path: 'volunteers', component: VolunteerListComponent },
-      { path: 'institutions', component: InstitutionListComponent }
+      { path: '', component: InstitutionListComponent },
+      { path: 'volunteers', component: VolunteerListComponent }
     ]
   },
-  { path: 'faq', component: FaqComponent, data: { title: 'FAQ' } },
+  { path: 'home', redirectTo: '/', pathMatch: 'full' },
+  { path: 'home/institutions', redirectTo: '/', pathMatch: 'full' },
   {
     path: 'register-volunteer',
     component: RegisterVolunteerComponent,
@@ -45,6 +44,7 @@ const routes: Routes = [
     component: RegisterInstitutionSuccessComponent,
     data: { title: 'Institution registrieren' }
   },
+  { path: 'faq', component: FaqComponent, data: { title: 'FAQ' } },
   {
     path: 'imprint',
     component: ImprintComponent,
@@ -59,7 +59,8 @@ const routes: Routes = [
     path: 'validate',
     component: ValidateComponent,
     data: { title: 'Registrierung' }
-  }
+  },
+  { path: '**', redirectTo: '/' }
 ];
 
 @NgModule({
