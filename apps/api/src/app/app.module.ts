@@ -30,7 +30,7 @@ import { EmailValidationController } from '../email-validation/email-validation.
     ServeStaticModule.forRoot({
       rootPath: join(__dirname, '..', 'helper-app'),
       serveStaticOptions: {
-        maxAge: 604800, // = 7*24*60*60 = 7 days,
+        maxAge: 604800000, // = 7*24*60*60 *1000 = 7 days,
         etag: true // cache validation
       }
     })
