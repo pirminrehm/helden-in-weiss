@@ -1,6 +1,6 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { GetVolunteer, customErrorCodes } from '@wir-vs-virus/api-interfaces';
+import { customErrorCodes, GetVolunteer } from '@wir-vs-virus/api-interfaces';
 import { Observable, Subject } from 'rxjs';
 import { map, takeUntil, tap } from 'rxjs/operators';
 import { VolunteerService } from '../../services/volunteer.service';

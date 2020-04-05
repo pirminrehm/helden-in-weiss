@@ -16,11 +16,39 @@ input[type='number'] {
   width: 100%;
   position: relative;
   height: 500px;
-  background-image: url('/assets/hero.png');
+  background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABoAAAAJCAYAAAAsCDz7AAAABmJLR0QA/wD/AP+gvaeTAAAACXBIWXMAAAsTAAALEwEAmpwYAAAAB3RJTUUH5AMdFTIdMElflQAAAS5JREFUKM+Fk12uAiEMhT8YGKNR4wpM3IX734XPugQzIz+lPniHIFFvE8K0tHM4PcWcz2flz4wxqL5cVa1r8Y0xtLn/Wfs/txQsgfaw9Y0xb9/L2S/ANte2gZZBf7MeJIRASglVpZSCiAAQY+R6vaKqWGsroOtv2LL7BJhzxjnHNE2M48jtdsN7j4iw3W5JKRFCIMaIiLBerzHG4Hqa30BUlZwzl8uF0+nE4XAgxsjxeKSUgrUWEcF7j6oSYyTnXOvdLwF7X0TY7XY451BVUkqsVqvaIudcrRmGARFBRBiGAdv2vteoBSml8Hg82O/3zPNMCKGyaNveT2YI4TUMnzRq27Xs8zxX8UWE+/3+cXjamPe+srXf3kxv4zgiIpRSUFU2mw3TNL3l9nWLXqrKE4sFAst5gArzAAAAAElFTkSuQmCC');
+  background-size: 1420px;
   background-position: center;
   background-repeat: no-repeat;
   display: flex;
   justify-content: center;
+
+  .header-bg {
+    z-index: 0;
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-image: url('/assets/hero.png');
+    background-size: 1420px;
+    background-position: center;
+    background-repeat: no-repeat;
+    opacity: 0;
+
+    animation: fadeInAnimation 200ms ease-in 2s;
+    animation-iteration-count: 1;
+    animation-fill-mode: forwards;
+
+    @keyframes fadeInAnimation {
+      0% {
+        opacity: 0;
+      }
+      100% {
+        opacity: 1;
+      }
+    }
+  }
 
   .nav-bar {
     margin-top: 1.5rem;
@@ -147,6 +175,7 @@ input[type='number'] {
 }
 
 .content-center {
+  z-index: 100;
   width: 960px;
   margin: 0 4 * $basic-spacer;
 

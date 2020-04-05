@@ -1,11 +1,23 @@
 <form [formGroup]="sendMessageForm" (ngSubmit)="onSubmit()">
   <mat-form-field appearance="fill">
-    <mat-label>Was möchten Sie dem Helfer mitteilen</mat-label>
+    <mat-label
+      >Was möchten Sie
+      {{
+        isVolunteer() ? 'dem Helfer' : 'der Einrichtung'
+      }}
+      mitteilen?</mat-label
+    >
     <textarea
       matInput
-      placeholder="Was möchten Sie dem Helfer mitteilen"
+      [placeholder]="
+        'Was möchten Sie ' +
+        (isVolunteer() ? 'dem Helfer' : 'der Einrichtung') +
+        ' mitteilen?'
+      "
       formControlName="message"
       maxlength="1000"
+      cdkTextareaAutosize
+      cdkAutosizeMinRows="4"
     ></textarea>
     <mat-hint align="end">
       {{ sendMessageForm.get('message').value?.length || 0 }}/1000

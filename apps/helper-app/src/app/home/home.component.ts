@@ -1,20 +1,33 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
 import { MatDialog, MatDialogRef } from '@angular/material/dialog';
 import { ActivatedRoute, Params, Router } from '@angular/router';
-import { first } from 'rxjs/operators';
+import { merge, Subject } from 'rxjs';
+import {
+  debounceTime,
+  distinctUntilChanged,
+  filter,
+  takeUntil,
+  takeWhile,
+  tap
+} from 'rxjs/operators';
 
 @Component({
   selector: 'wir-vs-virus-home',
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.scss']
 })
-export class HomeComponent implements OnInit {
+export class HomeComponent implements OnInit, OnDestroy {
   searchForm = new FormGroup({
     term: new FormControl(this.route.snapshot.queryParams.searchTerm || ''),
     plz: new FormControl(this.route.snapshot.queryParams.searchPLZ || ''),
-    radius: new FormControl(this.route.snapshot.queryParams.radius || '50')
+    radius: new FormControl({
+      value: this.route.snapshot.queryParams.radius || '50',
+      disabled: !this.route.snapshot.queryParams.radius
+    })
   });
+
+  destroyed = new Subject();
 
   constructor(
     private router: Router,
@@ -23,24 +36,38 @@ export class HomeComponent implements OnInit {
   ) {}
 
   ngOnInit() {
-    this.router.events.pipe(first()).subscribe(val => {
-      this.searchForm
-        .get('term')
-        .setValue(this.route.snapshot.queryParams.searchTerm);
+    this.route.queryParams
+      .pipe(takeUntil(this.destroyed))
+      .subscribe(queryParams => {
+        this.searchForm.get('term').setValue(queryParams.searchTerm);
+        this.searchForm.get('plz').setValue(queryParams.searchPLZ);
+        this.searchForm.get('radius').setValue(queryParams.radius || '50');
+      });
 
-      this.searchForm
-        .get('plz')
-        .setValue(this.route.snapshot.queryParams.searchPLZ);
-
-      this.searchForm
-        .get('radius')
-        .setValue(this.route.snapshot.queryParams.radius || '50');
-    });
+    // trigger search if one of the form values has changed
+    merge(
+      this.searchForm.get('term').valueChanges,
+      this.searchForm.get('plz').valueChanges
+    )
+      .pipe(
+        takeUntil(this.destroyed),
+        distinctUntilChanged(),
+        debounceTime(500),
+        tap(() => {
+          // disable radius form control if plz form control is empty
+          if (!this.searchForm.get('plz').value) {
+            this.searchForm.get('radius').disable();
+          } else {
+            this.searchForm.get('radius').enable();
+          }
+        })
+      )
+      .subscribe(() => {
+        this.startSearch();
+      });
   }
 
-  //TODO: on destroy
-
-  onChangeSearch() {
+  startSearch() {
     const queryParams: Params = {};
 
     queryParams.searchTerm = this.searchForm.value.term;
@@ -59,6 +86,11 @@ export class HomeComponent implements OnInit {
     this.dialog.open(QualificationsDialogComponent, {
       panelClass: 'qualifications-dialog'
     });
+  }
+
+  ngOnDestroy() {
+    this.destroyed.next();
+    this.destroyed.complete();
   }
 }
 

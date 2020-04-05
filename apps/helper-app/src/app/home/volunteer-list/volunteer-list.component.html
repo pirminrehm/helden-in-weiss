@@ -3,12 +3,16 @@
 </div>
 
 <div class="error-message" *ngIf="errorMessage">
-  <span>{{errorMessage}}</span>
+  <span>{{ errorMessage }}</span>
   <mat-icon>warning</mat-icon>
 </div>
 
 <wir-vs-virus-contact-card
-  [data]="institution"
-  *ngFor="let institution of institutions"
+  [data]="volunteer"
+  *ngFor="let volunteer of volunteers"
 >
 </wir-vs-virus-contact-card>
+
+<wir-vs-virus-info-box [type]="'warn'" *ngIf="!volunteers.length">
+  Wir haben keine Treffer für Ihre Suchanfrage gefunden.
+</wir-vs-virus-info-box>

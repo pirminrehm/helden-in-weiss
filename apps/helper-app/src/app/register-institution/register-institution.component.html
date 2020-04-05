@@ -58,6 +58,8 @@
         formControlName="description"
         placeholder="Ich suche ..."
         maxlength="300"
+        cdkTextareaAutosize
+        cdkAutosizeMinRows="4"
       ></textarea>
       <mat-hint align="end">
         {{ institutionForm.get('description').value?.length || 0 }}/300

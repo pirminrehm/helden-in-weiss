@@ -1,4 +1,5 @@
 <div class="header">
+  <div class="header-bg"></div>
   <div class="content-center">
     <div class="nav-bar">
       <img class="app-logo" src="/assets/logo-light.svg" routerLink="/" />
@@ -21,17 +22,18 @@
     </div>
     <div class="search-help-toggle">
       <a
-        routerLinkActive="bg-blue"
+        [routerLinkActive]="'bg-blue'"
         matRipple
-        routerLink="institutions"
+        [routerLink]="['/']"
         queryParamsHandling="merge"
+        [routerLinkActiveOptions]="{ exact: true }"
       >
         Einrichtungen, die Hilfe suchen
       </a>
       <a
-        routerLinkActive="bg-red"
+        [routerLinkActive]="'bg-red'"
         matRipple
-        routerLink="volunteers"
+        [routerLink]="['/volunteers']"
         queryParamsHandling="merge"
       >
         Engagierte, die helfen wollen
@@ -84,21 +86,45 @@
     </div>
 
     <div class="card-list">
-      <form [formGroup]="searchForm" (keydown.enter)="onChangeSearch()">
+      <form [formGroup]="searchForm" (keydown.enter)="startSearch()">
         <mat-form-field appearance="outline">
           <mat-icon matPrefix>search</mat-icon>
           <mat-label>Suche</mat-label>
           <input matInput formControlName="term" />
+          <button
+            mat-button
+            *ngIf="searchForm.get('term').value"
+            matSuffix
+            type="button"
+            mat-icon-button
+            aria-label="Clear"
+            tabindex="-1"
+            (click)="this.searchForm.get('term').reset()"
+          >
+            <mat-icon>close</mat-icon>
+          </button>
         </mat-form-field>
         <mat-form-field appearance="outline">
           <mat-label>PLZ</mat-label>
-          <input type="number" matInput formControlName="plz" />
+          <input type="number" matInput formControlName="plz" max="5" min="5" />
+          <button
+            mat-button
+            *ngIf="searchForm.get('plz').value"
+            matSuffix
+            type="button"
+            mat-icon-button
+            aria-label="Clear"
+            tabindex="-1"
+            (click)="this.searchForm.get('plz').reset()"
+          >
+            <mat-icon>close</mat-icon>
+          </button>
         </mat-form-field>
         <mat-form-field appearance="outline">
           <mat-label>Radius</mat-label>
           <mat-select
             formControlName="radius"
-            (selectionChange)="onChangeSearch()"
+            (selectionChange)="startSearch()"
           >
             <mat-option value="5">5 km</mat-option>
             <mat-option value="10">10 km</mat-option>
